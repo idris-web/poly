@@ -63,19 +63,16 @@ export default function BrandManifest() {
         <div className={`${styles.decorativeLine} manifest-line`} />
 
         <div className={styles.content}>
-          <p
+          <span className={styles.badge}>Das Manifest</span>
+
+          <h2
             ref={(el) => { textRefs.current[0] = el; }}
             className={styles.statement}
           >
             <span className={styles.highlight}>POLIGAMIA</span> ist mehr als eine Parfümmarke.
-          </p>
-
-          <p
-            ref={(el) => { textRefs.current[1] = el; }}
-            className={styles.statement}
-          >
-            Es ist ein <span className={styles.highlight}>Manifest.</span>
-          </p>
+            <br />
+            <span className={styles.statementSecond}>Es ist ein <span className={styles.highlight}>Manifest.</span></span>
+          </h2>
 
           <p
             ref={(el) => { textRefs.current[2] = el; }}
@@ -84,7 +81,6 @@ export default function BrandManifest() {
             Eine Einladung, Grenzen zu überschreiten und Identität neu zu definieren.
             Für jene, die nicht dazugehören wollen — sondern herausstechen.
           </p>
-
 
           <p
             ref={(el) => { textRefs.current[4] = el; }}

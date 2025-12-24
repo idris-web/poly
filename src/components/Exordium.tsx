@@ -81,21 +81,37 @@ export default function Exordium() {
 
         {/* Content Side */}
         <div ref={contentRef} className={styles.contentSide}>
-          <span className={`${styles.label} exordium-text`}>
+          <span className={`${styles.badge} exordium-text`}>
             First Edition
           </span>
 
           <h2 className={`${styles.title} exordium-text`}>
-            <span className={styles.titleGold}>EXORDIUM</span> — Der Ursprung
+            <span className={styles.titleGold}>EXORDIUM</span>
+            <span className={styles.titleSub}>Der Ursprung</span>
           </h2>
 
           <p className={`${styles.description} exordium-text`}>
-            Ein Duft, der nicht nur verführt, sondern erwacht. Kraftvoll. Rätselhaft. Unberechenbar.
+            Ein Duft, der nicht nur verführt, sondern erwacht. Kraftvoll. Rätselhaft. Unberechenbar. Jede Note erzählt eine Geschichte von Rebellion und Raffinesse.
           </p>
+
+          <div className={`${styles.details} exordium-text`}>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>Konzentration</span>
+              <span className={styles.detailValue}>Extrait de Parfum</span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>Inhalt</span>
+              <span className={styles.detailValue}>50ml</span>
+            </div>
+            <div className={styles.detailItem}>
+              <span className={styles.detailLabel}>Edition</span>
+              <span className={styles.detailValue}>Limitiert</span>
+            </div>
+          </div>
 
           <div className={`${styles.quote} exordium-text`}>
             <p>
-              Kein Parfüm, das man trägt — ein Parfüm, das man <span className={styles.emphasis}>wird.</span>
+              "Kein Parfüm, das man trägt — ein Parfüm, das man <span className={styles.emphasis}>wird.</span>"
             </p>
           </div>
 

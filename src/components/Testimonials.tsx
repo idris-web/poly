@@ -18,20 +18,32 @@ const testimonials: Testimonial[] = [
     title: 'Art Director, Berlin',
   },
   {
-    quote: 'Die erste Edition, die mich wirklich überrascht hat. Unvorhersehbar, genau wie der Mensch, der ihn trägt.',
+    quote: 'Die erste Edition, die mich wirklich überrascht hat.',
     author: 'A. von Stein',
     title: 'Private Collector',
   },
   {
     quote: 'Endlich ein Duft, der sich nicht erklärt. Er wirkt.',
     author: 'J. Schwarz',
-    title: 'Fashion Editor, München',
+    title: 'Fashion Editor',
+  },
+  {
+    quote: 'Luxus neu definiert. Ohne Kompromisse.',
+    author: 'L. Weber',
+    title: 'Entrepreneur',
+  },
+  {
+    quote: 'Ein Statement, das bleibt.',
+    author: 'S. Hoffmann',
+    title: 'Designer',
   },
 ];
 
+// Duplicate for infinite scroll
+const allTestimonials = [...testimonials, ...testimonials];
+
 export default function Testimonials() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -50,28 +62,6 @@ export default function Testimonials() {
           },
         }
       );
-
-      // Cards stagger animation
-      cardsRef.current.forEach((card, index) => {
-        if (card) {
-          gsap.fromTo(
-            card,
-            { opacity: 0, y: 50, scale: 0.98 },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              duration: 0.8,
-              delay: index * 0.15,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
-              },
-            }
-          );
-        }
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -79,30 +69,21 @@ export default function Testimonials() {
 
   return (
     <section ref={sectionRef} className={styles.testimonials}>
-      <div className={styles.container}>
-        {/* Header */}
-        <div className={`${styles.header} testimonial-header`}>
-          <span className={styles.overline}>Stimmen</span>
-          <h2 className={styles.title}>
-            Was <span className={styles.titleHighlight}>Auserwählte</span> sagen
-          </h2>
-        </div>
+      {/* Header */}
+      <div className={`${styles.header} testimonial-header`}>
+        <span className={styles.overline}>Stimmen</span>
+        <h2 className={styles.title}>
+          Was <span className={styles.titleHighlight}>Auserwählte</span> sagen
+        </h2>
+      </div>
 
-        {/* Testimonials Grid */}
-        <div className={styles.grid}>
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              ref={(el) => { cardsRef.current[index] = el; }}
-              className={styles.card}
-            >
-              <div className={styles.quoteIcon}>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
-                </svg>
-              </div>
+      {/* Floating Testimonials - Marquee */}
+      <div className={styles.marqueeWrapper}>
+        <div className={styles.marquee}>
+          {allTestimonials.map((testimonial, index) => (
+            <div key={index} className={styles.card}>
               <blockquote className={styles.quote}>
-                {testimonial.quote}
+                "{testimonial.quote}"
               </blockquote>
               <div className={styles.author}>
                 <span className={styles.authorName}>{testimonial.author}</span>
