@@ -10,7 +10,7 @@ export default function Hero() {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
       // Set initial states
-      gsap.set(['.hero-headline', '.hero-subtitle', '.hero-buttons', '.hero-product-card', '.hero-scroll'], {
+      gsap.set(['.hero-headline', '.hero-subtitle', '.hero-buttons'], {
         opacity: 0,
       });
 
@@ -31,29 +31,7 @@ export default function Hero() {
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.6 },
           '-=0.4'
-        )
-        .fromTo(
-          '.hero-product-card',
-          { opacity: 0, x: 30, scale: 0.95 },
-          { opacity: 1, x: 0, scale: 1, duration: 0.8 },
-          '-=0.3'
-        )
-        .fromTo(
-          '.hero-scroll',
-          { opacity: 0 },
-          { opacity: 1, duration: 0.5 },
-          '-=0.2'
         );
-
-      // Continuous scroll animation
-      gsap.to('.scroll-line', {
-        scaleY: 1.5,
-        opacity: 0.3,
-        duration: 1.5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'power2.inOut',
-      });
     }, containerRef);
 
     return () => ctx.revert();
@@ -111,14 +89,6 @@ export default function Hero() {
           </div>
         </div>
 
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className={`${styles.scrollIndicator} hero-scroll`}>
-        <span className={styles.scrollText}>Scroll</span>
-        <div className={styles.scrollLineWrapper}>
-          <div className={`${styles.scrollLine} scroll-line`} />
-        </div>
       </div>
     </section>
   );
