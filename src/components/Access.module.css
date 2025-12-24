@@ -59,6 +59,7 @@
     rgba(18, 18, 18, 0.4) 100%
   );
   border: 1px solid rgba(178, 153, 130, 0.2);
+  border-radius: 24px;
   padding: 2rem 3rem;
   min-width: 280px;
   text-align: center;
@@ -154,22 +155,24 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border: 1px solid rgba(178, 153, 130, 0.2);
+  gap: 1.5rem;
 }
 
 .card {
   padding: 2rem;
-  border-right: 1px solid rgba(178, 153, 130, 0.15);
-  transition: background 0.3s ease;
-}
-
-.card:last-child {
-  border-right: none;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 26, 0.6) 0%,
+    rgba(18, 18, 18, 0.4) 100%
+  );
+  border: 1px solid rgba(178, 153, 130, 0.15);
+  border-radius: 24px;
+  transition: all 0.3s ease;
 }
 
 .card:hover {
-  background: rgba(178, 153, 130, 0.03);
+  background: rgba(178, 153, 130, 0.08);
+  border-color: rgba(178, 153, 130, 0.3);
 }
 
 .cardNumber {
@@ -255,16 +258,11 @@
 
   .cards {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
   .card {
-    border-right: none;
-    border-bottom: 1px solid rgba(178, 153, 130, 0.15);
     padding: 1.5rem;
-  }
-
-  .card:last-child {
-    border-bottom: none;
   }
 
   .cardNumber {
