@@ -44,31 +44,45 @@
   font-style: normal;
 }
 
-/* Marquee */
-.marqueeWrapper {
+/* Rows Wrapper */
+.rowsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
   width: 100%;
-  overflow: hidden;
   mask-image: linear-gradient(
     90deg,
     transparent,
-    white 10%,
-    white 90%,
+    white 5%,
+    white 95%,
     transparent
   );
 }
 
-.marquee {
+/* Single Row */
+.row {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Row Track - contains all cards */
+.rowTrack {
   display: flex;
   gap: 1.5rem;
-  animation: scroll 30s linear infinite;
   width: max-content;
 }
 
-.marquee:hover {
-  animation-play-state: paused;
+/* Animation for left direction */
+.rowTrack[data-direction="left"] {
+  animation: scrollLeft 40s linear infinite;
 }
 
-@keyframes scroll {
+/* Animation for right direction */
+.rowTrack[data-direction="right"] {
+  animation: scrollRight 50s linear infinite;
+}
+
+@keyframes scrollLeft {
   0% {
     transform: translateX(0);
   }
@@ -77,13 +91,27 @@
   }
 }
 
+@keyframes scrollRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Pause on hover */
+.rowTrack:hover {
+  animation-play-state: paused;
+}
+
 /* Card */
 .card {
   background: #fff;
   border-radius: 24px;
   padding: 2rem;
-  min-width: 320px;
-  max-width: 320px;
+  min-width: 400px;
+  max-width: 400px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
   flex-shrink: 0;
@@ -94,36 +122,57 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
+/* Stars */
+.stars {
+  display: flex;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+.starFilled {
+  color: #D4A853;
+  font-size: 1rem;
+}
+
+.starEmpty {
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
 /* Quote */
 .quote {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 300;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 400;
   font-style: normal;
-  line-height: 1.6;
-  color: #4a4a4a;
+  line-height: 1.7;
+  color: #1a1a1a;
   margin-bottom: 1.5rem;
 }
 
 /* Author */
 .author {
   display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.authorInfo {
+  display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  gap: 0.15rem;
 }
 
 .authorName {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: #1a1a1a;
 }
 
 .authorTitle {
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 300;
   color: #8a8a8a;
 }
@@ -134,13 +183,29 @@
     padding: 4rem 0;
   }
 
+  .rowsWrapper {
+    gap: 1rem;
+  }
+
+  .rowTrack {
+    gap: 1rem;
+  }
+
   .card {
-    min-width: 280px;
-    max-width: 280px;
+    min-width: 300px;
+    max-width: 300px;
     padding: 1.5rem;
   }
 
   .quote {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+  }
+
+  .rowTrack[data-direction="left"] {
+    animation-duration: 30s;
+  }
+
+  .rowTrack[data-direction="right"] {
+    animation-duration: 35s;
   }
 }

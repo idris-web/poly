@@ -11,8 +11,8 @@ export default function Access() {
   const [hasAnimated, setHasAnimated] = useState(false);
 
   // Limited edition count - would come from API in production
-  const totalBottles = 99;
-  const remainingBottles = 47;
+  const totalBottles = 1000;
+  const soldBottles = 20;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -41,7 +41,7 @@ export default function Access() {
             setHasAnimated(true);
             const counter = { value: 0 };
             gsap.to(counter, {
-              value: remainingBottles,
+              value: soldBottles,
               duration: 2,
               ease: 'power2.out',
               onUpdate: () => {
@@ -98,12 +98,12 @@ export default function Access() {
                 <span className={styles.scarcityDivider}>/</span>
                 <span className={styles.scarcityTotal}>{totalBottles}</span>
               </div>
-              <span className={styles.scarcitySubtext}>Flaschen verfügbar</span>
+              <span className={styles.scarcitySubtext}>Flaschen vergeben</span>
             </div>
             <div className={styles.scarcityProgress}>
               <div
                 className={styles.scarcityBar}
-                style={{ width: `${(remainingBottles / totalBottles) * 100}%` }}
+                style={{ width: `${(soldBottles / totalBottles) * 100}%` }}
               />
             </div>
           </div>
