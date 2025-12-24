@@ -1,18 +1,7 @@
-import { useState } from 'react';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      setEmail('');
-    }
-  };
 
   return (
     <footer className={styles.footer}>
@@ -27,33 +16,6 @@ export default function Footer() {
               <p className={styles.brandDescription}>
                 Exklusive Düfte für diejenigen, die es wagen, anders zu sein.
               </p>
-            </div>
-
-            {/* Newsletter Column */}
-            <div className={styles.newsletterColumn}>
-              <h4 className={styles.columnTitle}>Newsletter</h4>
-              {!subscribed ? (
-                <form onSubmit={handleNewsletterSubmit} className={styles.newsletterForm}>
-                  <div className={styles.inputWrapper}>
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Ihre E-Mail Adresse"
-                      className={styles.newsletterInput}
-                      required
-                    />
-                    <button type="submit" className={styles.newsletterBtn}>
-                      Anmelden
-                    </button>
-                  </div>
-                </form>
-              ) : (
-                <div className={styles.subscribed}>
-                  <span className={styles.subscribedIcon}>✓</span>
-                  <p>Vielen Dank!</p>
-                </div>
-              )}
             </div>
 
             {/* Links Column */}
