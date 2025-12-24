@@ -5,90 +5,88 @@ import styles from './FragranceNotes.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface NoteCategory {
+interface Phase {
+  time: string;
+  label: string;
   title: string;
-  subtitle: string;
   notes: string[];
-  image: string;
 }
 
-const fragranceData: NoteCategory[] = [
+const phases: Phase[] = [
   {
+    time: '0-15 Min',
+    label: 'Erster Eindruck',
     title: 'Top Notes',
-    subtitle: 'Fresh & Uplifting',
-    notes: ['Lemon', 'Lemon Peel', 'Lavender Blossom', 'Bergamot', 'Rose Petals', 'Geranium'],
-    image: '/top-notes.webp',
+    notes: ['Zitrone', 'Bergamotte', 'Lavendel', 'Rose', 'Geranie'],
   },
   {
+    time: '15 Min - 2h',
+    label: 'Entwicklung',
     title: 'Heart Notes',
-    subtitle: 'Spicy & Sensual',
-    notes: ['Nutmeg', 'Clove', 'Tonka Bean', 'Strawberry', 'Patchouli', 'Frankincense'],
-    image: '/heart-notes.webp',
+    notes: ['Muskatnuss', 'Nelke', 'Tonkabohne', 'Patschuli', 'Weihrauch'],
   },
   {
+    time: '2h+',
+    label: 'Tiefe',
     title: 'Base Notes',
-    subtitle: 'Deep & Seductive',
-    notes: ['Amber', 'Labdanum', 'Cedarwood', 'Sandalwood', 'Musk', 'Smoky Cedar Resin'],
-    image: '/base-notes.webp',
+    notes: ['Amber', 'Sandelholz', 'Zedernholz', 'Moschus', 'Labdanum'],
   },
 ];
 
 export default function FragranceNotes() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Header reveal
+      // Timeline progress animation
+      if (progressRef.current) {
+        gsap.fromTo(
+          progressRef.current,
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: timelineRef.current,
+              start: 'top 70%',
+              end: 'top 20%',
+              scrub: 0.5,
+            },
+          }
+        );
+      }
+
+      // Phase cards stagger
       gsap.fromTo(
-        '.fragrance-header',
+        '.phase-card',
         { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
+          duration: 0.8,
+          stagger: 0.2,
           ease: 'power3.out',
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: timelineRef.current,
             start: 'top 70%',
           },
         }
       );
 
-      // Cards stagger animation
-      cardsRef.current.forEach((card, index) => {
-        if (card) {
-          gsap.fromTo(
-            card,
-            { opacity: 0, y: 60 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              delay: index * 0.2,
-              ease: 'power3.out',
-              scrollTrigger: {
-                trigger: card,
-                start: 'top 80%',
-              },
-            }
-          );
-        }
-      });
-
-      // Notes reveal within each card
+      // Timeline nodes
       gsap.fromTo(
-        '.note-item',
-        { opacity: 0, x: -20 },
+        '.timeline-node',
+        { scale: 0 },
         {
-          opacity: 1,
-          x: 0,
+          scale: 1,
           duration: 0.5,
-          stagger: 0.05,
-          ease: 'power2.out',
+          stagger: 0.15,
+          ease: 'back.out(2)',
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 50%',
+            trigger: timelineRef.current,
+            start: 'top 70%',
           },
         }
       );
@@ -99,67 +97,60 @@ export default function FragranceNotes() {
 
   return (
     <section ref={sectionRef} className={styles.fragrance}>
-      {/* Background Elements */}
-      <div className={styles.bgAccent} />
-
       <div className={styles.container}>
         {/* Header */}
-        <div className={`${styles.header} fragrance-header`}>
-          <span className={styles.overline}>The Olfactory Journey</span>
+        <header className={styles.header}>
+          <span className={styles.overline}>Die Duftreise</span>
           <h2 className={styles.title}>
-            Die <span className={styles.titleHighlight}>Duftkomposition</span>
+            Wie sich <span className={styles.titleHighlight}>EXORDIUM</span> entfaltet
           </h2>
           <p className={styles.subtitle}>
-            Eine Symphonie sorgfältig ausgewählter Noten, die sich auf Ihrer Haut entfaltet.
+            Ein Duft entwickelt sich über Stunden — von den ersten frischen Noten bis zur tiefen, warmen Basis.
           </p>
-        </div>
+        </header>
 
-        {/* Notes Grid */}
-        <div className={styles.grid}>
-          {fragranceData.map((category, index) => (
-            <div
-              key={category.title}
-              ref={(el) => { cardsRef.current[index] = el; }}
-              className={styles.card}
-            >
-              {/* Background Image - shows on hover */}
-              <div
-                className={styles.cardImage}
-                style={{ backgroundImage: `url(${category.image})` }}
-              />
+        {/* Timeline */}
+        <div ref={timelineRef} className={styles.timeline}>
+          {/* Timeline Track */}
+          <div className={styles.timelineTrack}>
+            <div ref={progressRef} className={styles.timelineProgress} />
+          </div>
 
-              {/* Title - always visible */}
-              <div className={styles.cardTitleWrapper}>
-                <span className={styles.cardNumber}>0{index + 1}</span>
-                <h3 className={styles.cardTitle}>{category.title}</h3>
-              </div>
-
-              {/* Content - hides on hover */}
-              <div className={styles.cardContent}>
-                <div className={styles.cardHeader}>
-                  <span className={styles.cardSubtitle}>{category.subtitle}</span>
+          {/* Timeline Nodes */}
+          <div className={styles.timelineNodes}>
+            {phases.map((phase, index) => (
+              <div key={phase.title} className={`${styles.timelineNode} timeline-node`}>
+                <div className={styles.nodeCircle}>
+                  <span className={styles.nodeNumber}>{index + 1}</span>
                 </div>
+              </div>
+            ))}
+          </div>
 
-                <div className={styles.cardDivider} />
-
-                <ul className={styles.notesList}>
-                  {category.notes.map((note) => (
-                    <li key={note} className={`${styles.noteItem} note-item`}>
-                      <span className={styles.noteDot} />
-                      <span className={styles.noteName}>{note}</span>
+          {/* Phase Cards */}
+          <div className={styles.phases}>
+            {phases.map((phase) => (
+              <div key={phase.title} className={`${styles.phaseCard} phase-card`}>
+                <span className={styles.phaseTime}>{phase.time}</span>
+                <span className={styles.phaseLabel}>{phase.label}</span>
+                <h3 className={styles.phaseTitle}>{phase.title}</h3>
+                <div className={styles.phaseDivider} />
+                <ul className={styles.phaseNotes}>
+                  {phase.notes.map((note) => (
+                    <li key={note} className={styles.noteItem}>
+                      {note}
                     </li>
                   ))}
                 </ul>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
-        {/* Bottom Quote */}
-        <div className={`${styles.bottomQuote} fragrance-header`}>
-          <p>
-            Extrait de Parfum — 30% Konzentration für maximale Intensität und Haltbarkeit.
-          </p>
+        {/* Bottom Info */}
+        <div className={styles.bottomInfo}>
+          <span className={styles.concentration}>Extrait de Parfum</span>
+          <span className={styles.concentrationValue}>30% Konzentration</span>
         </div>
       </div>
     </section>
