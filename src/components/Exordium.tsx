@@ -53,24 +53,6 @@ export default function Exordium() {
         }
       );
 
-      // Floating animation for product
-      gsap.to(productRef.current, {
-        y: -20,
-        duration: 3,
-        ease: 'power1.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
-
-      // Glow pulse
-      gsap.to('.product-glow', {
-        opacity: 0.6,
-        scale: 1.1,
-        duration: 2,
-        ease: 'power1.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -78,23 +60,18 @@ export default function Exordium() {
 
   return (
     <section ref={sectionRef} id="exordium" className={styles.exordium}>
-      {/* Background Elements */}
-      <div className={styles.bgPattern}>
-        <div className={styles.verticalLine} style={{ left: '20%' }} />
-        <div className={styles.verticalLine} style={{ left: '80%' }} />
-      </div>
 
       <div className={styles.container}>
         {/* Product Side */}
         <div className={styles.productSide}>
           <div ref={productRef} className={styles.productWrapper}>
-            {/* Product Glow */}
-            <div className={`${styles.productGlow} product-glow`} />
+            {/* Subtle Glow */}
+            <div className={styles.productGlow} />
 
             {/* Product Image */}
             <div className={styles.productImage}>
               <img
-                src="/exordium.png"
+                src="/parfume-no-bg.png"
                 alt="EXORDIUM - Extrait de Parfum"
                 className={styles.bottleImage}
               />
@@ -109,34 +86,19 @@ export default function Exordium() {
           </span>
 
           <h2 className={`${styles.title} exordium-text`}>
-            Der Ursprung.<br />
-            <span className={styles.titleGold}>Der erste Atemzug einer neuen Ära.</span>
+            <span className={styles.titleGold}>EXORDIUM</span> — Der Ursprung
           </h2>
 
           <p className={`${styles.description} exordium-text`}>
-            Ein Duft, der nicht nur verführt, sondern erwacht.
-            Kraftvoll. Rätselhaft. Unberechenbar.
-          </p>
-
-          <p className={`${styles.description} exordium-text`}>
-            Er öffnet mit einer klaren, elektrischen Spannung, bevor er sich
-            in dunkle, würzige Tiefen senkt, die sich wie ein Flüstern auf
-            die Haut legen.
+            Ein Duft, der nicht nur verführt, sondern erwacht. Kraftvoll. Rätselhaft. Unberechenbar.
           </p>
 
           <div className={`${styles.quote} exordium-text`}>
-            <span className={styles.quoteMark}>"</span>
             <p>
-              EXORDIUM ist kein Parfüm, das man trägt.<br />
-              Es ist ein Parfüm, das man <span className={styles.emphasis}>wird.</span>
+              Kein Parfüm, das man trägt — ein Parfüm, das man <span className={styles.emphasis}>wird.</span>
             </p>
           </div>
 
-          <div className={`${styles.tagline} exordium-text`}>
-            <div className={styles.taglineLine} />
-            <span>Only for the Chosen Few</span>
-            <div className={styles.taglineLine} />
-          </div>
         </div>
       </div>
     </section>

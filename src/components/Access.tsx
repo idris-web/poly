@@ -10,56 +10,18 @@ export default function Access() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title animation
+      // Simple fade in on scroll
       gsap.fromTo(
-        '.access-title',
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 70%',
-          },
-        }
-      );
-
-      // Cards stagger animation
-      gsap.fromTo(
-        '.access-card',
-        {
-          opacity: 0,
-          y: 80,
-          rotateX: -15,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          rotateX: 0,
-          duration: 1,
-          ease: 'power3.out',
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: '.access-cards',
-            start: 'top 75%',
-          },
-        }
-      );
-
-      // Bottom text
-      gsap.fromTo(
-        '.access-bottom',
+        '.access-content',
         { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          duration: 1,
-          ease: 'power3.out',
+          duration: 0.8,
+          ease: 'power2.out',
           scrollTrigger: {
-            trigger: '.access-bottom',
-            start: 'top 85%',
+            trigger: sectionRef.current,
+            start: 'top 70%',
           },
         }
       );
@@ -88,47 +50,40 @@ export default function Access() {
 
   return (
     <section ref={sectionRef} id="access" className={styles.access}>
-      {/* Icon Pattern Background */}
-      <div className="icon-pattern-large" />
-
-      {/* Decorative background */}
-      <div className={styles.bgGradient} />
-
-      <div className={styles.container}>
+      <div className={`${styles.container} access-content`}>
         {/* Header */}
-        <div className={`${styles.header} access-title`}>
+        <div className={styles.header}>
           <span className={styles.overline}>Der Zugang</span>
           <h2 className={styles.title}>
-            Du kannst EXORDIUM<br />
-            <span className={styles.titleHighlight}>nicht kaufen.</span>
+            Du kannst EXORDIUM <span className={styles.titleHighlight}>nicht kaufen.</span>
           </h2>
           <p className={styles.subtitle}>Es findet dich.</p>
         </div>
 
+        {/* Divider Line */}
+        <div className={styles.dividerLine} />
+
         {/* Access Cards */}
-        <div className={`${styles.cards} access-cards`}>
+        <div className={styles.cards}>
           {accessItems.map((item, index) => (
-            <div key={index} className={`${styles.card} access-card`}>
+            <div key={index} className={styles.card}>
               <span className={styles.cardNumber}>{item.number}</span>
-              <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>{item.title}</h3>
-                <p className={styles.cardDescription}>{item.description}</p>
-              </div>
-              <div className={styles.cardLine} />
+              <div className={styles.cardDivider} />
+              <h3 className={styles.cardTitle}>{item.title}</h3>
+              <p className={styles.cardDescription}>{item.description}</p>
             </div>
           ))}
         </div>
 
         {/* Bottom Quote */}
-        <div className={`${styles.bottomSection} access-bottom`}>
-          <div className={styles.decorativeDivider}>
+        <div className={styles.bottomSection}>
+          <div className={styles.quoteDivider}>
             <span />
-            <div className={styles.diamondSmall} />
+            <div className={styles.diamond} />
             <span />
           </div>
-
           <blockquote className={styles.quote}>
-            Ein Duft, den man nicht einfach kauft.<br />
+            Ein Duft, den man nicht einfach kauft.
             <span className={styles.quoteHighlight}>Man erlebt ihn.</span>
           </blockquote>
         </div>

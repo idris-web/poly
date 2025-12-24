@@ -57,8 +57,6 @@ export default function BrandManifest() {
 
   return (
     <section ref={sectionRef} id="manifest" className={styles.manifest}>
-      {/* Icon Pattern Background */}
-      <div className="icon-pattern-sparse" />
 
       <div className={styles.container}>
         {/* Decorative top line */}
@@ -87,10 +85,6 @@ export default function BrandManifest() {
             Für jene, die nicht dazugehören wollen — sondern herausstechen.
           </p>
 
-          <div
-            ref={(el) => { textRefs.current[3] = el as any; }}
-            className={styles.dividerSmall}
-          />
 
           <p
             ref={(el) => { textRefs.current[4] = el; }}
@@ -98,21 +92,10 @@ export default function BrandManifest() {
           >
             Wir erschaffen Düfte für Menschen, die nicht gefallen wollen.
             <br />
-            <span className={styles.italic}>Sondern wirken.</span>
+            <span className={styles.emphasis}>Sondern wirken.</span>
           </p>
         </div>
 
-        {/* Side accents */}
-        <div className={styles.sideAccentLeft}>
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className={styles.sideAccentRight}>
-          <span />
-          <span />
-          <span />
-        </div>
       </div>
     </section>
   );

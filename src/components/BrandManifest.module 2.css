@@ -46,7 +46,7 @@
 
 .highlight {
   color: var(--gold-primary);
-  font-style: italic;
+  font-style: normal;
 }
 
 .description {
@@ -98,7 +98,7 @@
 }
 
 .italic {
-  font-style: italic;
+  font-style: normal;
   color: var(--gold-primary);
 }
 

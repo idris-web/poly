@@ -20,20 +20,18 @@ export default function Hero() {
         '.hero-crown',
         {
           opacity: 0,
-          scale: 0.8,
-          y: 40,
+          y: 30,
         },
         {
           opacity: 1,
-          scale: 1,
           y: 0,
           duration: 1.2,
         }
       )
         .fromTo(
           scrollIndicatorRef.current,
-          { opacity: 0, y: -20 },
-          { opacity: 1, y: 0, duration: 0.6 },
+          { opacity: 0 },
+          { opacity: 1, duration: 0.6 },
           '-=0.4'
         );
 
@@ -46,24 +44,6 @@ export default function Hero() {
         yoyo: true,
         ease: 'power2.inOut',
       });
-
-      // Parallax on mouse move
-      const handleMouseMove = (e: MouseEvent) => {
-        const { clientX, clientY } = e;
-
-        gsap.to('.hero-glow', {
-          x: clientX,
-          y: clientY,
-          duration: 0.5,
-          ease: 'power2.out',
-        });
-      };
-
-      window.addEventListener('mousemove', handleMouseMove);
-
-      return () => {
-        window.removeEventListener('mousemove', handleMouseMove);
-      };
     }, containerRef);
 
     return () => ctx.revert();
@@ -71,27 +51,10 @@ export default function Hero() {
 
   return (
     <section ref={containerRef} className={styles.hero}>
-      {/* Background Glow */}
-      <div className={`${styles.heroGlow} hero-glow`} />
-
-      {/* Gold particles */}
-      <div className={styles.particles}>
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className={styles.particle}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${5 + Math.random() * 10}s`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Subtle center glow */}
+      <div className={styles.heroGlow} />
 
       <div className={styles.content}>
-        {/* Full Logo with Icon + Name + Tagline */}
         <div className={`${styles.fullLogo} hero-crown`}>
           <img src="/logo-full.svg" alt="Poligamia - Not for Everybody" className={styles.logoImage} />
         </div>
@@ -105,11 +68,8 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Corner Accents */}
-      <div className={`${styles.corner} ${styles.cornerTL}`} />
-      <div className={`${styles.corner} ${styles.cornerTR}`} />
-      <div className={`${styles.corner} ${styles.cornerBL}`} />
-      <div className={`${styles.corner} ${styles.cornerBR}`} />
+      {/* Bottom gradient for smooth transition */}
+      <div className={styles.bottomGradient} />
     </section>
   );
 }

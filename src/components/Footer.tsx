@@ -5,8 +5,6 @@ export default function Footer() {
 
   return (
     <footer className={styles.footer}>
-      {/* Icon Pattern Background */}
-      <div className="icon-pattern" />
 
       <div className={styles.container}>
         {/* Top Divider */}

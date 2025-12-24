@@ -63,16 +63,6 @@ export default function RequestForm() {
 
   return (
     <section ref={sectionRef} id="request" className={styles.request}>
-      {/* Icon Pattern Background */}
-      <div className="icon-pattern-sparse" />
-
-      {/* Background Elements */}
-      <div className={styles.bgElements}>
-        <div className={styles.cornerDecor} style={{ top: '5%', left: '5%' }} />
-        <div className={styles.cornerDecor} style={{ top: '5%', right: '5%' }} />
-        <div className={styles.cornerDecor} style={{ bottom: '5%', left: '5%' }} />
-        <div className={styles.cornerDecor} style={{ bottom: '5%', right: '5%' }} />
-      </div>
 
       <div className={styles.container}>
         {/* Header */}
@@ -154,18 +144,20 @@ export default function RequestForm() {
                   </span>
                 ) : (
                   <>
-                    <span>Zugang anfragen</span>
-                    <svg
-                      className={styles.arrow}
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
+                    <span className={styles.btnTextDefault}>Zugang anfragen</span>
+                    <span className={styles.btnTextHover}>
+                      Los geht's
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </span>
                   </>
                 )}
               </button>

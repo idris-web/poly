@@ -9,48 +9,20 @@
   background: var(--carbon);
 }
 
+/* Subtle center glow - static, no animation */
 .heroGlow {
   position: absolute;
-  width: 600px;
+  top: 50%;
+  left: 50%;
+  width: 800px;
   height: 600px;
   background: radial-gradient(
-    circle,
-    rgba(178, 153, 130, 0.08) 0%,
-    rgba(178, 153, 130, 0.02) 40%,
-    transparent 70%
+    ellipse,
+    rgba(178, 153, 130, 0.06) 0%,
+    transparent 60%
   );
-  pointer-events: none;
   transform: translate(-50%, -50%);
-  z-index: 1;
-}
-
-.particles {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--crown-gold);
-  border-radius: 50%;
-  opacity: 0.2;
-  animation: floatParticle 10s ease-in-out infinite;
-}
-
-@keyframes floatParticle {
-  0%, 100% {
-    transform: translateY(0) translateX(0) scale(1);
-    opacity: 0.2;
-  }
-  50% {
-    transform: translateY(-80px) translateX(40px) scale(1.5);
-    opacity: 0.4;
-  }
+  pointer-events: none;
 }
 
 .content {
@@ -68,7 +40,7 @@
 }
 
 .logoImage {
-  width: clamp(280px, 60vw, 600px);
+  width: clamp(280px, 55vw, 550px);
   height: auto;
 }
 
@@ -108,44 +80,19 @@
   transform-origin: top;
 }
 
-/* Corner Accents */
-.corner {
+/* Bottom gradient for smooth section transition */
+.bottomGradient {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  border-color: var(--crown-gold-muted);
-  border-style: solid;
-  border-width: 0;
-  opacity: 0.3;
-  z-index: 2;
-}
-
-.cornerTL {
-  top: 2rem;
-  left: 2rem;
-  border-top-width: 1px;
-  border-left-width: 1px;
-}
-
-.cornerTR {
-  top: 2rem;
-  right: 2rem;
-  border-top-width: 1px;
-  border-right-width: 1px;
-}
-
-.cornerBL {
-  bottom: 2rem;
-  left: 2rem;
-  border-bottom-width: 1px;
-  border-left-width: 1px;
-}
-
-.cornerBR {
-  bottom: 2rem;
-  right: 2rem;
-  border-bottom-width: 1px;
-  border-right-width: 1px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--carbon-deep) 100%
+  );
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
@@ -153,28 +100,12 @@
     width: clamp(240px, 80vw, 320px);
   }
 
-  .corner {
-    width: 30px;
-    height: 30px;
+  .heroGlow {
+    width: 400px;
+    height: 300px;
   }
 
-  .cornerTL,
-  .cornerTR {
-    top: 1rem;
-  }
-
-  .cornerBL,
-  .cornerBR {
-    bottom: 1rem;
-  }
-
-  .cornerTL,
-  .cornerBL {
-    left: 1rem;
-  }
-
-  .cornerTR,
-  .cornerBR {
-    right: 1rem;
+  .bottomGradient {
+    height: 100px;
   }
 }
