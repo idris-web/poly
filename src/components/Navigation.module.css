@@ -84,6 +84,7 @@
   width: 44px;
   height: 44px;
   border: 1px solid var(--crown-gold-muted);
+  border-radius: 12px;
   transition: all 0.4s var(--ease-luxury);
 }
 
@@ -149,6 +150,7 @@
   justify-content: center;
   padding: 0.75rem 1.5rem;
   border: 1px solid var(--crown-gold-muted);
+  border-radius: 50px;
   font-family: var(--font-display);
   font-size: 0.7rem;
   font-weight: 500;
@@ -192,6 +194,7 @@
   height: 44px;
   background: transparent;
   border: 1px solid var(--crown-gold-muted);
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 1001;
@@ -233,6 +236,8 @@
   z-index: 999;
   transition: right 0.4s var(--ease-luxury);
   border-left: 1px solid rgba(178, 153, 130, 0.15);
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 24px;
 }
 
 .drawerOpen {
@@ -269,6 +274,7 @@
   margin-top: 2rem;
   padding: 1rem 2rem;
   border: 1px solid var(--crown-gold);
+  border-radius: 50px;
   font-family: var(--font-display);
   font-size: 0.8rem;
   font-weight: 500;
