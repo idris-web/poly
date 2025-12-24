@@ -185,8 +185,26 @@
     margin-bottom: 3rem;
   }
 
+  .statement {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+
+  .statementFirst {
+    white-space: normal;
+    text-align: center;
+  }
+
+  .statementSecond {
+    text-align: center;
+  }
+
   .description {
     margin: 2rem auto;
+    text-align: center;
+  }
+
+  .subStatement {
+    text-align: center;
   }
 
   .dividerSmall {
