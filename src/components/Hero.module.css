@@ -353,7 +353,7 @@
   }
 
   .heroText {
-    padding-bottom: 0;
+    padding-bottom: 500px !important;
     text-align: center;
     max-width: 100%;
   }
