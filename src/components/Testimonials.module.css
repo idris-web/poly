@@ -74,12 +74,12 @@
 
 /* Animation for left direction */
 .rowTrack[data-direction="left"] {
-  animation: scrollLeft 40s linear infinite;
+  animation: scrollLeft 90s linear infinite;
 }
 
 /* Animation for right direction */
 .rowTrack[data-direction="right"] {
-  animation: scrollRight 50s linear infinite;
+  animation: scrollRight 110s linear infinite;
 }
 
 @keyframes scrollLeft {
@@ -202,10 +202,10 @@
   }
 
   .rowTrack[data-direction="left"] {
-    animation-duration: 30s;
+    animation-duration: 70s;
   }
 
   .rowTrack[data-direction="right"] {
-    animation-duration: 35s;
+    animation-duration: 85s;
   }
 }

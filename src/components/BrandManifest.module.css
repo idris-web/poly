@@ -74,6 +74,15 @@
   font-style: normal;
 }
 
+.manifestWord {
+  color: #8B7355;
+  font-style: normal;
+  font-weight: 500;
+  display: inline-block;
+  min-width: 180px;
+  text-align: left;
+}
+
 .description {
   font-family: var(--font-body);
   font-size: clamp(1rem, 2vw, 1.1rem);

@@ -15,57 +15,129 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     quote: 'EXORDIUM ist kein Parfum. Es ist eine Haltung. Jedes Mal, wenn ich es trage, fühle ich mich unaufhaltsam.',
-    author: 'M. Richter',
-    title: 'Art Director, Berlin',
+    author: 'Khalid Al-Rashid',
+    title: 'Art Director, Dubai',
     rating: 5,
   },
   {
     quote: 'Die erste Edition, die mich wirklich überrascht hat. Komplex, aber nie aufdringlich.',
-    author: 'A. von Stein',
+    author: 'Fatima Al-Hassan',
     title: 'Private Collector',
     rating: 5,
   },
   {
     quote: 'Endlich ein Duft, der sich nicht erklärt. Er wirkt. Punkt.',
-    author: 'J. Schwarz',
+    author: 'Omar Benzema',
     title: 'Fashion Editor',
     rating: 5,
   },
   {
     quote: 'Luxus neu definiert. Ohne Kompromisse, ohne Erklärungen nötig.',
-    author: 'L. Weber',
-    title: 'Entrepreneur',
+    author: 'Layla Al-Farsi',
+    title: 'Entrepreneur, Abu Dhabi',
     rating: 5,
   },
   {
     quote: 'Ein Statement, das bleibt. Mein Signature-Duft für besondere Anlässe.',
-    author: 'S. Hoffmann',
+    author: 'Yusuf Al-Qasimi',
     title: 'Designer',
-    rating: 4,
+    rating: 5,
   },
   {
     quote: 'POLIGAMIA versteht, was wahre Exklusivität bedeutet. Nicht für jeden — genau richtig.',
-    author: 'T. Neumann',
-    title: 'Gallerist',
+    author: 'Nadia Mansour',
+    title: 'Gallerist, Berlin',
     rating: 5,
   },
   {
     quote: 'Die Verpackung allein ist schon Kunst. Der Duft selbst? Meisterhaft.',
-    author: 'K. Fischer',
+    author: 'Ahmed Al-Maktoum',
     title: 'Creative Director',
     rating: 5,
   },
   {
     quote: 'Ich bekomme ständig Komplimente. EXORDIUM ist mein Geheimnis.',
-    author: 'E. Braun',
+    author: 'Sara El-Amin',
     title: 'Architect',
-    rating: 4,
+    rating: 5,
+  },
+  {
+    quote: 'Ein Duft, der Geschichten erzählt. Jede Note eine Erinnerung.',
+    author: 'Mohammed Al-Thani',
+    title: 'Investor, Qatar',
+    rating: 5,
+  },
+  {
+    quote: 'EXORDIUM hat meine Erwartungen übertroffen. Wahre Handwerkskunst.',
+    author: 'Amira Khaled',
+    title: 'Interior Designer',
+    rating: 5,
+  },
+  {
+    quote: 'Selten findet man solche Tiefe in einem modernen Duft. Beeindruckend.',
+    author: 'Hassan Al-Jabri',
+    title: 'Art Collector, Kuwait',
+    rating: 5,
+  },
+  {
+    quote: 'Die Exklusivität spürt man sofort. Ein Duft für Kenner.',
+    author: 'Leila Benali',
+    title: 'Fashion Designer',
+    rating: 5,
+  },
+  {
+    quote: 'POLIGAMIA hat verstanden, was Luxus wirklich bedeutet.',
+    author: 'Tariq Al-Saud',
+    title: 'Private Banker',
+    rating: 5,
+  },
+  {
+    quote: 'Mein neuer Favorit. Die Sillage ist perfekt — präsent, aber elegant.',
+    author: 'Zahra Al-Mutairi',
+    title: 'CEO, Dubai',
+    rating: 5,
+  },
+  {
+    quote: 'Ein Meisterwerk. Die Komposition ist einzigartig und unvergesslich.',
+    author: 'Ibrahim Hakim',
+    title: 'Hotelier',
+    rating: 5,
+  },
+  {
+    quote: 'EXORDIUM ist wie Kunst — man muss es erleben, um es zu verstehen.',
+    author: 'Rania Al-Fayed',
+    title: 'Gallery Owner',
+    rating: 5,
+  },
+  {
+    quote: 'Jedes Detail stimmt. Vom Flakon bis zur letzten Note.',
+    author: 'Malik Saeed',
+    title: 'Brand Strategist',
+    rating: 5,
+  },
+  {
+    quote: 'Ein Duft, der Selbstbewusstsein verleiht. Absolut einzigartig.',
+    author: 'Dina Al-Hashimi',
+    title: 'Luxury Consultant',
+    rating: 5,
+  },
+  {
+    quote: 'Die limitierte Edition war die richtige Entscheidung. Ich bin stolz, dabei zu sein.',
+    author: 'Karim Nasser',
+    title: 'Entrepreneur, Beirut',
+    rating: 5,
+  },
+  {
+    quote: 'EXORDIUM spricht für sich selbst. Keine Worte nötig.',
+    author: 'Yasmin Al-Rasheed',
+    title: 'Photographer',
+    rating: 5,
   },
 ];
 
-// Split into rows for the floating effect
-const row1 = testimonials.slice(0, 4);
-const row2 = testimonials.slice(4, 8);
+// Split into rows for the floating effect (10 per row for 20 total)
+const row1 = testimonials.slice(0, 10);
+const row2 = testimonials.slice(10, 20);
 
 function StarRating({ rating }: { rating: number }) {
   return (
