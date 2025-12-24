@@ -3,7 +3,7 @@ import styles from './Footer.module.css';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const brandTextRef = useRef<HTMLSpanElement>(null);
+  const brandTextRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!brandTextRef.current) return;
@@ -75,7 +75,14 @@ export default function Footer() {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <span ref={brandTextRef} className={styles.bigBrandText}>POLIGAMIA</span>
+          <div ref={brandTextRef} className={styles.bigBrandText}>
+            {/* Base layer - subtle */}
+            <img src="/poligamia-logo.svg" alt="POLIGAMIA" className={styles.logoBase} />
+            {/* Spotlight layer */}
+            <img src="/poligamia-logo.svg" alt="" className={styles.logoSpotlight} aria-hidden="true" />
+            {/* Glow layer */}
+            <img src="/poligamia-logo.svg" alt="" className={styles.logoGlow} aria-hidden="true" />
+          </div>
         </div>
 
         {/* Bottom Bar */}

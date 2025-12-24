@@ -1,6 +1,6 @@
 .fragrance {
   position: relative;
-  background: var(--carbon);
+  background: #E8E0D5; /* Light beige - alternating pattern */
   padding: 8rem 2rem;
   overflow: hidden;
 }
@@ -41,10 +41,10 @@
   font-weight: 400;
   letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--crown-gold);
+  color: #8B7355;
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 1px solid var(--crown-gold-muted);
+  border-bottom: 1px solid rgba(139, 115, 85, 0.3);
 }
 
 .title {
@@ -52,12 +52,12 @@
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   font-weight: 300;
   line-height: 1.3;
-  color: var(--white-soft);
+  color: #1a1a1a;
   margin-bottom: 1rem;
 }
 
 .titleHighlight {
-  color: var(--crown-gold);
+  color: #8B7355;
   font-style: normal;
 }
 
@@ -65,7 +65,7 @@
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 300;
-  color: var(--white-subtle);
+  color: #5a5a5a;
   max-width: 500px;
   margin: 0 auto;
   line-height: 1.7;
@@ -80,12 +80,8 @@
 
 /* Card */
 .card {
-  background: linear-gradient(
-    135deg,
-    rgba(26, 26, 26, 0.6) 0%,
-    rgba(18, 18, 18, 0.4) 100%
-  );
-  border: 1px solid rgba(178, 153, 130, 0.15);
+  background: #fff;
+  border: 1px solid rgba(139, 115, 85, 0.15);
   border-radius: 24px;
   padding: 2.5rem 2rem;
   position: relative;
@@ -94,6 +90,7 @@
   display: flex;
   flex-direction: column;
   transition: all 0.5s var(--ease-luxury);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .card::before {
@@ -106,7 +103,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--crown-gold-muted),
+    rgba(139, 115, 85, 0.4),
     transparent
   );
   opacity: 0;
@@ -118,7 +115,8 @@
 }
 
 .card:hover {
-  border-color: rgba(178, 153, 130, 0.4);
+  border-color: rgba(139, 115, 85, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Card Background Image - hidden by default, shows on hover */
@@ -160,7 +158,7 @@
 }
 
 .card:hover .cardImage {
-  opacity: 1;
+  opacity: 0.12;
   transform: scale(1);
 }
 
@@ -173,9 +171,6 @@
   transition: transform 0.5s ease-out;
 }
 
-.card:hover .cardTitleWrapper {
-  transform: translateY(140px);
-}
 
 .cardNumber {
   display: block;
@@ -183,13 +178,13 @@
   font-size: 0.7rem;
   font-weight: 400;
   letter-spacing: 0.3em;
-  color: var(--crown-gold-muted);
+  color: #999;
   margin-bottom: 0.75rem;
   transition: color 0.5s var(--ease-luxury);
 }
 
 .card:hover .cardNumber {
-  color: var(--crown-gold);
+  color: #8B7355;
 }
 
 .cardTitle {
@@ -198,15 +193,15 @@
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--crown-gold);
+  color: #8B7355;
   transition:
     color 0.5s var(--ease-luxury),
     text-shadow 0.5s var(--ease-luxury);
 }
 
 .card:hover .cardTitle {
-  color: var(--white-soft);
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  color: #1a1a1a;
+  text-shadow: none;
 }
 
 /* Card Content - fades out on hover */
@@ -221,11 +216,6 @@
     transform 0.5s ease-out;
 }
 
-.card:hover .cardContent {
-  opacity: 0;
-  transform: translateY(30px);
-  pointer-events: none;
-}
 
 .cardHeader {
   text-align: center;
@@ -235,8 +225,7 @@
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 300;
-  font-style: italic;
-  color: var(--white-ghost);
+  color: #888;
   letter-spacing: 0.05em;
 }
 
@@ -278,7 +267,7 @@
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 300;
-  color: var(--white-muted);
+  color: #4a4a4a;
   letter-spacing: 0.02em;
 }
 
@@ -287,7 +276,7 @@
   text-align: center;
   margin-top: 4rem;
   padding-top: 3rem;
-  border-top: 1px solid rgba(178, 153, 130, 0.1);
+  border-top: 1px solid rgba(139, 115, 85, 0.2);
 }
 
 .bottomQuote p {
@@ -296,7 +285,7 @@
   font-weight: 300;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--white-ghost);
+  color: #6a6a6a;
 }
 
 /* Responsive */
@@ -329,10 +318,6 @@
   .card {
     padding: 2rem;
     min-height: 350px;
-  }
-
-  .card:hover .cardTitleWrapper {
-    transform: translateY(80px);
   }
 
   .bottomQuote {

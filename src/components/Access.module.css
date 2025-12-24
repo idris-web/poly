@@ -1,5 +1,5 @@
 .access {
-  background: var(--carbon-deep);
+  background: #000000; /* Black - before reviews */
   padding: 5rem 2rem;
 }
 

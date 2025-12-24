@@ -1,15 +1,16 @@
 .footer {
-  background: #0a0a0a;
+  background: #000000;
   padding: 5rem 2rem 2rem;
   position: relative;
   overflow: hidden;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 2000px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  padding: 0 2rem;
 }
 
 /* Top Section */
@@ -198,88 +199,95 @@
 
 /* Big Brand Name */
 .bigBrand {
-  padding: 4rem 0;
+  padding: 6rem 0;
   text-align: center;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .bigBrandText {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 15vw, 10rem);
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  line-height: 1;
-  user-select: none;
+  display: inline-block;
   position: relative;
   cursor: default;
+  user-select: none;
+  width: 100%;
   /* CSS variables for mouse position */
   --mouse-x: 50%;
   --mouse-y: 50%;
-  /* Base text - subtle */
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0.25) 0%,
-    rgba(255, 255, 255, 0.35) 50%,
-    rgba(255, 255, 255, 0.25) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
-/* Spotlight effect that follows mouse */
-.bigBrandText::before {
-  content: 'POLIGAMIA';
+/* Base logo - subtle */
+.logoBase {
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  opacity: 0.2;
+  filter: invert(1);
+  transition: opacity 0.3s ease;
+}
+
+/* Spotlight layer - follows mouse */
+.logoSpotlight {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  background: radial-gradient(
-    circle 150px at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(178, 153, 130, 0.8) 30%,
-    rgba(178, 153, 130, 0.4) 50%,
-    transparent 70%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  height: auto;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
+  /* Create spotlight mask that follows mouse */
+  mask-image: radial-gradient(
+    circle 250px at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    rgba(0, 0, 0, 0.7) 40%,
+    transparent 70%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle 250px at var(--mouse-x) var(--mouse-y),
+    black 0%,
+    rgba(0, 0, 0, 0.7) 40%,
+    transparent 70%
+  );
+  /* White-gold color effect */
+  filter: invert(1) sepia(0.4) saturate(2) hue-rotate(-10deg) brightness(1.2);
 }
 
-/* Show spotlight on hover */
-.bigBrandText.isHovering::before {
+/* Glow layer - soft glow behind spotlight */
+.logoGlow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+  filter: invert(1) sepia(0.5) saturate(2) hue-rotate(-10deg) blur(25px);
+  mask-image: radial-gradient(
+    circle 300px at var(--mouse-x) var(--mouse-y),
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 70%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle 300px at var(--mouse-x) var(--mouse-y),
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    transparent 70%
+  );
+}
+
+/* Show effects on hover */
+.bigBrandText.isHovering .logoSpotlight {
   opacity: 1;
 }
 
-/* Glow effect that follows mouse */
-.bigBrandText::after {
-  content: 'POLIGAMIA';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: radial-gradient(
-    circle 200px at var(--mouse-x) var(--mouse-y),
-    rgba(178, 153, 130, 0.6) 0%,
-    rgba(178, 153, 130, 0.2) 40%,
-    transparent 70%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: blur(20px);
-  z-index: -1;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-/* Show glow on hover */
-.bigBrandText.isHovering::after {
+.bigBrandText.isHovering .logoGlow {
   opacity: 1;
 }
 
@@ -335,9 +343,6 @@
     text-align: center;
   }
 
-  .bigBrandText {
-    font-size: clamp(3rem, 12vw, 8rem);
-  }
 }
 
 @media (max-width: 768px) {
@@ -370,11 +375,6 @@
 
   .bigBrand {
     padding: 3rem 0;
-  }
-
-  .bigBrandText {
-    font-size: clamp(2.5rem, 10vw, 5rem);
-    letter-spacing: 0.1em;
   }
 
   .bottom {

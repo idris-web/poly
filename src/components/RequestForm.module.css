@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  background: #faf8f5;
+  background: #E8E0D5; /* Beige */
   padding: 8rem 2rem;
   overflow: hidden;
 }
@@ -55,7 +55,6 @@
 
 .titleHighlight {
   color: #8B7355;
-  font-style: normal;
   font-weight: 300;
 }
 
@@ -63,7 +62,7 @@
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 300;
-  color: #6a6a6a;
+  color: #5a5a5a;
   letter-spacing: 0.05em;
 }
 
@@ -321,7 +320,6 @@
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 300;
-  font-style: italic;
   color: #8B7355;
   padding-top: 2rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);

@@ -1,14 +1,83 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Exordium.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Total number of frames for 3D rotation
+const TOTAL_FRAMES = 160;
+
+// Preload all frames into array
+const frameImages: string[] = [];
+for (let i = 1; i <= TOTAL_FRAMES; i++) {
+  frameImages.push(`/frames/ezgif-frame-${String(i).padStart(3, '0')}.jpg`);
+}
+
 export default function Exordium() {
   const sectionRef = useRef<HTMLElement>(null);
   const productRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const currentFrameRef = useRef(96); // Start at frame 96 (initial position)
+  const preloadedImagesRef = useRef<HTMLImageElement[]>([]);
+  const canvasInitializedRef = useRef(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+
+  // Function to draw frame to canvas (stable reference)
+  const drawFrame = useCallback((frameIndex: number) => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    const images = preloadedImagesRef.current;
+
+    // Clamp frame index to valid range
+    const safeIndex = Math.max(0, Math.min(frameIndex, TOTAL_FRAMES - 1));
+    const img = images[safeIndex];
+
+    if (canvas && ctx && img && img.complete && img.naturalWidth > 0) {
+      // Initialize canvas size once
+      if (!canvasInitializedRef.current) {
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        canvasInitializedRef.current = true;
+      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+    }
+  }, []);
+
+  // Preload ALL images into memory for instant switching
+  useEffect(() => {
+    let loadedCount = 0;
+    const images: HTMLImageElement[] = [];
+
+    frameImages.forEach((src, index) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loadedCount++;
+        images[index] = img;
+        if (loadedCount === TOTAL_FRAMES) {
+          preloadedImagesRef.current = images;
+          setImagesLoaded(true);
+          // Draw initial frame after a short delay to ensure canvas is ready
+          requestAnimationFrame(() => {
+            drawFrame(currentFrameRef.current);
+          });
+        }
+      };
+      img.onerror = () => {
+        console.warn(`Failed to load frame ${index + 1}: ${src}`);
+        loadedCount++;
+        // Create placeholder for missing frame
+        images[index] = new Image();
+        if (loadedCount === TOTAL_FRAMES) {
+          preloadedImagesRef.current = images;
+          setImagesLoaded(true);
+        }
+      };
+    });
+  }, [drawFrame]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -53,10 +122,43 @@ export default function Exordium() {
         }
       );
 
+      // 3D rotation scroll effect - ultra smooth using canvas & requestAnimationFrame
+      let rafId: number | null = null;
+      let targetFrame = currentFrameRef.current;
+
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top bottom',
+        end: 'bottom top',
+        scrub: true,
+        onUpdate: (self) => {
+          // Use ALL 160 frames for maximum smoothness (full 360° rotation)
+          // Frame 0 (front view) appears at ~40% progress (when section is well visible)
+          const startFrame = 96;
+
+          // Linear progression through ALL frames with modulo wrap
+          const rawIndex = (startFrame + self.progress * TOTAL_FRAMES) % TOTAL_FRAMES;
+          targetFrame = Math.round(rawIndex);
+
+          // Use requestAnimationFrame for smooth updates
+          if (currentFrameRef.current !== targetFrame && !rafId) {
+            rafId = requestAnimationFrame(() => {
+              if (currentFrameRef.current !== targetFrame) {
+                currentFrameRef.current = targetFrame;
+                drawFrame(targetFrame);
+              }
+              rafId = null;
+            });
+          }
+        },
+      });
+
     }, sectionRef);
 
-    return () => ctx.revert();
-  }, []);
+    return () => {
+      ctx.revert();
+    };
+  }, [drawFrame]);
 
   return (
     <section ref={sectionRef} id="exordium" className={styles.exordium}>
@@ -65,16 +167,26 @@ export default function Exordium() {
         {/* Product Side */}
         <div className={styles.productSide}>
           <div ref={productRef} className={styles.productWrapper}>
-            {/* Subtle Glow */}
+            {/* Animated Glow Layers */}
             <div className={styles.productGlow} />
+            <div className={styles.glowRing} />
 
-            {/* Product Image */}
+            {/* Product Image - 3D Rotation via Canvas for smooth animation */}
             <div className={styles.productImage}>
-              <img
-                src="/parfume-no-bg.png"
-                alt="EXORDIUM - Extrait de Parfum"
+              {/* Canvas for ultra-smooth frame animation (no React re-renders) */}
+              <canvas
+                ref={canvasRef}
                 className={styles.bottleImage}
+                style={{ opacity: imagesLoaded ? 1 : 0 }}
               />
+              {/* Fallback while frames load */}
+              {!imagesLoaded && (
+                <img
+                  src="/parfume-no-bg.png"
+                  alt="EXORDIUM - Extrait de Parfum"
+                  className={styles.bottleImage}
+                />
+              )}
             </div>
           </div>
         </div>
