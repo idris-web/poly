@@ -21,7 +21,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'Die erste Edition, die mich wirklich überrascht hat. Komplex, aber nie aufdringlich.',
-    author: 'Fatima Al-Hassan',
+    author: 'Faris Al-Hassan',
     title: 'Private Collector',
     rating: 5,
   },
@@ -33,7 +33,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'Luxus neu definiert. Ohne Kompromisse, ohne Erklärungen nötig.',
-    author: 'Layla Al-Farsi',
+    author: 'Rashid Al-Farsi',
     title: 'Entrepreneur, Abu Dhabi',
     rating: 5,
   },
@@ -45,7 +45,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'POLIGAMIA versteht, was wahre Exklusivität bedeutet. Nicht für jeden — genau richtig.',
-    author: 'Nadia Mansour',
+    author: 'Nabil Mansour',
     title: 'Gallerist, Berlin',
     rating: 5,
   },
@@ -57,7 +57,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'Ich bekomme ständig Komplimente. EXORDIUM ist mein Geheimnis.',
-    author: 'Sara El-Amin',
+    author: 'Samir El-Amin',
     title: 'Architect',
     rating: 5,
   },
@@ -69,7 +69,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'EXORDIUM hat meine Erwartungen übertroffen. Wahre Handwerkskunst.',
-    author: 'Amira Khaled',
+    author: 'Amir Khaled',
     title: 'Interior Designer',
     rating: 5,
   },
@@ -81,7 +81,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'Die Exklusivität spürt man sofort. Ein Duft für Kenner.',
-    author: 'Leila Benali',
+    author: 'Bilal Benali',
     title: 'Fashion Designer',
     rating: 5,
   },
@@ -93,7 +93,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'Mein neuer Favorit. Die Sillage ist perfekt — präsent, aber elegant.',
-    author: 'Zahra Al-Mutairi',
+    author: 'Zayed Al-Mutairi',
     title: 'CEO, Dubai',
     rating: 5,
   },
@@ -105,7 +105,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'EXORDIUM ist wie Kunst — man muss es erleben, um es zu verstehen.',
-    author: 'Rania Al-Fayed',
+    author: 'Rayan Al-Fayed',
     title: 'Gallery Owner',
     rating: 5,
   },
@@ -117,7 +117,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'Ein Duft, der Selbstbewusstsein verleiht. Absolut einzigartig.',
-    author: 'Dina Al-Hashimi',
+    author: 'Hamza Al-Hashimi',
     title: 'Luxury Consultant',
     rating: 5,
   },
@@ -129,7 +129,7 @@ const testimonials: Testimonial[] = [
   },
   {
     quote: 'EXORDIUM spricht für sich selbst. Keine Worte nötig.',
-    author: 'Yasmin Al-Rasheed',
+    author: 'Yasser Al-Rasheed',
     title: 'Photographer',
     rating: 5,
   },

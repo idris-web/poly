@@ -79,8 +79,9 @@
   font-style: normal;
   font-weight: 500;
   display: inline-block;
-  min-width: 180px;
-  text-align: left;
+  /* Initial state: blurred */
+  filter: blur(12px);
+  opacity: 0.3;
 }
 
 .description {

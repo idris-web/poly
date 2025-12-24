@@ -32,17 +32,18 @@ export default function Access() {
         }
       );
 
-      // Counter animation
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top 60%',
-        onEnter: () => {
-          if (!hasAnimated && counterRef.current) {
+      // Counter animation - runs once when section enters viewport
+      if (!hasAnimated && counterRef.current) {
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          once: true,
+          onEnter: () => {
             setHasAnimated(true);
             const counter = { value: 0 };
             gsap.to(counter, {
               value: soldBottles,
-              duration: 2,
+              duration: 2.5,
               ease: 'power2.out',
               onUpdate: () => {
                 if (counterRef.current) {
@@ -50,13 +51,13 @@ export default function Access() {
                 }
               },
             });
-          }
-        },
-      });
+          },
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [hasAnimated]);
+  }, []);
 
   const accessItems = [
     {

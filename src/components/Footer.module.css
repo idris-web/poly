@@ -212,73 +212,75 @@
   line-height: 1;
   user-select: none;
   position: relative;
-  /* Base text with gradient */
+  cursor: default;
+  /* CSS variables for mouse position */
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  /* Base text - subtle */
   background: linear-gradient(
     90deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0.3) 100%
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.25) 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Shine animation overlay - only on hover */
+/* Spotlight effect that follows mouse */
 .bigBrandText::before {
   content: 'POLIGAMIA';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    transparent 30%,
-    rgba(178, 153, 130, 0.8) 45%,
-    rgba(255, 255, 255, 0.9) 50%,
-    rgba(178, 153, 130, 0.8) 55%,
-    transparent 70%,
-    transparent 100%
+  background: radial-gradient(
+    circle 150px at var(--mouse-x) var(--mouse-y),
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(178, 153, 130, 0.8) 30%,
+    rgba(178, 153, 130, 0.4) 50%,
+    transparent 70%
   );
-  background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-position: 200% center;
-  transition: background-position 0s;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.bigBrandText:hover::before {
-  animation: footerShine 1.2s ease-in-out forwards;
+/* Show spotlight on hover */
+.bigBrandText.isHovering::before {
+  opacity: 1;
 }
 
-@keyframes footerShine {
-  0% {
-    background-position: 200% center;
-  }
-  100% {
-    background-position: -200% center;
-  }
-}
-
-/* Subtle glow effect - only on hover */
+/* Glow effect that follows mouse */
 .bigBrandText::after {
   content: 'POLIGAMIA';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  color: rgba(178, 153, 130, 0.15);
-  filter: blur(30px);
+  background: radial-gradient(
+    circle 200px at var(--mouse-x) var(--mouse-y),
+    rgba(178, 153, 130, 0.6) 0%,
+    rgba(178, 153, 130, 0.2) 40%,
+    transparent 70%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: blur(20px);
   z-index: -1;
-  opacity: 0.2;
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
-.bigBrandText:hover::after {
-  opacity: 0.7;
-  filter: blur(40px);
+/* Show glow on hover */
+.bigBrandText.isHovering::after {
+  opacity: 1;
 }
 
 /* Bottom Bar */

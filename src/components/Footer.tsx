@@ -1,7 +1,32 @@
+import { useRef } from 'react';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const brandTextRef = useRef<HTMLSpanElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!brandTextRef.current) return;
+
+    const rect = brandTextRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    brandTextRef.current.style.setProperty('--mouse-x', `${x}%`);
+    brandTextRef.current.style.setProperty('--mouse-y', `${y}%`);
+  };
+
+  const handleMouseEnter = () => {
+    if (brandTextRef.current) {
+      brandTextRef.current.classList.add(styles.isHovering);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (brandTextRef.current) {
+      brandTextRef.current.classList.remove(styles.isHovering);
+    }
+  };
 
   return (
     <footer className={styles.footer}>
@@ -44,8 +69,13 @@ export default function Footer() {
         </div>
 
         {/* Big Brand Name */}
-        <div className={styles.bigBrand}>
-          <span className={styles.bigBrandText}>POLIGAMIA</span>
+        <div
+          className={styles.bigBrand}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <span ref={brandTextRef} className={styles.bigBrandText}>POLIGAMIA</span>
         </div>
 
         {/* Bottom Bar */}

@@ -1,28 +1,14 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './BrandManifest.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Words to cycle through before landing on "Manifest"
-const manifestWords = [
-  'Erklärung',
-  'Bekenntnis',
-  'Vision',
-  'Statement',
-  'Credo',
-  'Botschaft',
-  'Philosophie',
-  'Überzeugung',
-  'Manifest',
-];
-
 export default function BrandManifest() {
   const sectionRef = useRef<HTMLElement>(null);
   const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const manifestWordRef = useRef<HTMLSpanElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -66,63 +52,31 @@ export default function BrandManifest() {
         }
       );
 
-      // Word scramble animation for "Manifest" - runs only once
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top 60%',
-        once: true,
-        onEnter: () => {
-          if (!hasAnimated && manifestWordRef.current) {
-            setHasAnimated(true);
-
-            let wordIndex = 0;
-            const totalWords = manifestWords.length;
-
-            // Start fast, slow down towards the end
-            const animateWord = () => {
-              if (!manifestWordRef.current) return;
-
-              manifestWordRef.current.textContent = manifestWords[wordIndex] + '.';
-
-              // Add a flash effect on each change
-              gsap.fromTo(
-                manifestWordRef.current,
-                { opacity: 0.5 },
-                { opacity: 1, duration: 0.05 }
-              );
-
-              wordIndex++;
-
-              if (wordIndex < totalWords) {
-                // Speed slows down as we approach the final word
-                // Start at 50ms, end around 300ms
-                const progress = wordIndex / totalWords;
-                const delay = 50 + (progress * progress * 250);
-                setTimeout(animateWord, delay);
-              } else {
-                // Final word - add a subtle highlight animation
-                gsap.fromTo(
-                  manifestWordRef.current,
-                  { scale: 1.05, opacity: 0.8 },
-                  {
-                    scale: 1,
-                    opacity: 1,
-                    duration: 0.4,
-                    ease: 'power2.out'
-                  }
-                );
-              }
-            };
-
-            // Start the animation
-            animateWord();
+      // Blur to sharp animation for "Manifest" - runs only once
+      if (manifestWordRef.current) {
+        gsap.fromTo(
+          manifestWordRef.current,
+          {
+            filter: 'blur(12px)',
+            opacity: 0.3,
+          },
+          {
+            filter: 'blur(0px)',
+            opacity: 1,
+            duration: 1.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 70%',
+              once: true,
+            },
           }
-        },
-      });
+        );
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [hasAnimated]);
+  }, []);
 
   return (
     <section ref={sectionRef} id="manifest" className={styles.manifest}>
