@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation';
+import Hero from '../components/Hero';
+import BrandManifest from '../components/BrandManifest';
+import Exordium from '../components/Exordium';
+import Access from '../components/Access';
+import RequestForm from '../components/RequestForm';
+import Footer from '../components/Footer';
+---
+
+<Layout title="POLIGAMIA | Not for Everybody">
+  <Navigation client:load />
+  <main>
+    <Hero client:load />
+    <BrandManifest client:visible />
+    <Exordium client:visible />
+    <Access client:visible />
+    <RequestForm client:visible />
+    <Footer />
+  </main>
+</Layout>
+
+<style>
+  main {
+    overflow-x: hidden;
+  }
+</style>

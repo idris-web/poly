@@ -1,0 +1,136 @@
+.footer {
+  background: var(--carbon-deep);
+  padding: 5rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.dividerLine {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--crown-gold-muted)
+  );
+}
+
+.dividerLine:last-child {
+  background: linear-gradient(
+    90deg,
+    var(--crown-gold-muted),
+    transparent
+  );
+}
+
+.dividerDiamond {
+  width: 8px;
+  height: 8px;
+  background: var(--crown-gold);
+  transform: rotate(45deg);
+}
+
+/* Logo */
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--crown-gold);
+  margin-bottom: 0.75rem;
+}
+
+/* Tagline */
+.tagline {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--white-ghost);
+  margin-bottom: 2.5rem;
+}
+
+/* Links */
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.link {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-subtle);
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: var(--crown-gold);
+}
+
+.linkDivider {
+  color: var(--crown-gold-muted);
+  font-size: 0.6rem;
+}
+
+/* Copyright */
+.copyright {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--white-ghost);
+}
+
+/* Bottom Accent */
+.bottomAccent {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--crown-gold),
+    transparent
+  );
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 4rem 1.5rem 2.5rem;
+  }
+
+  .dividerLine {
+    width: 50px;
+  }
+
+  .links {
+    flex-wrap: wrap;
+  }
+}
