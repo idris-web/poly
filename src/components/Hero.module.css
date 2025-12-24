@@ -343,13 +343,13 @@
   }
 
   .heroBgImage {
-    object-position: center center;
+    object-position: center 30%;
   }
 
   .heroContent {
     padding: 0 1.5rem;
     justify-content: flex-end;
-    padding-bottom: 3rem;
+    padding-bottom: 2.5rem;
   }
 
   .heroText {
@@ -395,9 +395,9 @@
     background: linear-gradient(
       180deg,
       transparent 0%,
-      transparent 50%,
-      rgba(232, 224, 213, 0.7) 75%,
-      rgba(232, 224, 213, 0.95) 100%
+      transparent 40%,
+      rgba(232, 224, 213, 0.85) 65%,
+      rgba(232, 224, 213, 0.98) 100%
     );
   }
 }
