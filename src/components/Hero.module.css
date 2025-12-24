@@ -343,7 +343,7 @@
   }
 
   .heroBgImage {
-    object-position: center 15%;
+    object-position: center top;
   }
 
   .heroContent {
@@ -395,9 +395,9 @@
     background: linear-gradient(
       180deg,
       transparent 0%,
-      transparent 40%,
-      rgba(232, 224, 213, 0.85) 65%,
-      rgba(232, 224, 213, 0.98) 100%
+      transparent 55%,
+      rgba(232, 224, 213, 0.75) 75%,
+      rgba(232, 224, 213, 0.95) 100%
     );
   }
 }
