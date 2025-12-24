@@ -105,30 +105,82 @@ body {
   background: var(--crown-gold);
 }
 
-/* Typography */
+/* Typography System - Modular Scale (1.25 ratio) */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 500;
   line-height: 1.15;
-  letter-spacing: 0.02em;
 }
 
 h1 {
   font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 200;
+  letter-spacing: -0.02em;
 }
 
 h2 {
   font-size: clamp(2rem, 6vw, 4.5rem);
+  font-weight: 300;
+  letter-spacing: 0.01em;
 }
 
 h3 {
   font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+}
+
+h4 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+h5 {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+h6 {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 p {
-  font-weight: 400;
-  letter-spacing: 0.05em;
+  font-weight: 300;
+  letter-spacing: 0.03em;
   line-height: 1.8;
+}
+
+/* Overline / Label Text */
+.overline {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--crown-gold);
+}
+
+/* Body Large */
+.text-large {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+/* Body Small */
+.text-small {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Caption */
+.text-caption {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--white-subtle);
 }
 
 /* Links */
@@ -366,6 +418,70 @@ a:hover {
   z-index: 1;
   transform: translate(-50%, -50%);
   transition: opacity 0.3s ease;
+}
+
+/* Accessibility - Focus States */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--crown-gold);
+  outline-offset: 3px;
+}
+
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--crown-gold);
+  color: var(--carbon-deep);
+  padding: 0.5rem 1rem;
+  z-index: 10000;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --crown-gold: #d4b896;
+    --crown-gold-muted: rgba(212, 184, 150, 0.8);
+    --white-subtle: rgba(255, 255, 255, 0.85);
+    --white-ghost: rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Media Queries */

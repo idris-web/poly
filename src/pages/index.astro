@@ -4,7 +4,9 @@ import Navigation from '../components/Navigation';
 import Hero from '../components/Hero';
 import BrandManifest from '../components/BrandManifest';
 import Exordium from '../components/Exordium';
+import FragranceNotes from '../components/FragranceNotes';
 import Gallery from '../components/Gallery';
+import Testimonials from '../components/Testimonials';
 import Access from '../components/Access';
 import RequestForm from '../components/RequestForm';
 import Footer from '../components/Footer';
@@ -16,10 +18,12 @@ import Footer from '../components/Footer';
     <Hero client:load />
     <BrandManifest client:visible />
     <Exordium client:visible />
+    <FragranceNotes client:visible />
     <Gallery client:visible />
+    <Testimonials client:visible />
     <Access client:visible />
     <RequestForm client:visible />
-    <Footer />
+    <Footer client:visible />
   </main>
 </Layout>
 

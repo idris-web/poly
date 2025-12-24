@@ -186,6 +186,33 @@
   width: 100%;
 }
 
+/* Validation States */
+.inputError {
+  border-color: #c45c5c;
+}
+
+.inputError:focus {
+  border-color: #c45c5c;
+}
+
+.inputError ~ .inputLine {
+  background: #c45c5c;
+}
+
+.inputValid {
+  border-color: var(--crown-gold);
+}
+
+.errorMessage {
+  display: block;
+  margin-top: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: #c45c5c;
+  letter-spacing: 0.02em;
+}
+
 /* Submit Button */
 .submitBtn {
   display: flex;
@@ -377,6 +404,27 @@
   color: var(--white-ghost);
   padding-top: 2rem;
   border-top: 1px solid rgba(178, 153, 130, 0.2);
+}
+
+.backBtn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--crown-gold-muted);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--crown-gold);
+  cursor: pointer;
+  transition: all 0.4s var(--ease-luxury);
+}
+
+.backBtn:hover {
+  border-color: var(--crown-gold);
+  background: rgba(178, 153, 130, 0.1);
 }
 
 @media (max-width: 768px) {

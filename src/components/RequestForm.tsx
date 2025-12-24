@@ -5,6 +5,11 @@ import styles from './RequestForm.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+}
+
 export default function RequestForm() {
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
@@ -12,12 +17,13 @@ export default function RequestForm() {
     email: '',
     message: '',
   });
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate form elements
       gsap.fromTo(
         '.form-element',
         {
@@ -41,8 +47,41 @@ export default function RequestForm() {
     return () => ctx.revert();
   }, []);
 
+  const validateField = (name: string, value: string): string | undefined => {
+    switch (name) {
+      case 'name':
+        if (!value.trim()) return 'Bitte geben Sie Ihren Namen ein';
+        if (value.trim().length < 2) return 'Name muss mindestens 2 Zeichen lang sein';
+        return undefined;
+      case 'email':
+        if (!value.trim()) return 'Bitte geben Sie Ihre E-Mail-Adresse ein';
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+        return undefined;
+      default:
+        return undefined;
+    }
+  };
+
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {
+      name: validateField('name', formData.name),
+      email: validateField('email', formData.email),
+    };
+    setErrors(newErrors);
+    return !newErrors.name && !newErrors.email;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Mark all fields as touched
+    setTouched({ name: true, email: true, message: true });
+
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     // Simulate form submission
@@ -55,15 +94,55 @@ export default function RequestForm() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    // Validate on change if field has been touched
+    if (touched[name]) {
+      setErrors({
+        ...errors,
+        [name]: validateField(name, value),
+      });
+    }
+  };
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setTouched({
+      ...touched,
+      [name]: true,
+    });
+    setErrors({
+      ...errors,
+      [name]: validateField(name, value),
+    });
+  };
+
+  const handleReset = () => {
+    setSubmitted(false);
+    setFormData({ name: '', email: '', message: '' });
+    setErrors({});
+    setTouched({});
+  };
+
+  const getInputClassName = (fieldName: string) => {
+    const baseClass = fieldName === 'message' ? styles.textarea : styles.input;
+    if (touched[fieldName] && errors[fieldName as keyof FormErrors]) {
+      return `${baseClass} ${styles.inputError}`;
+    }
+    if (touched[fieldName] && !errors[fieldName as keyof FormErrors] && formData[fieldName as keyof typeof formData]) {
+      return `${baseClass} ${styles.inputValid}`;
+    }
+    return baseClass;
   };
 
   return (
     <section ref={sectionRef} id="request" className={styles.request}>
-
       <div className={styles.container}>
         {/* Header */}
         <div className={`${styles.header} form-element`}>
@@ -80,7 +159,7 @@ export default function RequestForm() {
         {/* Form Container */}
         <div className={styles.formWrapper}>
           {!submitted ? (
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form} noValidate>
               <div className={`${styles.inputGroup} form-element`}>
                 <label htmlFor="name" className={styles.label}>
                   Name
@@ -91,11 +170,18 @@ export default function RequestForm() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  required
-                  className={styles.input}
+                  onBlur={handleBlur}
+                  className={getInputClassName('name')}
                   placeholder="Ihr vollständiger Name"
+                  aria-invalid={touched.name && !!errors.name}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
                 />
                 <div className={styles.inputLine} />
+                {touched.name && errors.name && (
+                  <span id="name-error" className={styles.errorMessage} role="alert">
+                    {errors.name}
+                  </span>
+                )}
               </div>
 
               <div className={`${styles.inputGroup} form-element`}>
@@ -108,11 +194,18 @@ export default function RequestForm() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
-                  className={styles.input}
+                  onBlur={handleBlur}
+                  className={getInputClassName('email')}
                   placeholder="Ihre E-Mail-Adresse"
+                  aria-invalid={touched.email && !!errors.email}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
                 />
                 <div className={styles.inputLine} />
+                {touched.email && errors.email && (
+                  <span id="email-error" className={styles.errorMessage} role="alert">
+                    {errors.email}
+                  </span>
+                )}
               </div>
 
               <div className={`${styles.inputGroup} form-element`}>
@@ -124,6 +217,7 @@ export default function RequestForm() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   className={styles.textarea}
                   placeholder="Warum möchten Sie Teil von POLIGAMIA werden?"
                   rows={4}
@@ -189,6 +283,13 @@ export default function RequestForm() {
               <div className={styles.successQuote}>
                 "Wahre Exklusivität lässt sich nicht anklicken. Sie findet dich."
               </div>
+              <button
+                type="button"
+                onClick={handleReset}
+                className={styles.backBtn}
+              >
+                Weitere Anfrage stellen
+              </button>
             </div>
           )}
         </div>

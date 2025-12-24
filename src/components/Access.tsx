@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import styles from './Access.module.css';
@@ -7,6 +7,12 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Access() {
   const sectionRef = useRef<HTMLElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  // Limited edition count - would come from API in production
+  const totalBottles = 99;
+  const remainingBottles = 47;
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -25,10 +31,32 @@ export default function Access() {
           },
         }
       );
+
+      // Counter animation
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: 'top 60%',
+        onEnter: () => {
+          if (!hasAnimated && counterRef.current) {
+            setHasAnimated(true);
+            const counter = { value: 0 };
+            gsap.to(counter, {
+              value: remainingBottles,
+              duration: 2,
+              ease: 'power2.out',
+              onUpdate: () => {
+                if (counterRef.current) {
+                  counterRef.current.textContent = Math.round(counter.value).toString();
+                }
+              },
+            });
+          }
+        },
+      });
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [hasAnimated]);
 
   const accessItems = [
     {
@@ -58,6 +86,27 @@ export default function Access() {
             Du kannst EXORDIUM <span className={styles.titleHighlight}>nicht kaufen.</span>
           </h2>
           <p className={styles.subtitle}>Es findet dich.</p>
+        </div>
+
+        {/* Scarcity Counter */}
+        <div className={styles.scarcitySection}>
+          <div className={styles.scarcityBox}>
+            <div className={styles.scarcityContent}>
+              <span className={styles.scarcityLabel}>Limitierte Edition</span>
+              <div className={styles.scarcityCounter}>
+                <span ref={counterRef} className={styles.scarcityNumber}>0</span>
+                <span className={styles.scarcityDivider}>/</span>
+                <span className={styles.scarcityTotal}>{totalBottles}</span>
+              </div>
+              <span className={styles.scarcitySubtext}>Flaschen verfügbar</span>
+            </div>
+            <div className={styles.scarcityProgress}>
+              <div
+                className={styles.scarcityBar}
+                style={{ width: `${(remainingBottles / totalBottles) * 100}%` }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Divider Line */}

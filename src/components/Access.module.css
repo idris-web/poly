@@ -45,6 +45,97 @@
   margin-top: 0.5rem;
 }
 
+/* Scarcity Section */
+.scarcitySection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.scarcityBox {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 26, 0.6) 0%,
+    rgba(18, 18, 18, 0.4) 100%
+  );
+  border: 1px solid rgba(178, 153, 130, 0.2);
+  padding: 2rem 3rem;
+  min-width: 280px;
+  text-align: center;
+}
+
+.scarcityContent {
+  margin-bottom: 1.25rem;
+}
+
+.scarcityLabel {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--crown-gold);
+  margin-bottom: 0.75rem;
+}
+
+.scarcityCounter {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.scarcityNumber {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 200;
+  color: var(--crown-gold);
+  line-height: 1;
+}
+
+.scarcityDivider {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 200;
+  color: var(--white-ghost);
+}
+
+.scarcityTotal {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--white-ghost);
+}
+
+.scarcitySubtext {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--white-subtle);
+}
+
+.scarcityProgress {
+  height: 2px;
+  background: rgba(178, 153, 130, 0.2);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.scarcityBar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--crown-gold-dark),
+    var(--crown-gold),
+    var(--crown-gold-light)
+  );
+  border-radius: 1px;
+  transition: width 2s var(--ease-luxury);
+}
+
 /* Divider Line */
 .dividerLine {
   width: 100%;

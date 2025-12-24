@@ -124,6 +124,173 @@
   opacity: 0.3;
 }
 
+/* Caption */
+.caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.9) 0%,
+    rgba(10, 10, 10, 0.6) 50%,
+    transparent 100%
+  );
+  transform: translateY(100%);
+  transition: transform 0.5s var(--ease-luxury);
+  z-index: 3;
+}
+
+.imageWrapper:hover .caption {
+  transform: translateY(0);
+}
+
+.captionTitle {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--crown-gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.captionSubtitle {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--white-subtle);
+  letter-spacing: 0.02em;
+}
+
+/* Zoom Icon */
+.zoomIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(178, 153, 130, 0.3);
+  border-radius: 50%;
+  color: var(--crown-gold);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.4s var(--ease-luxury);
+  z-index: 3;
+}
+
+.imageWrapper:hover .zoomIcon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.zoomIcon:hover {
+  background: rgba(178, 153, 130, 0.2);
+  border-color: var(--crown-gold);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightboxClose {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--crown-gold-muted);
+  border-radius: 50%;
+  color: var(--crown-gold);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lightboxClose:hover {
+  border-color: var(--crown-gold);
+  background: rgba(178, 153, 130, 0.1);
+}
+
+.lightboxContent {
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: scaleIn 0.4s var(--ease-luxury);
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightboxImage {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+}
+
+.lightboxCaption {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(178, 153, 130, 0.2);
+}
+
+.lightboxCaption h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--crown-gold);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.lightboxCaption p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--white-subtle);
+  letter-spacing: 0.05em;
+}
+
 /* Bento Grid Layout */
 .imageWrapper:nth-child(1) {
   grid-column: 1 / 2;
