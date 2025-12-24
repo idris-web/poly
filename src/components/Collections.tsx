@@ -11,21 +11,21 @@ const collections = [
     name: 'Die Flasche',
     description: 'Handgefertigtes Design mit zeitloser Eleganz — jedes Detail erzählt eine Geschichte.',
     badge: 'EXORDIUM',
-    image: '/shot-01.png',  // Gold
+    image: '/shot-01.webp',  // Gold
   },
   {
     id: 2,
     name: 'Der Duft',
     description: 'Luxuriöse Tiefe mit warmen Noten — ein Erlebnis, das in Erinnerung bleibt.',
     badge: 'EXORDIUM',
-    image: '/shot-05.png',  // Blue
+    image: '/shot-05.webp',  // Blue
   },
   {
     id: 3,
     name: 'Das Erlebnis',
     description: 'Mehr als ein Parfüm — ein Statement für die, die herausstechen wollen.',
     badge: 'EXORDIUM',
-    image: '/shot-04.png',  // Red
+    image: '/shot-04.webp',  // Red
   },
 ];
 

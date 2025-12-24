@@ -14,31 +14,31 @@ interface GalleryImage {
 
 const galleryImages: GalleryImage[] = [
   {
-    src: '/shot-01.png',
+    src: '/shot-01.webp',
     alt: 'EXORDIUM Collection',
     title: 'Die Essenz',
     subtitle: 'Handgefertigt in limitierter Auflage'
   },
   {
-    src: '/shot-03.png',
+    src: '/shot-03.webp',
     alt: 'EXORDIUM Artistic',
     title: 'Das Ritual',
     subtitle: 'Ein Moment der Transformation'
   },
   {
-    src: '/shot-04.png',
+    src: '/shot-04.webp',
     alt: 'EXORDIUM Red',
     title: 'Die Leidenschaft',
     subtitle: 'Intensiv und unvergesslich'
   },
   {
-    src: '/shot-05.png',
+    src: '/shot-05.webp',
     alt: 'EXORDIUM Blue',
     title: 'Die Tiefe',
     subtitle: 'Mysterium in jeder Note'
   },
   {
-    src: '/shot-02.png',
+    src: '/shot-02.webp',
     alt: 'EXORDIUM Detail',
     title: 'Das Handwerk',
     subtitle: 'Perfektion in jedem Detail'

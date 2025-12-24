@@ -182,7 +182,7 @@ export default function Exordium() {
               {/* Fallback while frames load */}
               {!imagesLoaded && (
                 <img
-                  src="/parfume-no-bg.png"
+                  src="/parfume-no-bg.webp"
                   alt="EXORDIUM - Extrait de Parfum"
                   className={styles.bottleImage}
                 />
