@@ -9,6 +9,7 @@ interface NoteCategory {
   title: string;
   subtitle: string;
   notes: string[];
+  image: string;
 }
 
 const fragranceData: NoteCategory[] = [
@@ -16,16 +17,22 @@ const fragranceData: NoteCategory[] = [
     title: 'Top Notes',
     subtitle: 'Fresh & Uplifting',
     notes: ['Lemon', 'Lemon Peel', 'Lavender Blossom', 'Bergamot', 'Rose Petals', 'Geranium'],
+    // Replace with your own: /notes-top.jpg
+    image: 'https://images.unsplash.com/photo-1587049016823-69ef9d68bd44?w=640&q=80',
   },
   {
     title: 'Heart Notes',
     subtitle: 'Spicy & Sensual',
     notes: ['Nutmeg', 'Clove', 'Tonka Bean', 'Strawberry', 'Patchouli', 'Frankincense'],
+    // Replace with your own: /notes-heart.jpg
+    image: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=640&q=80',
   },
   {
     title: 'Base Notes',
     subtitle: 'Deep & Seductive',
     notes: ['Amber', 'Labdanum', 'Cedarwood', 'Sandalwood', 'Musk', 'Smoky Cedar Resin'],
+    // Replace with your own: /notes-base.jpg
+    image: 'https://images.unsplash.com/photo-1599751449318-56f6e7596e6e?w=640&q=80',
   },
 ];
 
@@ -118,22 +125,35 @@ export default function FragranceNotes() {
               ref={(el) => { cardsRef.current[index] = el; }}
               className={styles.card}
             >
-              <div className={styles.cardHeader}>
+              {/* Background Image - shows on hover */}
+              <div
+                className={styles.cardImage}
+                style={{ backgroundImage: `url(${category.image})` }}
+              />
+
+              {/* Title - always visible */}
+              <div className={styles.cardTitleWrapper}>
                 <span className={styles.cardNumber}>0{index + 1}</span>
                 <h3 className={styles.cardTitle}>{category.title}</h3>
-                <span className={styles.cardSubtitle}>{category.subtitle}</span>
               </div>
 
-              <div className={styles.cardDivider} />
+              {/* Content - hides on hover */}
+              <div className={styles.cardContent}>
+                <div className={styles.cardHeader}>
+                  <span className={styles.cardSubtitle}>{category.subtitle}</span>
+                </div>
 
-              <ul className={styles.notesList}>
-                {category.notes.map((note) => (
-                  <li key={note} className={`${styles.noteItem} note-item`}>
-                    <span className={styles.noteDot} />
-                    <span className={styles.noteName}>{note}</span>
-                  </li>
-                ))}
-              </ul>
+                <div className={styles.cardDivider} />
+
+                <ul className={styles.notesList}>
+                  {category.notes.map((note) => (
+                    <li key={note} className={`${styles.noteItem} note-item`}>
+                      <span className={styles.noteDot} />
+                      <span className={styles.noteName}>{note}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           ))}
         </div>

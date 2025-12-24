@@ -4,38 +4,48 @@ import styles from './Hero.module.css';
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      // Initial state
-      gsap.set(['.hero-crown', scrollIndicatorRef.current], {
+      // Set initial states
+      gsap.set(['.hero-headline', '.hero-subtitle', '.hero-buttons', '.hero-product-card', '.hero-scroll'], {
         opacity: 0,
       });
 
-      // Animate logo
+      // Animate elements in sequence
       tl.fromTo(
-        '.hero-crown',
-        {
-          opacity: 0,
-          y: 30,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-        }
+        '.hero-headline',
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1.2 }
       )
         .fromTo(
-          scrollIndicatorRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 0.6 },
+          '.hero-subtitle',
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.8 },
+          '-=0.6'
+        )
+        .fromTo(
+          '.hero-buttons',
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6 },
           '-=0.4'
+        )
+        .fromTo(
+          '.hero-product-card',
+          { opacity: 0, x: 30, scale: 0.95 },
+          { opacity: 1, x: 0, scale: 1, duration: 0.8 },
+          '-=0.3'
+        )
+        .fromTo(
+          '.hero-scroll',
+          { opacity: 0 },
+          { opacity: 1, duration: 0.5 },
+          '-=0.2'
         );
 
-      // Continuous scroll indicator animation
+      // Continuous scroll animation
       gsap.to('.scroll-line', {
         scaleY: 1.5,
         opacity: 0.3,
@@ -49,27 +59,67 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.querySelector(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section ref={containerRef} className={styles.hero}>
-      {/* Subtle center glow */}
-      <div className={styles.heroGlow} />
+      {/* Background Image */}
+      <div className={styles.heroBg}>
+        <img
+          src="/hero-bg.jpg"
+          alt=""
+          className={styles.heroBgImage}
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+          }}
+        />
+        <div className={styles.heroBgOverlay} />
+      </div>
 
-      <div className={styles.content}>
-        <div className={`${styles.fullLogo} hero-crown`}>
-          <img src="/logo-full.svg" alt="Poligamia - Not for Everybody" className={styles.logoImage} />
+      {/* Content */}
+      <div className={styles.heroContent}>
+        {/* Left Side - Text */}
+        <div className={styles.heroText}>
+          <h1 className={`${styles.heroHeadline} hero-headline`}>
+            <span className={styles.heroHeadlineFirst}>POLIGAMIA ist mehr als eine Parfümmarke.</span>
+            <span className={styles.heroHeadlineSecondLine}>Es ist ein <span className={styles.heroHeadlineGradient}>Manifest.</span></span>
+          </h1>
+
+          <p className={`${styles.heroSubtitle} hero-subtitle`}>
+            Exklusive Düfte mit eleganter, moderner Note —
+            gemacht für die, die herausstechen.
+          </p>
+
+          <div className={`${styles.heroButtons} hero-buttons`}>
+            <button
+              className={styles.btnPrimary}
+              onClick={() => scrollToSection('#exordium')}
+            >
+              Kollektion entdecken
+            </button>
+            <button
+              className={styles.btnSecondary}
+              onClick={() => scrollToSection('#anfragen')}
+            >
+              Anfragen
+            </button>
+          </div>
         </div>
+
       </div>
 
       {/* Scroll Indicator */}
-      <div ref={scrollIndicatorRef} className={styles.scrollIndicator}>
+      <div className={`${styles.scrollIndicator} hero-scroll`}>
         <span className={styles.scrollText}>Scroll</span>
         <div className={styles.scrollLineWrapper}>
           <div className={`${styles.scrollLine} scroll-line`} />
         </div>
       </div>
-
-      {/* Bottom gradient for smooth transition */}
-      <div className={styles.bottomGradient} />
     </section>
   );
 }

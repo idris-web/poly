@@ -4,16 +4,21 @@ import styles from './Navigation.module.css';
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [inHero, setInHero] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
+      const heroHeight = window.innerHeight * 0.8; // 80% of viewport height
 
-      // Show/hide based on scroll direction (but not when menu is open)
-      if (!menuOpen) {
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      // Check if we're in the hero section
+      setInHero(currentScrollY < heroHeight);
+
+      // Show/hide based on scroll direction (but not when menu is open or in hero)
+      if (!menuOpen && currentScrollY >= heroHeight) {
+        if (currentScrollY > lastScrollY && currentScrollY > heroHeight + 100) {
           setHidden(true);
         } else {
           setHidden(false);
@@ -57,7 +62,7 @@ export default function Navigation() {
       <nav
         className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${
           hidden ? styles.hidden : ''
-        } ${menuOpen ? styles.menuOpen : ''}`}
+        } ${menuOpen ? styles.menuOpen : ''} ${inHero ? styles.inHero : ''}`}
       >
         <div className={styles.container}>
           {/* Logo */}

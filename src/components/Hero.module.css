@@ -1,47 +1,234 @@
+/* Hero Section - Mocko Style */
 .hero {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: relative;
   overflow: hidden;
-  background: var(--carbon);
-}
-
-/* Subtle center glow - static, no animation */
-.heroGlow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 800px;
-  height: 600px;
-  background: radial-gradient(
-    ellipse,
-    rgba(178, 153, 130, 0.06) 0%,
-    transparent 60%
-  );
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-}
-
-.content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 2rem;
-}
-
-/* Full Logo */
-.fullLogo {
   display: flex;
-  justify-content: center;
   align-items: center;
+  /* Warm beige fallback - matches EXORDIUM product shot */
+  background: linear-gradient(
+    135deg,
+    #d4b896 0%,
+    #c9a882 50%,
+    #bfa078 100%
+  );
 }
 
-.logoImage {
-  width: clamp(280px, 55vw, 550px);
-  height: auto;
+/* Background Image */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.heroBgImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+}
+
+.heroBgOverlay {
+  display: none;
+}
+
+/* Content Container */
+.heroContent {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Left Side - Text Content */
+.heroText {
+  max-width: 700px;
+  padding-top: 0;
+  padding-bottom: 12rem;
+  align-self: center;
+}
+
+/* Headline - Elegant Bold */
+.heroHeadline {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.4;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0;
+}
+
+.heroHeadlineFirst {
+  display: block;
+  white-space: nowrap;
+}
+
+.heroHeadlineSecond {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.heroHeadlineSecondLine {
+  display: block;
+  margin-top: 0.75rem;
+}
+
+.heroHeadlineGradient {
+  position: relative;
+  color: #1a1a1a;
+  display: inline-block;
+}
+
+.heroHeadlineGradient::before {
+  content: 'Manifest.';
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    transparent 30%,
+    rgba(212, 184, 150, 0.9) 45%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(212, 184, 150, 0.9) 55%,
+    transparent 70%,
+    transparent 100%
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: luxuryShine 3s ease-in-out infinite;
+}
+
+@keyframes luxuryShine {
+  0% {
+    background-position: 150% center;
+  }
+  100% {
+    background-position: -50% center;
+  }
+}
+
+/* Subtitle */
+.heroSubtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.3vw, 1rem);
+  font-weight: 400;
+  line-height: 1.8;
+  color: #4a4a4a;
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+/* Buttons */
+.heroButtons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.btnPrimary {
+  padding: 0.9rem 2.2rem;
+  background: #1a1a1a;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid #1a1a1a;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.btnPrimary:hover {
+  background: #333;
+  border-color: #333;
+}
+
+.btnSecondary {
+  padding: 0.9rem 2.2rem;
+  background: transparent;
+  color: #1a1a1a;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid rgba(26, 26, 26, 0.4);
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.btnSecondary:hover {
+  border-color: #1a1a1a;
+  background: rgba(26, 26, 26, 0.05);
+}
+
+/* Product Card */
+.productCard {
+  background: #fff;
+  padding: 1.5rem 1.75rem;
+  border-radius: 20px;
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.12),
+    0 10px 30px rgba(0, 0, 0, 0.08);
+  min-width: 220px;
+  margin-bottom: 3rem;
+  margin-right: 2rem;
+}
+
+.productBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #1a1a1a;
+  background: rgba(0, 0, 0, 0.04);
+  padding: 0.4rem 0.85rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  background: #B29982;
+  border-radius: 50%;
+}
+
+.productName {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.35rem;
+  letter-spacing: 0.01em;
+}
+
+.productDesc {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #777;
+  margin-bottom: 0.85rem;
+}
+
+.productPrice {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #B29982;
 }
 
 /* Scroll Indicator */
@@ -54,58 +241,105 @@
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  z-index: 2;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .scrollText {
-  font-family: var(--font-body);
-  font-size: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.55rem;
   font-weight: 400;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--crown-gold-muted);
+  color: rgba(26, 26, 26, 0.5);
+  transition: color 0.3s ease;
+}
+
+.scrollIndicator:hover .scrollText {
+  color: rgba(26, 26, 26, 0.8);
 }
 
 .scrollLineWrapper {
   width: 1px;
-  height: 40px;
-  background: rgba(178, 153, 130, 0.2);
+  height: 50px;
+  background: rgba(26, 26, 26, 0.1);
   overflow: hidden;
+  position: relative;
 }
 
 .scrollLine {
   width: 100%;
   height: 20px;
-  background: var(--crown-gold);
+  background: linear-gradient(180deg, #1a1a1a 0%, rgba(26, 26, 26, 0.2) 100%);
   transform-origin: top;
+  animation: scrollPulse 2s ease-in-out infinite;
 }
 
-/* Bottom gradient for smooth section transition */
-.bottomGradient {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 150px;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    var(--carbon-deep) 100%
-  );
-  pointer-events: none;
+@keyframes scrollPulse {
+  0%, 100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(150%);
+    opacity: 1;
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .heroContent {
+    padding: 7rem 3rem 3rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .heroText {
+    padding-bottom: 3rem;
+  }
+
+  .productCard {
+    margin-right: 0;
+    margin-bottom: 5rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .logoImage {
-    width: clamp(240px, 80vw, 320px);
+  .heroContent {
+    padding: 6rem 1.5rem 2rem;
   }
 
-  .heroGlow {
-    width: 400px;
-    height: 300px;
+  .heroHeadline {
+    font-size: clamp(2rem, 8vw, 2.8rem);
   }
 
-  .bottomGradient {
-    height: 100px;
+  .heroSubtitle {
+    font-size: 0.9rem;
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .productCard {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .heroBgOverlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.1) 30%,
+      transparent 50%
+    );
   }
 }

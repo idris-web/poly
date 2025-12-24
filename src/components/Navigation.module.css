@@ -8,6 +8,42 @@
   transition: all 0.5s var(--ease-luxury);
 }
 
+/* Initial state - light background (hero) */
+.nav:not(.scrolled) .logo {
+  border-color: rgba(30, 30, 30, 0.3);
+}
+
+.nav:not(.scrolled) .logoIcon {
+  filter: brightness(0) saturate(100%);
+}
+
+.nav:not(.scrolled) .link {
+  color: rgba(30, 30, 30, 0.7);
+}
+
+.nav:not(.scrolled) .link:hover {
+  color: var(--carbon);
+}
+
+.nav:not(.scrolled) .cta {
+  border-color: rgba(30, 30, 30, 0.3);
+  color: var(--carbon);
+}
+
+.nav:not(.scrolled) .cta:hover {
+  border-color: var(--carbon);
+  background: var(--carbon);
+  color: white;
+}
+
+.nav:not(.scrolled) .hamburger {
+  border-color: rgba(30, 30, 30, 0.3);
+}
+
+.nav:not(.scrolled) .hamburgerLine {
+  background: var(--carbon);
+}
+
 .nav.scrolled {
   padding: 1rem 2rem;
   background: rgba(22, 22, 22, 0.95);
@@ -17,6 +53,19 @@
 
 .nav.hidden {
   transform: translateY(-100%);
+}
+
+/* Hide navigation completely when in hero section */
+.nav.inHero {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+}
+
+.nav.inHero.menuOpen {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 .container {
@@ -123,12 +172,12 @@
   z-index: -1;
 }
 
-.cta:hover {
+.nav.scrolled .cta:hover {
   color: var(--carbon-deep);
   border-color: var(--crown-gold);
 }
 
-.cta:hover::before {
+.nav.scrolled .cta:hover::before {
   left: 0;
 }
 
