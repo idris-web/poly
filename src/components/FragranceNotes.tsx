@@ -50,9 +50,9 @@ export default function FragranceNotes() {
             ease: 'none',
             scrollTrigger: {
               trigger: timelineRef.current,
-              start: 'top 70%',
-              end: 'top 20%',
-              scrub: 0.5,
+              start: 'top 80%',
+              end: 'top 50%',
+              scrub: 0.3,
             },
           }
         );
