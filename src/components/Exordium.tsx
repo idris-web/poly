@@ -11,7 +11,7 @@ const TOTAL_FRAMES = 160;
 // Preload all frames into array
 const frameImages: string[] = [];
 for (let i = 1; i <= TOTAL_FRAMES; i++) {
-  frameImages.push(`/frames/ezgif-frame-${String(i).padStart(3, '0')}.jpg`);
+  frameImages.push(`/frames/ezgif-frame-${String(i).padStart(3, '0')}.webp`);
 }
 
 export default function Exordium() {

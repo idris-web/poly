@@ -48,14 +48,17 @@ export default function Hero() {
     <section ref={containerRef} className={styles.hero}>
       {/* Background Image */}
       <div className={styles.heroBg}>
-        <img
-          src="/hero-bg.jpg"
-          alt=""
-          className={styles.heroBgImage}
-          onError={(e) => {
-            e.currentTarget.style.display = 'none';
-          }}
-        />
+        <picture>
+          <source media="(max-width: 768px)" srcSet="/hero-mobile.webp" />
+          <img
+            src="/hero-bg.webp"
+            alt=""
+            className={styles.heroBgImage}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </picture>
         <div className={styles.heroBgOverlay} />
       </div>
 
