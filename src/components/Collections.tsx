@@ -16,7 +16,7 @@ const collections = [
   {
     id: 2,
     name: 'Der Duft',
-    description: 'Luxuriöse Tiefe mit warmen Noten — ein Erlebnis, das in Erinnerung bleibt.',
+    description: 'Luxuriöse Tiefe mit warmen Noten, ein Erlebnis, das in Erinnerung bleibt.',
     badge: 'EXORDIUM',
     image: '/shot-05.webp',  // Blue
   },
