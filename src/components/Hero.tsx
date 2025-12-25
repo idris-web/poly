@@ -67,7 +67,10 @@ export default function Hero() {
         {/* Left Side - Text */}
         <div className={styles.heroText}>
           <div className={`${styles.heroHeadline} hero-headline`}>
-            <img src="/name-poligamia.svg" alt="POLIGAMIA® - Not for everybody" className={styles.heroLogo} />
+            <div className={styles.logoWrapper}>
+              <img src="/name-poligamia.svg" alt="POLIGAMIA - Not for everybody" className={styles.heroLogo} />
+              <span className={styles.trademark}>®</span>
+            </div>
           </div>
 
           <p className={`${styles.heroSubtitle} hero-subtitle`}>

@@ -88,11 +88,25 @@
   margin-bottom: 2rem;
 }
 
+.logoWrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .heroLogo {
   max-width: 400px;
   width: 100%;
   height: auto;
   filter: brightness(0.3);
+}
+
+.trademark {
+  position: absolute;
+  top: 0;
+  right: -20px;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #1a1a1a;
 }
 
 .heroHeadlineFirst {
