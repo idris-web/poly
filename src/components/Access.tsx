@@ -84,7 +84,8 @@ export default function Access() {
         <div className={styles.header}>
           <span className={styles.overline}>Der Zugang</span>
           <h2 className={styles.title}>
-            Du kannst EXORDIUM <span className={styles.titleHighlight}>nicht kaufen.</span>
+            EXORDIUM ist bewusst entzogen –<br />
+            <span className={styles.titleHighlight}>Dem Mainstream. Der Masse. Dem Erwartbaren.</span>
           </h2>
           <p className={styles.subtitle}>Es findet dich.</p>
         </div>
