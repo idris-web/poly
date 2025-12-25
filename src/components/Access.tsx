@@ -90,29 +90,6 @@ export default function Access() {
           <p className={styles.subtitle}>Es findet dich.</p>
         </div>
 
-        {/* Scarcity Counter */}
-        <div className={styles.scarcitySection}>
-          <div className={styles.scarcityBox}>
-            <div className={styles.scarcityContent}>
-              <span className={styles.scarcityLabel}>Limitierte Edition</span>
-              <div className={styles.scarcityCounter}>
-                <span ref={counterRef} className={styles.scarcityNumber}>0</span>
-                <span className={styles.scarcityDivider}>/</span>
-                <span className={styles.scarcityTotal}>{totalBottles}</span>
-              </div>
-              <span className={styles.scarcitySubtext}>Flaschen vergeben</span>
-            </div>
-            <div className={styles.scarcityProgress}>
-              <div
-                className={styles.scarcityBar}
-                style={{ width: `${(soldBottles / totalBottles) * 100}%` }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Divider Line */}
-        <div className={styles.dividerLine} />
 
         {/* Access Cards */}
         <div className={styles.cards}>
