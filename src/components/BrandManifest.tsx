@@ -92,8 +92,8 @@ export default function BrandManifest() {
             ref={(el) => { textRefs.current[0] = el; }}
             className={styles.statement}
           >
-            <span className={styles.statementFirst}><span className={styles.highlight}>POLIGAMIA</span> ist mehr als eine Parfümmarke.</span>
-            <span className={styles.statementSecond}>Es ist ein <span ref={manifestWordRef} className={styles.manifestWord}>Manifest.</span></span>
+            <span className={styles.statementFirst}><span className={styles.highlight}>POLIGAMIA</span> ist kein Produkt.</span>
+            <span className={styles.statementSecond}>Sondern ein <span ref={manifestWordRef} className={styles.manifestWord}>Statement.</span></span>
           </h2>
 
           <p
