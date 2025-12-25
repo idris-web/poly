@@ -66,10 +66,9 @@ export default function Hero() {
       <div className={styles.heroContent}>
         {/* Left Side - Text */}
         <div className={styles.heroText}>
-          <h1 className={`${styles.heroHeadline} hero-headline`}>
-            <span className={styles.heroHeadlineFirst}>POLIGAMIA®</span>
-            <span className={styles.heroHeadlineSecondLine}>Not for everybody.</span>
-          </h1>
+          <div className={`${styles.heroHeadline} hero-headline`}>
+            <img src="/name-poligamia.svg" alt="POLIGAMIA® - Not for everybody" className={styles.heroLogo} />
+          </div>
 
           <p className={`${styles.heroSubtitle} hero-subtitle`}>
             POLIGAMIA ist mehr als eine Parfümmarke. Es ist ein Manifest. Eine Einladung, Grenzen zu überschreiten und Identität neu zu definieren. Für jene, die nicht dazugehören wollen, sondern herausstechen.
