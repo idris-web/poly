@@ -102,7 +102,8 @@ export default function FragranceNotes() {
         <header className={styles.header}>
           <span className={styles.overline}>Die Duftreise</span>
           <h2 className={styles.title}>
-            Wie sich <span className={styles.titleHighlight}>EXORDIUM</span> entfaltet
+            <span className={styles.titleHighlight}>EXORDIUM</span><br />
+            Unberechenbar und frei von Regeln.
           </h2>
           <p className={styles.subtitle}>
             Ein Duft entwickelt sich über Stunden — von den ersten frischen Noten bis zur tiefen, warmen Basis.
