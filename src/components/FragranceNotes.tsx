@@ -106,7 +106,9 @@ export default function FragranceNotes() {
             Unberechenbar und frei von Regeln.
           </h2>
           <p className={styles.subtitle}>
-            Ein Duft entwickelt sich über Stunden — von den ersten frischen Noten bis zur tiefen, warmen Basis.
+            Ein Duft, der nicht gefallen will, aber Begierden weckt. Er entwickelt sich über Stunden.
+            <br /><br />
+            Beginnend mit frischen, blumigen Noten bis hin zur tiefen, warmen Basis.
           </p>
         </header>
 
