@@ -100,8 +100,7 @@ export default function BrandManifest() {
             ref={(el) => { textRefs.current[2] = el; }}
             className={styles.description}
           >
-            Eine Einladung, Grenzen zu überschreiten und Identität neu zu definieren.
-            Für jene, die nicht dazugehören wollen — sondern herausstechen.
+            Jedes unserer Düfte ist ein Manifest gegen Austauschbarkeit und für absolute Individualität.
           </p>
 
           <p
