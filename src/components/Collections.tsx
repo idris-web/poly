@@ -9,7 +9,7 @@ const collections = [
   {
     id: 1,
     name: 'Die Flasche',
-    description: 'Handgefertigtes Design mit zeitloser Eleganz — jedes Detail erzählt eine Geschichte.',
+    description: 'Handgefertigtes Design mit zeitloser Eleganz. Jedes Detail erzählt eine Geschichte.',
     badge: 'EXORDIUM',
     image: '/shot-01.webp',  // Gold
   },
