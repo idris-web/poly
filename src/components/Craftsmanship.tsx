@@ -29,8 +29,7 @@ export default function Craftsmanship() {
 
         <div className={styles.quoteSection}>
           <p className={styles.quote}>
-            Jeder Duft ist eine <span className={styles.quoteHighlight}>Komposition aus Leidenschaft</span>,
-            kreiert für diejenigen, die das Besondere suchen.
+            Wir erschaffen Parfüms, die Grenzen herausfordern. Düfte, die eine Geschichte erzählen, ohne ein Wort zu sagen. <span className={styles.quoteHighlight}>Einzigartig, mysteriös, kompromisslos exklusiv.</span>
           </p>
           <span className={styles.author}>Die Philosophie von POLIGAMIA</span>
         </div>
