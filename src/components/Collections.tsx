@@ -23,7 +23,7 @@ const collections = [
   {
     id: 3,
     name: 'Das Erlebnis',
-    description: 'Mehr als ein Parfüm — ein Statement für die, die herausstechen wollen.',
+    description: 'Mehr als ein Parfüm, ein Statement für die, die herausstechen wollen.',
     badge: 'EXORDIUM',
     image: '/shot-04.webp',  // Red
   },
