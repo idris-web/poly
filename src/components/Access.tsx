@@ -63,7 +63,7 @@ export default function Access() {
     {
       number: '01',
       title: 'Kein Handel',
-      description: 'EXORDIUM wird nicht online und nicht im Handel verkauft. Bewusst entzogen — dem Mainstream, der Masse, dem Erwartbaren.',
+      description: 'Kein Online-Shop. Keine Läden. Zugang nur auf Einladung. Release ausschließlich auf ausgewählten Events mit limitierter Verfügbarkeit.',
     },
     {
       number: '02',
