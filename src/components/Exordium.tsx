@@ -223,7 +223,9 @@ export default function Exordium() {
 
           <div className={`${styles.quote} exordium-text`}>
             <p>
-              "Kein Parfüm, das man trägt — ein Parfüm, das man <span className={styles.emphasis}>wird.</span>"
+              Ein Duft, erschaffen für Persönlichkeiten, deren Identität nicht verhandelbar ist.
+              <br /><br />
+              Für jene, die nicht erwartet, sondern <span className={styles.emphasis}>angekündigt</span> werden.
             </p>
           </div>
 
