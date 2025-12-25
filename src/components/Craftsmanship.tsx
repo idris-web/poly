@@ -1,10 +1,10 @@
 import styles from './Craftsmanship.module.css';
 
 const stats = [
-  { number: '200+', label: 'Stunden Entwicklung' },
+  { number: '5000+', label: 'Stunden Entwicklung*' },
   { number: '47', label: 'Rohstoffe' },
   { number: '18', label: 'Monate Reifung' },
-  { number: '100', label: 'Limitierte Flakons' },
+  { number: '1000*', label: 'Limitierte Flakons*' },
 ];
 
 export default function Craftsmanship() {
