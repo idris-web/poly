@@ -199,7 +199,7 @@ export default function Exordium() {
 
           <h2 className={`${styles.title} exordium-text`}>
             <span className={styles.titleGold}>EXORDIUM</span>
-            <span className={styles.titleSub}>Der Ursprung</span>
+            <span className={styles.titleSub}>The Beginning of the Chosen Ones</span>
           </h2>
 
           <p className={`${styles.description} exordium-text`}>
