@@ -81,7 +81,6 @@ export default function Collections() {
                   }}
                 />
                 <div className={styles.cardOverlay} />
-                <span className={styles.cardBadge}>{collection.badge}</span>
               </div>
               <div className={styles.cardContent}>
                 <h3 className={styles.cardTitle}>{collection.name}</h3>
