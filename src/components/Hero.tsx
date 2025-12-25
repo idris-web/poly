@@ -71,6 +71,10 @@ export default function Hero() {
             <span className={styles.heroHeadlineSecondLine}>Not for everybody.</span>
           </h1>
 
+          <p className={`${styles.heroSubtitle} hero-subtitle`}>
+            POLIGAMIA ist mehr als eine Parfümmarke. Es ist ein Manifest. Eine Einladung, Grenzen zu überschreiten und Identität neu zu definieren. Für jene, die nicht dazugehören wollen, sondern herausstechen.
+          </p>
+
           <div className={`${styles.heroButtons} hero-buttons`}>
             <button
               className={styles.btnPrimary}
