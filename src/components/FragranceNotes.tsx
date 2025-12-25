@@ -106,7 +106,7 @@ export default function FragranceNotes() {
             Unberechenbar und frei von Regeln.
           </h2>
           <p className={styles.subtitle}>
-            Ein Duft, der nicht gefallen will, aber Begierden weckt. Er entwickelt sich über Stunden.
+            Ein Duft, der nicht gefallen will, aber Begierden weckt.<br />Er entwickelt sich über Stunden.
             <br /><br />
             Beginnend mit frischen, blumigen Noten bis hin zur tiefen, warmen Basis.
           </p>
