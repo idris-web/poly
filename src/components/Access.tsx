@@ -68,7 +68,7 @@ export default function Access() {
     {
       number: '02',
       title: 'Ausgewählte Events',
-      description: 'Jedes POLIGAMIA-Event ist ein Ritual. Geheimnisvoll, sinnlich, provokant. Hier wird EXORDIUM nicht präsentiert — sondern offenbart.',
+      description: 'Jedes POLIGAMIA-Event ist ein Ritual. Geheimnisvoll, sinnlich, provokant. Hier wird EXORDIUM nicht präsentiert, sondern offenbart.',
     },
     {
       number: '03',
