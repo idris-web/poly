@@ -118,7 +118,7 @@ export default function Access() {
         <div className={styles.cards}>
           {accessItems.map((item, index) => (
             <div key={index} className={styles.card}>
-              <span className={styles.cardNumber}>{item.number}</span>
+              <img src="/icon-poligamia.svg" alt="" className={styles.cardIcon} />
               <div className={styles.cardDivider} />
               <h3 className={styles.cardTitle}>{item.title}</h3>
               <p className={styles.cardDescription}>{item.description}</p>
