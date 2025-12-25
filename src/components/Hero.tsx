@@ -67,14 +67,9 @@ export default function Hero() {
         {/* Left Side - Text */}
         <div className={styles.heroText}>
           <h1 className={`${styles.heroHeadline} hero-headline`}>
-            <span className={styles.heroHeadlineFirst}>POLIGAMIA ist mehr als eine Parfümmarke.</span>
-            <span className={styles.heroHeadlineSecondLine}>Es ist ein <span className={styles.heroHeadlineGradient}>Manifest.</span></span>
+            <span className={styles.heroHeadlineFirst}>POLIGAMIA®</span>
+            <span className={styles.heroHeadlineSecondLine}>Not for everybody.</span>
           </h1>
-
-          <p className={`${styles.heroSubtitle} hero-subtitle`}>
-            Exklusive Düfte mit eleganter, moderner Note —
-            gemacht für die, die herausstechen.
-          </p>
 
           <div className={`${styles.heroButtons} hero-buttons`}>
             <button

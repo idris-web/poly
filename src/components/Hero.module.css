@@ -83,21 +83,20 @@
   align-self: center;
 }
 
-/* Headline - Elegant Bold */
+/* Headline - Bold Statement */
 .heroHeadline {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 700;
   font-style: normal;
-  line-height: 1.4;
+  line-height: 1.1;
   color: #1a1a1a;
-  margin-bottom: 1.5rem;
-  letter-spacing: 0;
+  margin-bottom: 2rem;
+  letter-spacing: -0.02em;
 }
 
 .heroHeadlineFirst {
   display: block;
-  white-space: nowrap;
 }
 
 .heroHeadlineSecond {
@@ -107,7 +106,12 @@
 
 .heroHeadlineSecondLine {
   display: block;
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.4em;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #4a4a4a;
 }
 
 .heroHeadlineGradient {
@@ -359,12 +363,17 @@
   }
 
   .heroHeadline {
-    font-size: clamp(1.3rem, 5vw, 1.6rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
     color: #1a1a1a;
+    text-align: center;
   }
 
   .heroHeadlineFirst {
     white-space: normal;
+  }
+
+  .heroHeadlineSecondLine {
+    font-size: 0.35em;
   }
 
   .heroSubtitle {
