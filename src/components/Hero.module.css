@@ -358,14 +358,14 @@
   }
 
   .heroText {
-    padding: 2rem !important;
+    padding: 1.5rem !important;
     margin: 0 !important;
     margin-bottom: 2rem !important;
     text-align: center;
     max-width: 100%;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(12px);
-    border-radius: 16px;
+    background: transparent;
+    backdrop-filter: none;
+    border-radius: 0;
   }
 
   .heroHeadline {
@@ -373,26 +373,43 @@
   }
 
   .heroLogo {
-    max-width: 320px;
+    max-width: 280px;
+    filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+  }
+
+  .trademark {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   }
 
   .heroSubtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     max-width: 100%;
     color: #fff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+    margin-bottom: 1.5rem;
   }
 
   .heroButtons {
     flex-direction: column;
     width: 100%;
-    gap: 1rem;
+    gap: 0.75rem;
   }
 
-  .btnPrimary,
+  .btnPrimary {
+    width: 100%;
+    text-align: center;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.7rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
   .btnSecondary {
     width: 100%;
     text-align: center;
-    padding: 1rem 2rem;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.7rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
   }
 
   .productCard {
@@ -402,5 +419,9 @@
 
   .heroBgOverlay {
     display: none !important;
+  }
+
+  .scrollIndicator {
+    display: none;
   }
 }

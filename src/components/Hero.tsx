@@ -88,7 +88,7 @@ export default function Hero() {
             </button>
             <button
               className={styles.btnSecondary}
-              onClick={() => scrollToSection('#anfragen')}
+              onClick={() => scrollToSection('#request')}
             >
               {t.nav.request}
             </button>

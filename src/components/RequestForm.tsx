@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import emailjs from '@emailjs/browser';
 import { useLanguage } from '../i18n/LanguageContext';
 import styles from './RequestForm.module.css';
+
+// EmailJS configuration
+const EMAILJS_SERVICE_ID = 'service_h8e3zgf';
+const EMAILJS_TEMPLATE_ID = 'template_9ger65j';
+const EMAILJS_PUBLIC_KEY = 'U38CXB8gbjNn3IeGU';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -165,11 +171,26 @@ export default function RequestForm() {
 
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setIsSubmitting(false);
-    setSubmitted(true);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message || 'No message provided',
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setSubmitted(true);
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      alert(language === 'de'
+        ? 'Fehler beim Senden. Bitte versuchen Sie es erneut.'
+        : 'Error sending. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
