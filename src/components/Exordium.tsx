@@ -19,12 +19,8 @@ export default function Exordium() {
     if (!video || !section) return;
 
     video.pause();
-    // Don't call video.load() - let preload="auto" handle it
 
-    let targetProgress = 0;
-    let currentProgress = 0;
-    let animationId: number;
-    let videoScrollTrigger: ScrollTrigger | null = null;
+    let videoTween: gsap.core.Tween | null = null;
     let isSetup = false;
 
     const setupVideoScroll = () => {
@@ -32,26 +28,19 @@ export default function Exordium() {
       if (!video.duration || isNaN(video.duration)) return;
 
       isSetup = true;
-      const duration = video.duration;
 
-      // Track scroll progress with ScrollTrigger
-      videoScrollTrigger = ScrollTrigger.create({
-        trigger: section,
-        start: 'top bottom',
-        end: 'bottom top',
-        onUpdate: (self) => {
-          targetProgress = self.progress;
+      // Use GSAP's native scrub for smooth video scroll
+      // scrub: 1 means 1 second catchup time for buttery smoothness
+      videoTween = gsap.to(video, {
+        currentTime: video.duration,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
         }
       });
-
-      // Smooth animation loop with lerp
-      const animate = () => {
-        // Smooth interpolation (lerp) - 0.08 for very smooth, buttery feel
-        currentProgress += (targetProgress - currentProgress) * 0.08;
-        video.currentTime = currentProgress * duration;
-        animationId = requestAnimationFrame(animate);
-      };
-      animate();
     };
 
     // Try to setup immediately if video is ready
@@ -85,8 +74,7 @@ export default function Exordium() {
     return () => {
       video.removeEventListener('loadedmetadata', setupVideoScroll);
       video.removeEventListener('canplay', setupVideoScroll);
-      if (animationId) cancelAnimationFrame(animationId);
-      if (videoScrollTrigger) videoScrollTrigger.kill();
+      if (videoTween) videoTween.kill();
       ctx.revert();
     };
   }, []);
