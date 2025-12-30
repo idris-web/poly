@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Exordium.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,6 +16,7 @@ for (let i = 1; i <= TOTAL_FRAMES; i++) {
 }
 
 export default function Exordium() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const productRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -194,38 +196,38 @@ export default function Exordium() {
         {/* Content Side */}
         <div ref={contentRef} className={styles.contentSide}>
           <span className={`${styles.badge} exordium-text`}>
-            First Edition
+            {t.exordium.badge}
           </span>
 
           <h2 className={`${styles.title} exordium-text`}>
-            <span className={styles.titleGold}>EXORDIUM</span>
-            <span className={styles.titleSub}>The Beginning of the Chosen Ones</span>
+            <span className={styles.titleGold}>{t.exordium.title}</span>
+            <span className={styles.titleSub}>{t.exordium.titleSub}</span>
           </h2>
 
           <p className={`${styles.description} exordium-text`}>
-            Ein Duft, der nicht nur verführt, sondern erwacht. Kraftvoll. Rätselhaft. Unberechenbar. Jede Note erzählt eine Geschichte von Rebellion und Raffinesse.
+            {t.exordium.description}
           </p>
 
           <div className={`${styles.details} exordium-text`}>
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Konzentration</span>
-              <span className={styles.detailValue}>Extrait de Parfum</span>
+              <span className={styles.detailLabel}>{t.exordium.concentration}</span>
+              <span className={styles.detailValue}>{t.exordium.concentrationValue}</span>
             </div>
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Inhalt</span>
-              <span className={styles.detailValue}>50ml</span>
+              <span className={styles.detailLabel}>{t.exordium.content}</span>
+              <span className={styles.detailValue}>{t.exordium.contentValue}</span>
             </div>
             <div className={styles.detailItem}>
-              <span className={styles.detailLabel}>Edition</span>
-              <span className={styles.detailValue}>Limitiert</span>
+              <span className={styles.detailLabel}>{t.exordium.edition}</span>
+              <span className={styles.detailValue}>{t.exordium.editionValue}</span>
             </div>
           </div>
 
           <div className={`${styles.quote} exordium-text`}>
             <p>
-              Ein Duft, erschaffen für Persönlichkeiten, deren Identität nicht verhandelbar ist.
+              {t.exordium.quote}
               <br /><br />
-              Für jene, die nicht erwartet, sondern <span className={styles.emphasis}>angekündigt</span> werden.
+              {t.exordium.quoteSuffix} <span className={styles.emphasis}>{t.exordium.quoteHighlight}</span>.
             </p>
           </div>
 

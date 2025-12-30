@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './RequestForm.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -11,6 +12,7 @@ interface FormErrors {
 }
 
 export default function RequestForm() {
+  const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const [formData, setFormData] = useState({
     name: '',
@@ -47,16 +49,95 @@ export default function RequestForm() {
     return () => ctx.revert();
   }, []);
 
+  // Validation messages
+  const validationMessages = {
+    de: {
+      nameRequired: 'Bitte geben Sie Ihren Namen ein',
+      nameMin: 'Name muss mindestens 2 Zeichen lang sein',
+      emailRequired: 'Bitte geben Sie Ihre E-Mail-Adresse ein',
+      emailInvalid: 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+    },
+    en: {
+      nameRequired: 'Please enter your name',
+      nameMin: 'Name must be at least 2 characters',
+      emailRequired: 'Please enter your email address',
+      emailInvalid: 'Please enter a valid email address',
+    },
+  };
+
+  // Header text
+  const headerText = {
+    de: {
+      overline: 'Zugang anfragen',
+      title: 'Bist du bereit,',
+      titleHighlight: 'Teil dieser Welt zu werden?',
+      subtitle: 'Jede Einladung ist eine Entscheidung.',
+    },
+    en: {
+      overline: 'Request Access',
+      title: 'Are you ready to',
+      titleHighlight: 'become part of this world?',
+      subtitle: 'Every invitation is a decision.',
+    },
+  };
+
+  // Form labels and placeholders
+  const formLabels = {
+    de: {
+      name: 'Name',
+      namePlaceholder: 'Ihr vollständiger Name',
+      email: 'E-Mail',
+      emailPlaceholder: 'Ihre E-Mail-Adresse',
+      message: 'Nachricht',
+      messageOptional: '(optional)',
+      messagePlaceholder: 'Warum möchten Sie Teil von POLIGAMIA werden?',
+      submit: 'Zugang anfragen',
+      submitHover: "Los geht's",
+      disclaimer: 'Durch das Absenden stimmen Sie zu, von POLIGAMIA kontaktiert zu werden. Wir respektieren Ihre Privatsphäre.',
+    },
+    en: {
+      name: 'Name',
+      namePlaceholder: 'Your full name',
+      email: 'Email',
+      emailPlaceholder: 'Your email address',
+      message: 'Message',
+      messageOptional: '(optional)',
+      messagePlaceholder: 'Why do you want to be part of POLIGAMIA?',
+      submit: 'Request Access',
+      submitHover: "Let's go",
+      disclaimer: 'By submitting, you agree to be contacted by POLIGAMIA. We respect your privacy.',
+    },
+  };
+
+  // Success messages
+  const successText = {
+    de: {
+      title: 'Anfrage erhalten',
+      text: 'Vielen Dank für Ihr Interesse an POLIGAMIA.',
+      textSub: 'Wenn Sie auserwählt werden, werden wir Sie kontaktieren.',
+      quote: '"Wahre Exklusivität lässt sich nicht anklicken. Sie findet dich."',
+      back: 'Weitere Anfrage stellen',
+    },
+    en: {
+      title: 'Request Received',
+      text: 'Thank you for your interest in POLIGAMIA.',
+      textSub: 'If you are chosen, we will contact you.',
+      quote: '"True exclusivity cannot be clicked. It finds you."',
+      back: 'Submit another request',
+    },
+  };
+
   const validateField = (name: string, value: string): string | undefined => {
+    const msgs = validationMessages[language];
     switch (name) {
       case 'name':
-        if (!value.trim()) return 'Bitte geben Sie Ihren Namen ein';
-        if (value.trim().length < 2) return 'Name muss mindestens 2 Zeichen lang sein';
+        if (!value.trim()) return msgs.nameRequired;
+        if (value.trim().length < 2) return msgs.nameMin;
         return undefined;
       case 'email':
-        if (!value.trim()) return 'Bitte geben Sie Ihre E-Mail-Adresse ein';
+        if (!value.trim()) return msgs.emailRequired;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+        if (!emailRegex.test(value)) return msgs.emailInvalid;
         return undefined;
       default:
         return undefined;
@@ -146,13 +227,13 @@ export default function RequestForm() {
       <div className={styles.container}>
         {/* Header */}
         <div className={`${styles.header} form-element`}>
-          <span className={styles.overline}>Zugang anfragen</span>
+          <span className={styles.overline}>{headerText[language].overline}</span>
           <h2 className={styles.title}>
-            Bist du bereit,<br />
-            <span className={styles.titleHighlight}>Teil dieser Welt zu werden?</span>
+            {headerText[language].title}<br />
+            <span className={styles.titleHighlight}>{headerText[language].titleHighlight}</span>
           </h2>
           <p className={styles.subtitle}>
-            Jede Einladung ist eine Entscheidung.
+            {headerText[language].subtitle}
           </p>
         </div>
 
@@ -162,7 +243,7 @@ export default function RequestForm() {
             <form onSubmit={handleSubmit} className={styles.form} noValidate>
               <div className={`${styles.inputGroup} form-element`}>
                 <label htmlFor="name" className={styles.label}>
-                  Name
+                  {formLabels[language].name}
                 </label>
                 <input
                   type="text"
@@ -172,7 +253,7 @@ export default function RequestForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={getInputClassName('name')}
-                  placeholder="Ihr vollständiger Name"
+                  placeholder={formLabels[language].namePlaceholder}
                   aria-invalid={touched.name && !!errors.name}
                   aria-describedby={errors.name ? 'name-error' : undefined}
                 />
@@ -186,7 +267,7 @@ export default function RequestForm() {
 
               <div className={`${styles.inputGroup} form-element`}>
                 <label htmlFor="email" className={styles.label}>
-                  E-Mail
+                  {formLabels[language].email}
                 </label>
                 <input
                   type="email"
@@ -196,7 +277,7 @@ export default function RequestForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={getInputClassName('email')}
-                  placeholder="Ihre E-Mail-Adresse"
+                  placeholder={formLabels[language].emailPlaceholder}
                   aria-invalid={touched.email && !!errors.email}
                   aria-describedby={errors.email ? 'email-error' : undefined}
                 />
@@ -210,7 +291,7 @@ export default function RequestForm() {
 
               <div className={`${styles.inputGroup} form-element`}>
                 <label htmlFor="message" className={styles.label}>
-                  Nachricht <span className={styles.optional}>(optional)</span>
+                  {formLabels[language].message} <span className={styles.optional}>{formLabels[language].messageOptional}</span>
                 </label>
                 <textarea
                   id="message"
@@ -219,7 +300,7 @@ export default function RequestForm() {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   className={styles.textarea}
-                  placeholder="Warum möchten Sie Teil von POLIGAMIA werden?"
+                  placeholder={formLabels[language].messagePlaceholder}
                   rows={4}
                 />
                 <div className={styles.inputLine} />
@@ -238,9 +319,9 @@ export default function RequestForm() {
                   </span>
                 ) : (
                   <>
-                    <span className={styles.btnTextDefault}>Zugang anfragen</span>
+                    <span className={styles.btnTextDefault}>{formLabels[language].submit}</span>
                     <span className={styles.btnTextHover}>
-                      Los geht's
+                      {formLabels[language].submitHover}
                       <svg
                         width="18"
                         height="18"
@@ -257,8 +338,7 @@ export default function RequestForm() {
               </button>
 
               <p className={`${styles.disclaimer} form-element`}>
-                Durch das Absenden stimmen Sie zu, von POLIGAMIA kontaktiert zu werden.
-                Wir respektieren Ihre Privatsphäre.
+                {formLabels[language].disclaimer}
               </p>
             </form>
           ) : (
@@ -275,20 +355,20 @@ export default function RequestForm() {
                   <path d="M20 6L9 17l-5-5" />
                 </svg>
               </div>
-              <h3 className={styles.successTitle}>Anfrage erhalten</h3>
+              <h3 className={styles.successTitle}>{successText[language].title}</h3>
               <p className={styles.successText}>
-                Vielen Dank für Ihr Interesse an POLIGAMIA.<br />
-                Wenn Sie auserwählt werden, werden wir Sie kontaktieren.
+                {successText[language].text}<br />
+                {successText[language].textSub}
               </p>
               <div className={styles.successQuote}>
-                "Wahre Exklusivität lässt sich nicht anklicken. Sie findet dich."
+                {successText[language].quote}
               </div>
               <button
                 type="button"
                 onClick={handleReset}
                 className={styles.backBtn}
               >
-                Weitere Anfrage stellen
+                {successText[language].back}
               </button>
             </div>
           )}

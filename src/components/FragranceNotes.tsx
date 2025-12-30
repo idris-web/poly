@@ -1,39 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './FragranceNotes.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-interface Phase {
-  time: string;
-  label: string;
-  title: string;
-  notes: string[];
-}
-
-const phases: Phase[] = [
-  {
-    time: '0-15 Min',
-    label: 'Erster Eindruck',
-    title: 'Top Notes',
-    notes: ['Zitrone', 'Bergamotte', 'Lavendel', 'Rose', 'Geranie'],
-  },
-  {
-    time: '15 Min - 2h',
-    label: 'Entwicklung',
-    title: 'Heart Notes',
-    notes: ['Muskatnuss', 'Nelke', 'Tonkabohne', 'Patschuli', 'Weihrauch'],
-  },
-  {
-    time: '2h+',
-    label: 'Tiefe',
-    title: 'Base Notes',
-    notes: ['Amber', 'Sandelholz', 'Zedernholz', 'Moschus', 'Labdanum'],
-  },
-];
-
 export default function FragranceNotes() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -100,15 +74,15 @@ export default function FragranceNotes() {
       <div className={styles.container}>
         {/* Header */}
         <header className={styles.header}>
-          <span className={styles.overline}>Die Duftreise</span>
+          <span className={styles.overline}>{t.fragrance.overline}</span>
           <h2 className={styles.title}>
-            <span className={styles.titleHighlight}>EXORDIUM</span><br />
-            Unberechenbar und frei von Regeln.
+            <span className={styles.titleHighlight}>{t.fragrance.title}</span><br />
+            {t.fragrance.titleSub}
           </h2>
           <p className={styles.subtitle}>
-            Ein Duft, der nicht gefallen will, aber Begierden weckt.<br />Er entwickelt sich über Stunden.
+            {t.fragrance.subtitle}
             <br /><br />
-            Beginnend mit frischen, blumigen Noten bis hin zur tiefen, warmen Basis.
+            {t.fragrance.subtitleContinue}
           </p>
         </header>
 
@@ -116,7 +90,7 @@ export default function FragranceNotes() {
         <div className={styles.heroImage}>
           <img
             src="/mockup-03.webp"
-            alt="EXORDIUM - Die Essenz der Natur"
+            alt="EXORDIUM"
             className={styles.heroImg}
           />
         </div>
@@ -130,7 +104,7 @@ export default function FragranceNotes() {
 
           {/* Timeline Nodes */}
           <div className={styles.timelineNodes}>
-            {phases.map((phase, index) => (
+            {t.fragrance.phases.map((phase, index) => (
               <div key={phase.title} className={`${styles.timelineNode} timeline-node`}>
                 <div className={styles.nodeCircle}>
                   <span className={styles.nodeNumber}>{index + 1}</span>
@@ -141,7 +115,7 @@ export default function FragranceNotes() {
 
           {/* Phase Cards */}
           <div className={styles.phases}>
-            {phases.map((phase) => (
+            {t.fragrance.phases.map((phase) => (
               <div key={phase.title} className={`${styles.phaseCard} phase-card`}>
                 <span className={styles.phaseTime}>{phase.time}</span>
                 <span className={styles.phaseLabel}>{phase.label}</span>
@@ -161,8 +135,8 @@ export default function FragranceNotes() {
 
         {/* Bottom Info */}
         <div className={styles.bottomInfo}>
-          <span className={styles.concentration}>Extrait de Parfum</span>
-          <span className={styles.concentrationValue}>30% Konzentration</span>
+          <span className={styles.concentration}>{t.fragrance.concentration}</span>
+          <span className={styles.concentrationValue}>{t.fragrance.concentrationValue}</span>
         </div>
       </div>
     </section>

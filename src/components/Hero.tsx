@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Hero.module.css';
 
 export default function Hero() {
+  const { t } = useLanguage();
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -82,13 +84,13 @@ export default function Hero() {
               className={styles.btnPrimary}
               onClick={() => scrollToSection('#exordium')}
             >
-              Kollektion entdecken
+              {t.hero.cta}
             </button>
             <button
               className={styles.btnSecondary}
               onClick={() => scrollToSection('#anfragen')}
             >
-              Anfragen
+              {t.nav.request}
             </button>
           </div>
         </div>

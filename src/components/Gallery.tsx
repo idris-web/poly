@@ -1,69 +1,40 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Gallery.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const galleryImageSources = [
+  '/mockup-02.webp',
+  '/mockup-06.webp',
+  '/shot-01.webp',
+  '/shot-02.webp',
+  '/shot-03.webp',
+  '/shot-04.webp',
+  '/shot-05.webp',
+];
+
 interface GalleryImage {
   src: string;
-  alt: string;
   title: string;
   subtitle: string;
 }
 
-const galleryImages: GalleryImage[] = [
-  // Neue Mockups
-  {
-    src: '/mockup-02.webp',
-    alt: 'EXORDIUM - Lifestyle',
-    title: 'Das Statement',
-    subtitle: 'Luxus im Alltag'
-  },
-  {
-    src: '/mockup-06.webp',
-    alt: 'EXORDIUM - Ritual',
-    title: 'Das Ritual',
-    subtitle: 'Ein Moment nur für dich'
-  },
-  // Originale Shots
-  {
-    src: '/shot-01.webp',
-    alt: 'EXORDIUM Collection',
-    title: 'Die Essenz',
-    subtitle: 'Handgefertigt in limitierter Auflage'
-  },
-  {
-    src: '/shot-02.webp',
-    alt: 'EXORDIUM Detail',
-    title: 'Das Handwerk',
-    subtitle: 'Perfektion in jedem Detail'
-  },
-  {
-    src: '/shot-03.webp',
-    alt: 'EXORDIUM Artistic',
-    title: 'Die Kunst',
-    subtitle: 'Ein Moment der Transformation'
-  },
-  {
-    src: '/shot-04.webp',
-    alt: 'EXORDIUM Red',
-    title: 'Die Leidenschaft',
-    subtitle: 'Intensiv und unvergesslich'
-  },
-  {
-    src: '/shot-05.webp',
-    alt: 'EXORDIUM Blue',
-    title: 'Die Tiefe',
-    subtitle: 'Mysterium in jeder Note'
-  },
-];
-
 export default function Gallery() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeImage, setActiveImage] = useState<GalleryImage | null>(null);
+
+  // Create gallery images from translations and image sources
+  const galleryImages: GalleryImage[] = t.gallery.images.map((img, index) => ({
+    src: galleryImageSources[index],
+    title: img.title,
+    subtitle: img.subtitle,
+  }));
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -132,8 +103,8 @@ export default function Gallery() {
     <>
       <section ref={sectionRef} className={styles.gallery}>
         <div className={styles.header}>
-          <span className={styles.overline}>Die Kollektion</span>
-          <h2 className={styles.title}>Visuelle Perfektion</h2>
+          <span className={styles.overline}>{t.gallery.overline}</span>
+          <h2 className={styles.title}>{t.gallery.title}</h2>
         </div>
 
         <div ref={galleryRef} className={styles.galleryGrid}>
@@ -149,7 +120,7 @@ export default function Gallery() {
             >
               <img
                 src={image.src}
-                alt={image.alt}
+                alt={image.title}
                 className={styles.image}
                 loading="lazy"
               />
@@ -199,7 +170,7 @@ export default function Gallery() {
           >
             <img
               src={activeImage.src}
-              alt={activeImage.alt}
+              alt={activeImage.title}
               className={styles.lightboxImage}
             />
             <div className={styles.lightboxCaption}>

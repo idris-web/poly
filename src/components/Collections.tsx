@@ -1,35 +1,19 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Collections.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const collections = [
-  {
-    id: 1,
-    name: 'Die Flasche',
-    description: 'Handgefertigtes Design mit zeitloser Eleganz. Jedes Detail erzählt eine Geschichte.',
-    badge: 'EXORDIUM',
-    image: '/shot-02.webp',
-  },
-  {
-    id: 2,
-    name: 'Der Duft',
-    description: 'Luxuriöse Tiefe mit warmen Noten, ein Erlebnis, das in Erinnerung bleibt.',
-    badge: 'EXORDIUM',
-    image: '/mockup-04.webp',
-  },
-  {
-    id: 3,
-    name: 'Das Erlebnis',
-    description: 'Mehr als ein Parfüm, ein Statement für die, die herausstechen wollen.',
-    badge: 'EXORDIUM',
-    image: '/shot-04.webp',
-  },
+const collectionImages = [
+  '/shot-02.webp',
+  '/mockup-04.webp',
+  '/shot-04.webp',
 ];
 
 export default function Collections() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -59,22 +43,22 @@ export default function Collections() {
       <div className={styles.container}>
         {/* Header */}
         <div className={styles.header}>
-          <span className={styles.badge}>Unser Produkt</span>
+          <span className={styles.badge}>{t.collections.badge}</span>
           <h2 className={styles.title}>
-            Entdecke EXORDIUM
+            {t.collections.title}
             <br />
-            <span className={styles.titleLight}>aus jeder Perspektive</span>
+            <span className={styles.titleLight}>{t.collections.titleLight}</span>
           </h2>
         </div>
 
         {/* Grid */}
         <div className={styles.grid}>
-          {collections.map((collection) => (
-            <article key={collection.id} className={`${styles.card} collection-card`}>
+          {t.collections.items.map((item, index) => (
+            <article key={index} className={`${styles.card} collection-card`}>
               <div className={styles.cardImageWrapper}>
                 <img
-                  src={collection.image}
-                  alt={collection.name}
+                  src={collectionImages[index]}
+                  alt={item.name}
                   className={styles.cardImage}
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
@@ -83,8 +67,8 @@ export default function Collections() {
                 <div className={styles.cardOverlay} />
               </div>
               <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>{collection.name}</h3>
-                <p className={styles.cardDescription}>{collection.description}</p>
+                <h3 className={styles.cardTitle}>{item.name}</h3>
+                <p className={styles.cardDescription}>{item.description}</p>
               </div>
             </article>
           ))}

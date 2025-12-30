@@ -1,7 +1,9 @@
 import { useRef } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Footer.module.css';
 
 export default function Footer() {
+  const { t, language } = useLanguage();
   const currentYear = new Date().getFullYear();
   const brandTextRef = useRef<HTMLDivElement>(null);
 
@@ -28,6 +30,32 @@ export default function Footer() {
     }
   };
 
+  // Localized footer text
+  const footerText = {
+    de: {
+      brandDescription: 'Exklusive Düfte für diejenigen, die es wagen, anders zu sein.',
+      linksTitle: 'Links',
+      collection: 'Kollektion',
+      manifest: 'Manifest',
+      request: 'Anfragen',
+      socialTitle: 'Social',
+      imprint: 'Impressum',
+      privacy: 'Datenschutz',
+      copyright: `© ${currentYear} POLIGAMIA. Alle Rechte vorbehalten.`,
+    },
+    en: {
+      brandDescription: 'Exclusive fragrances for those who dare to be different.',
+      linksTitle: 'Links',
+      collection: 'Collection',
+      manifest: 'Manifest',
+      request: 'Request',
+      socialTitle: 'Social',
+      imprint: 'Imprint',
+      privacy: 'Privacy',
+      copyright: `© ${currentYear} POLIGAMIA. All rights reserved.`,
+    },
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -37,25 +65,25 @@ export default function Footer() {
             {/* Brand Column */}
             <div className={styles.brandColumn}>
               <img src="/logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
-              <p className={styles.tagline}>Not for Everybody.</p>
+              <p className={styles.tagline}>{t.footer.tagline}</p>
               <p className={styles.brandDescription}>
-                Exklusive Düfte für diejenigen, die es wagen, anders zu sein.
+                {footerText[language].brandDescription}
               </p>
             </div>
 
             {/* Links Column */}
             <div className={styles.linksColumn}>
-              <h4 className={styles.columnTitle}>Links</h4>
+              <h4 className={styles.columnTitle}>{footerText[language].linksTitle}</h4>
               <div className={styles.linksList}>
-                <a href="#exordium" className={styles.footerLink}>Kollektion</a>
-                <a href="#manifest" className={styles.footerLink}>Manifest</a>
-                <a href="#request" className={styles.footerLink}>Anfragen</a>
+                <a href="#exordium" className={styles.footerLink}>{footerText[language].collection}</a>
+                <a href="#manifest" className={styles.footerLink}>{footerText[language].manifest}</a>
+                <a href="#request" className={styles.footerLink}>{footerText[language].request}</a>
               </div>
             </div>
 
             {/* Social Column */}
             <div className={styles.socialColumn}>
-              <h4 className={styles.columnTitle}>Social</h4>
+              <h4 className={styles.columnTitle}>{footerText[language].socialTitle}</h4>
               <div className={styles.socialLinks}>
                 <a href="https://instagram.com/poligamia" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
                   Instagram
@@ -88,11 +116,11 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className={styles.bottom}>
           <p className={styles.copyright}>
-            &copy; {currentYear} POLIGAMIA. All rights reserved.
+            {footerText[language].copyright}
           </p>
           <div className={styles.legalLinks}>
-            <a href="#" className={styles.legalLink}>Impressum</a>
-            <a href="#" className={styles.legalLink}>Datenschutz</a>
+            <a href="#" className={styles.legalLink}>{footerText[language].imprint}</a>
+            <a href="#" className={styles.legalLink}>{footerText[language].privacy}</a>
           </div>
         </div>
       </div>

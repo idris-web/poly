@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Access.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Access() {
+  const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -59,41 +61,86 @@ export default function Access() {
     return () => ctx.revert();
   }, []);
 
-  const accessItems = [
-    {
-      number: '01',
-      title: 'Kein Handel',
-      description: 'Kein Online-Shop. Keine Läden. Zugang nur auf Einladung. Release ausschließlich auf ausgewählten Events mit limitierter Verfügbarkeit.',
+  // Localized access items
+  const accessItems = {
+    de: [
+      {
+        number: '01',
+        title: 'Kein Handel',
+        description: 'Kein Online-Shop. Keine Läden. Zugang nur auf Einladung. Release ausschließlich auf ausgewählten Events mit limitierter Verfügbarkeit.',
+      },
+      {
+        number: '02',
+        title: 'Ausgewählte Events',
+        description: 'Jedes POLIGAMIA-Event ist ein Ritual. Geheimnisvoll, sinnlich, provokant. Hier wird EXORDIUM nicht präsentiert, sondern offenbart.',
+      },
+      {
+        number: '03',
+        title: 'Auf Einladung',
+        description: 'Zugang ausschließlich auf Einladung. Begrenzte Stückzahl. Denn wahre Exklusivität lässt sich nicht anklicken. Sie findet dich.',
+      },
+    ],
+    en: [
+      {
+        number: '01',
+        title: 'No Retail',
+        description: 'No online shop. No stores. Access by invitation only. Release exclusively at selected events with limited availability.',
+      },
+      {
+        number: '02',
+        title: 'Selected Events',
+        description: 'Every POLIGAMIA event is a ritual. Mysterious, sensual, provocative. Here EXORDIUM is not presented, but revealed.',
+      },
+      {
+        number: '03',
+        title: 'By Invitation',
+        description: 'Access exclusively by invitation. Limited quantity. Because true exclusivity cannot be clicked. It finds you.',
+      },
+    ],
+  };
+
+  // Localized header and quote text
+  const headerText = {
+    de: {
+      title: 'EXORDIUM ist bewusst entzogen –',
+      titleHighlight: 'Dem Mainstream. Der Masse. Dem Erwartbaren.',
+      subtitle: 'Es findet dich.',
     },
-    {
-      number: '02',
-      title: 'Ausgewählte Events',
-      description: 'Jedes POLIGAMIA-Event ist ein Ritual. Geheimnisvoll, sinnlich, provokant. Hier wird EXORDIUM nicht präsentiert, sondern offenbart.',
+    en: {
+      title: 'EXORDIUM is deliberately withheld –',
+      titleHighlight: 'From the mainstream. The masses. The expected.',
+      subtitle: 'It finds you.',
     },
-    {
-      number: '03',
-      title: 'Auf Einladung',
-      description: 'Zugang ausschließlich auf Einladung. Begrenzte Stückzahl. Denn wahre Exklusivität lässt sich nicht anklicken. Sie findet dich.',
+  };
+
+  const quoteText = {
+    de: {
+      main: 'Ein Duft, den man nicht einfach kauft.',
+      highlight: 'Man erlebt ihn.',
     },
-  ];
+    en: {
+      main: "A fragrance you don't simply buy.",
+      highlight: 'You experience it.',
+    },
+  };
 
   return (
     <section ref={sectionRef} id="access" className={styles.access}>
       <div className={`${styles.container} access-content`}>
         {/* Header */}
         <div className={styles.header}>
-          <span className={styles.overline}>Der Zugang</span>
+          <span className={styles.overline}>{t.access.overline}</span>
           <h2 className={styles.title}>
-            EXORDIUM ist bewusst entzogen –<br />
-            <span className={styles.titleHighlight}>Dem Mainstream. Der Masse. Dem Erwartbaren.</span>
+            {headerText[language].title}<br />
+            <span className={styles.titleHighlight}>{headerText[language].titleHighlight}</span>
           </h2>
-          <p className={styles.subtitle}>Es findet dich.</p>
+          <p className={styles.subtitle}>{headerText[language].subtitle}</p>
         </div>
 
 
         {/* Access Cards */}
         <div className={styles.cards}>
-          {accessItems.map((item, index) => (
+          {accessItems[language].map((item, index) => (
             <div key={index} className={styles.card}>
               <img src="/icon-poligamia.svg" alt="" className={styles.cardIcon} />
               <div className={styles.cardDivider} />
@@ -111,8 +158,8 @@ export default function Access() {
             <span />
           </div>
           <blockquote className={styles.quote}>
-            Ein Duft, den man nicht einfach kauft.
-            <span className={styles.quoteHighlight}>Man erlebt ihn.</span>
+            {quoteText[language].main}
+            <span className={styles.quoteHighlight}>{quoteText[language].highlight}</span>
           </blockquote>
         </div>
       </div>

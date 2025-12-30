@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './Testimonials.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -71,7 +72,14 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function Testimonials() {
+  const { t, language } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Localized title
+  const titleText = {
+    de: { prefix: 'Was', highlight: 'Auserwählte', suffix: 'sagen' },
+    en: { prefix: 'What the', highlight: 'Chosen', suffix: 'say' },
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -99,9 +107,9 @@ export default function Testimonials() {
     <section ref={sectionRef} className={styles.testimonials}>
       {/* Header */}
       <div className={`${styles.header} testimonial-header`}>
-        <span className={styles.overline}>Stimmen</span>
+        <span className={styles.overline}>{t.testimonials.overline}</span>
         <h2 className={styles.title}>
-          Was <span className={styles.titleHighlight}>Auserwählte</span> sagen
+          {titleText[language].prefix} <span className={styles.titleHighlight}>{titleText[language].highlight}</span> {titleText[language].suffix}
         </h2>
       </div>
 

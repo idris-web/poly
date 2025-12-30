@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import styles from './Navigation.module.css';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Navigation() {
+  const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [inHero, setInHero] = useState(true);
@@ -77,23 +79,32 @@ export default function Navigation() {
               onClick={(e) => scrollToSection(e, 'manifest')}
               className={styles.link}
             >
-              Manifest
+              {t.nav.manifest}
             </a>
             <a
               href="#exordium"
               onClick={(e) => scrollToSection(e, 'exordium')}
               className={styles.link}
             >
-              Exordium
+              {t.nav.exordium}
             </a>
             <a
               href="#access"
               onClick={(e) => scrollToSection(e, 'access')}
               className={styles.link}
             >
-              Zugang
+              {t.nav.access}
             </a>
           </div>
+
+          {/* Language Switcher */}
+          <button
+            className={styles.langSwitch}
+            onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
+            aria-label="Switch language"
+          >
+            {language === 'de' ? 'EN' : 'DE'}
+          </button>
 
           {/* CTA (Desktop) */}
           <a
@@ -101,7 +112,7 @@ export default function Navigation() {
             onClick={(e) => scrollToSection(e, 'request')}
             className={styles.cta}
           >
-            <span>Anfragen</span>
+            <span>{t.nav.request}</span>
           </a>
 
           {/* Hamburger Menu (Mobile) */}
@@ -126,28 +137,34 @@ export default function Navigation() {
             onClick={(e) => scrollToSection(e, 'manifest')}
             className={styles.drawerLink}
           >
-            Manifest
+            {t.nav.manifest}
           </a>
           <a
             href="#exordium"
             onClick={(e) => scrollToSection(e, 'exordium')}
             className={styles.drawerLink}
           >
-            Exordium
+            {t.nav.exordium}
           </a>
           <a
             href="#access"
             onClick={(e) => scrollToSection(e, 'access')}
             className={styles.drawerLink}
           >
-            Zugang
+            {t.nav.access}
           </a>
+          <button
+            className={styles.drawerLangSwitch}
+            onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
+          >
+            {language === 'de' ? 'English' : 'Deutsch'}
+          </button>
           <a
             href="#request"
             onClick={(e) => scrollToSection(e, 'request')}
             className={styles.drawerCta}
           >
-            Anfragen
+            {t.nav.request}
           </a>
         </div>
       </div>

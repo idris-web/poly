@@ -1,11 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useLanguage } from '../i18n/LanguageContext';
 import styles from './BrandManifest.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function BrandManifest() {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const textRefs = useRef<(HTMLParagraphElement | null)[]>([]);
   const manifestWordRef = useRef<HTMLSpanElement>(null);
@@ -86,30 +88,30 @@ export default function BrandManifest() {
         <div className={`${styles.decorativeLine} manifest-line`} />
 
         <div className={styles.content}>
-          <span className={styles.badge}>Das Manifest</span>
+          <span className={styles.badge}>{t.manifest.overline}</span>
 
           <h2
             ref={(el) => { textRefs.current[0] = el; }}
             className={styles.statement}
           >
-            <span className={styles.statementFirst}><span className={styles.highlight}>POLIGAMIA</span> ist kein Produkt.</span>
-            <span className={styles.statementSecond}>Sondern ein <span ref={manifestWordRef} className={styles.manifestWord}>Statement.</span></span>
+            <span className={styles.statementFirst}><span className={styles.highlight}>POLIGAMIA</span> {t.manifest.title}</span>
+            <span className={styles.statementSecond}>{t.manifest.subtitle.split(' ').slice(0, -1).join(' ')} <span ref={manifestWordRef} className={styles.manifestWord}>{t.manifest.subtitle.split(' ').slice(-1)[0]}</span></span>
           </h2>
 
           <p
             ref={(el) => { textRefs.current[2] = el; }}
             className={styles.description}
           >
-            Jedes unserer Düfte ist ein Manifest gegen Austauschbarkeit und für absolute Individualität.
+            {t.manifest.description}
           </p>
 
           <p
             ref={(el) => { textRefs.current[4] = el; }}
             className={styles.subStatement}
           >
-            Wir erschaffen Düfte für Menschen, die nicht gefallen wollen.
+            {t.manifest.values[0].title}: {t.manifest.values[0].desc}
             <br />
-            <span className={styles.emphasis}>Sondern wirken.</span>
+            <span className={styles.emphasis}>{t.manifest.values[2].title}: {t.manifest.values[2].desc}</span>
           </p>
         </div>
 

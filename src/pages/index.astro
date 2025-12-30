@@ -1,34 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Navigation from '../components/Navigation';
-import Hero from '../components/Hero';
-import BrandManifest from '../components/BrandManifest';
-import Exordium from '../components/Exordium';
-import FragranceNotes from '../components/FragranceNotes';
-import Collections from '../components/Collections';
-import Gallery from '../components/Gallery';
-import Craftsmanship from '../components/Craftsmanship';
-import Testimonials from '../components/Testimonials';
-import Access from '../components/Access';
-import RequestForm from '../components/RequestForm';
-import Footer from '../components/Footer';
+import App from '../components/App';
 ---
 
 <Layout title="POLIGAMIA | Not for Everybody">
-  <Navigation client:load />
-  <main>
-    <Hero client:load />
-    <BrandManifest client:visible />
-    <Exordium client:visible />
-    <FragranceNotes client:visible />
-    <Collections client:visible />
-    <Gallery client:visible />
-    <Craftsmanship client:visible />
-    <Testimonials client:visible />
-    <Access client:visible />
-    <RequestForm client:visible />
-    <Footer client:visible />
-  </main>
+  <App client:load />
 </Layout>
 
 <style>
