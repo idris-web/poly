@@ -7,7 +7,7 @@ import styles from './Exordium.module.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const FRAME_COUNT = 102;
-const getFramePath = (index: number) => `/frames/frame-${String(index).padStart(3, '0')}.jpg`;
+const getFramePath = (index: number) => `/frames/frame-${String(index).padStart(3, '0')}.webp`;
 
 export default function Exordium() {
   const { t } = useLanguage();
@@ -58,15 +58,15 @@ export default function Exordium() {
     ctx.drawImage(firstImage, 0, 0);
 
     // Animate frame index with GSAP scrub
-    // Start at frame 0 when section enters viewport, end at last frame when leaving
+    // Full bottle visible when section is centered in viewport
     const frameObj = { frame: 0 };
     const frameTween = gsap.to(frameObj, {
       frame: FRAME_COUNT - 1,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
-        start: 'top 80%',  // Start when top of section is 80% down viewport
-        end: 'bottom 20%', // End when bottom of section is 20% from top
+        start: 'top top',    // Start when section top reaches viewport top
+        end: 'bottom top',   // End when section bottom reaches viewport top
         scrub: 0.5,
       },
       onUpdate: () => {
