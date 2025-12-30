@@ -191,6 +191,14 @@
   filter: drop-shadow(0 60px 120px rgba(0, 0, 0, 0.5));
 }
 
+.bottleCanvas {
+  width: 520px;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  filter: drop-shadow(0 60px 120px rgba(0, 0, 0, 0.5));
+}
+
 /* Content Side */
 .contentSide {
   padding-left: 2rem;

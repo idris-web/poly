@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -6,52 +6,83 @@ import styles from './Exordium.module.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const FRAME_COUNT = 102;
+const getFramePath = (index: number) => `/frames/frame-${String(index).padStart(3, '0')}.jpg`;
+
 export default function Exordium() {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const productRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
 
+  // Preload all frames
   useEffect(() => {
-    const video = videoRef.current;
-    const section = sectionRef.current;
-    if (!video || !section) return;
+    const images: HTMLImageElement[] = [];
+    let loadedCount = 0;
 
-    video.pause();
-
-    let videoTween: gsap.core.Tween | null = null;
-    let isSetup = false;
-
-    const setupVideoScroll = () => {
-      if (isSetup) return;
-      if (!video.duration || isNaN(video.duration)) return;
-
-      isSetup = true;
-
-      // Use GSAP's native scrub for smooth video scroll
-      // scrub: 1 means 1 second catchup time for buttery smoothness
-      videoTween = gsap.to(video, {
-        currentTime: video.duration,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
+    for (let i = 1; i <= FRAME_COUNT; i++) {
+      const img = new Image();
+      img.src = getFramePath(i);
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === FRAME_COUNT) {
+          imagesRef.current = images;
+          setImagesLoaded(true);
         }
-      });
-    };
-
-    // Try to setup immediately if video is ready
-    if (video.readyState >= 1 && video.duration && !isNaN(video.duration)) {
-      setupVideoScroll();
+      };
+      images.push(img);
     }
+  }, []);
 
-    // Also listen for loadedmetadata as fallback
-    video.addEventListener('loadedmetadata', setupVideoScroll);
-    video.addEventListener('canplay', setupVideoScroll);
+  // Setup scroll animation once images are loaded
+  useEffect(() => {
+    if (!imagesLoaded) return;
+    const canvas = canvasRef.current;
+    const section = sectionRef.current;
+    if (!canvas || !section) return;
 
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const images = imagesRef.current;
+    const firstImage = images[0];
+
+    // Set canvas size to match image
+    canvas.width = firstImage.naturalWidth;
+    canvas.height = firstImage.naturalHeight;
+
+    // Draw first frame
+    ctx.drawImage(firstImage, 0, 0);
+
+    // Animate frame index with GSAP scrub
+    // Start at frame 0 when section enters viewport, end at last frame when leaving
+    const frameObj = { frame: 0 };
+    const frameTween = gsap.to(frameObj, {
+      frame: FRAME_COUNT - 1,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',  // Start when top of section is 80% down viewport
+        end: 'bottom 20%', // End when bottom of section is 20% from top
+        scrub: 0.5,
+      },
+      onUpdate: () => {
+        const frameIndex = Math.round(frameObj.frame);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(images[frameIndex], 0, 0);
+      }
+    });
+
+    return () => {
+      frameTween.kill();
+    };
+  }, [imagesLoaded]);
+
+  // Other animations
+  useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         productRef.current,
@@ -71,12 +102,7 @@ export default function Exordium() {
       );
     }, sectionRef);
 
-    return () => {
-      video.removeEventListener('loadedmetadata', setupVideoScroll);
-      video.removeEventListener('canplay', setupVideoScroll);
-      if (videoTween) videoTween.kill();
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -85,15 +111,11 @@ export default function Exordium() {
         {/* Product Side */}
         <div className={styles.productSide}>
           <div ref={productRef} className={styles.productWrapper}>
-            {/* Scroll-controlled video */}
+            {/* Scroll-controlled frame animation */}
             <div className={styles.productImage}>
-              <video
-                ref={videoRef}
-                className={styles.bottleVideo}
-                src="/poligamia.webm"
-                muted
-                playsInline
-                preload="auto"
+              <canvas
+                ref={canvasRef}
+                className={styles.bottleCanvas}
               />
             </div>
           </div>
