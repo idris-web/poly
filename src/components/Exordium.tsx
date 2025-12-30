@@ -19,28 +19,39 @@ export default function Exordium() {
     if (!video || !section) return;
 
     video.pause();
+    // Don't call video.load() - let preload="auto" handle it
 
+    let targetProgress = 0;
+    let currentProgress = 0;
+    let animationId: number;
     let videoScrollTrigger: ScrollTrigger | null = null;
     let isSetup = false;
 
-    video.load();
-
     const setupVideoScroll = () => {
       if (isSetup) return;
-
       if (!video.duration || isNaN(video.duration)) return;
 
       isSetup = true;
+      const duration = video.duration;
 
-      // Use GSAP ScrollTrigger for reliable video scrubbing
+      // Track scroll progress with ScrollTrigger
       videoScrollTrigger = ScrollTrigger.create({
         trigger: section,
         start: 'top bottom',
         end: 'bottom top',
         onUpdate: (self) => {
-          video.currentTime = self.progress * video.duration;
+          targetProgress = self.progress;
         }
       });
+
+      // Smooth animation loop with lerp
+      const animate = () => {
+        // Smooth interpolation (lerp) - 0.08 for very smooth, buttery feel
+        currentProgress += (targetProgress - currentProgress) * 0.08;
+        video.currentTime = currentProgress * duration;
+        animationId = requestAnimationFrame(animate);
+      };
+      animate();
     };
 
     // Try to setup immediately if video is ready
@@ -74,6 +85,7 @@ export default function Exordium() {
     return () => {
       video.removeEventListener('loadedmetadata', setupVideoScroll);
       video.removeEventListener('canplay', setupVideoScroll);
+      if (animationId) cancelAnimationFrame(animationId);
       if (videoScrollTrigger) videoScrollTrigger.kill();
       ctx.revert();
     };
