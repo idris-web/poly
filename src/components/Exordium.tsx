@@ -15,41 +15,42 @@ export default function Exordium() {
 
   useEffect(() => {
     const video = videoRef.current;
-    const scrollContainer = sectionRef.current;
-    if (!video || !scrollContainer) return;
+    const section = sectionRef.current;
+    if (!video || !section) return;
 
     video.pause();
-    let duration = 0;
 
-    // Wait for video metadata to load
-    const handleMetadata = () => {
-      duration = video.duration;
+    let videoScrollTrigger: ScrollTrigger | null = null;
+    let isSetup = false;
+
+    video.load();
+
+    const setupVideoScroll = () => {
+      if (isSetup) return;
+
+      if (!video.duration || isNaN(video.duration)) return;
+
+      isSetup = true;
+
+      // Use GSAP ScrollTrigger for reliable video scrubbing
+      videoScrollTrigger = ScrollTrigger.create({
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
+        onUpdate: (self) => {
+          video.currentTime = self.progress * video.duration;
+        }
+      });
     };
-    video.addEventListener('loadedmetadata', handleMetadata);
 
-    // If already loaded
-    if (video.readyState >= 1) {
-      duration = video.duration;
+    // Try to setup immediately if video is ready
+    if (video.readyState >= 1 && video.duration && !isNaN(video.duration)) {
+      setupVideoScroll();
     }
 
-    const handleScroll = () => {
-      if (!duration) return;
-
-      const scrollTop = window.scrollY;
-      const containerTop = scrollContainer.offsetTop;
-      const maxScroll = scrollContainer.offsetHeight - window.innerHeight;
-
-      // Calculate scroll progress relative to container
-      const relativeScroll = scrollTop - containerTop + window.innerHeight;
-      const scrollProgress = Math.max(0, Math.min(1, relativeScroll / (scrollContainer.offsetHeight + window.innerHeight)));
-
-      const targetTime = scrollProgress * duration;
-
-      // Smooth scrubbing
-      video.currentTime += (targetTime - video.currentTime) * 0.15;
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    // Also listen for loadedmetadata as fallback
+    video.addEventListener('loadedmetadata', setupVideoScroll);
+    video.addEventListener('canplay', setupVideoScroll);
 
     const ctx = gsap.context(() => {
       gsap.fromTo(
@@ -71,8 +72,9 @@ export default function Exordium() {
     }, sectionRef);
 
     return () => {
-      video.removeEventListener('loadedmetadata', handleMetadata);
-      window.removeEventListener('scroll', handleScroll);
+      video.removeEventListener('loadedmetadata', setupVideoScroll);
+      video.removeEventListener('canplay', setupVideoScroll);
+      if (videoScrollTrigger) videoScrollTrigger.kill();
       ctx.revert();
     };
   }, []);
@@ -83,9 +85,6 @@ export default function Exordium() {
         {/* Product Side */}
         <div className={styles.productSide}>
           <div ref={productRef} className={styles.productWrapper}>
-            <div className={styles.productGlow} />
-            <div className={styles.glowRing} />
-
             {/* Scroll-controlled video */}
             <div className={styles.productImage}>
               <video

@@ -25,7 +25,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('poligamia-lang', lang);
   };
 
-  const t = translations[language];
+  const t = translations[language] as Translations;
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>
