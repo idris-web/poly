@@ -13,6 +13,20 @@ interface GalleryImage {
 }
 
 const galleryImages: GalleryImage[] = [
+  // Neue Mockups
+  {
+    src: '/mockup-02.webp',
+    alt: 'EXORDIUM - Lifestyle',
+    title: 'Das Statement',
+    subtitle: 'Luxus im Alltag'
+  },
+  {
+    src: '/mockup-06.webp',
+    alt: 'EXORDIUM - Ritual',
+    title: 'Das Ritual',
+    subtitle: 'Ein Moment nur für dich'
+  },
+  // Originale Shots
   {
     src: '/shot-01.webp',
     alt: 'EXORDIUM Collection',
@@ -20,9 +34,15 @@ const galleryImages: GalleryImage[] = [
     subtitle: 'Handgefertigt in limitierter Auflage'
   },
   {
+    src: '/shot-02.webp',
+    alt: 'EXORDIUM Detail',
+    title: 'Das Handwerk',
+    subtitle: 'Perfektion in jedem Detail'
+  },
+  {
     src: '/shot-03.webp',
     alt: 'EXORDIUM Artistic',
-    title: 'Das Ritual',
+    title: 'Die Kunst',
     subtitle: 'Ein Moment der Transformation'
   },
   {
@@ -36,12 +56,6 @@ const galleryImages: GalleryImage[] = [
     alt: 'EXORDIUM Blue',
     title: 'Die Tiefe',
     subtitle: 'Mysterium in jeder Note'
-  },
-  {
-    src: '/shot-02.webp',
-    alt: 'EXORDIUM Detail',
-    title: 'Das Handwerk',
-    subtitle: 'Perfektion in jedem Detail'
   },
 ];
 

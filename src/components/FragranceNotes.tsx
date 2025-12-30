@@ -112,6 +112,15 @@ export default function FragranceNotes() {
           </p>
         </header>
 
+        {/* Hero Image */}
+        <div className={styles.heroImage}>
+          <img
+            src="/mockup-03.webp"
+            alt="EXORDIUM - Die Essenz der Natur"
+            className={styles.heroImg}
+          />
+        </div>
+
         {/* Timeline */}
         <div ref={timelineRef} className={styles.timeline}>
           {/* Timeline Track */}
