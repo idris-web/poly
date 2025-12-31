@@ -184,7 +184,7 @@
 }
 
 .bottleVideo {
-  width: 520px;
+  width: 100%;
   height: auto;
   object-fit: contain;
   pointer-events: none;
