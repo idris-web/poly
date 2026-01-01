@@ -59,9 +59,9 @@ export default function Exordium() {
 
     // Animate frame index with GSAP scrub
     // Full bottle visible when section is centered in viewport
-    const frameObj = { frame: 0 };
+    const frameObj = { frame: FRAME_COUNT - 1 };
     const frameTween = gsap.to(frameObj, {
-      frame: FRAME_COUNT - 1,
+      frame: 0,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
