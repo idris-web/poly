@@ -61,7 +61,7 @@ export default function Exordium() {
     // Start at frame 60, end at frame 90 when scrolling through section
     const frameObj = { frame: 59 };
     const frameTween = gsap.to(frameObj, {
-      frame: 89,
+      frame: FRAME_COUNT - 1,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
