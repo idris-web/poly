@@ -65,8 +65,8 @@ export default function Exordium() {
       ease: 'none',
       scrollTrigger: {
         trigger: section,
-        start: 'top 90%',    // Start very early
-        end: 'bottom 10%',   // End very late - full bottle visible when centered
+        start: 'top 60%',
+        end: 'bottom 5%',
         scrub: 0.5,
       },
       onUpdate: () => {
