@@ -65,8 +65,8 @@ export default function Exordium() {
       ease: 'none',
       scrollTrigger: {
         trigger: section,
-        start: 'top top',    // Start when section top reaches viewport top
-        end: 'bottom top',   // End when section bottom reaches viewport top
+        start: 'top 90%',    // Start very early
+        end: 'bottom 10%',   // End very late - full bottle visible when centered
         scrub: 0.5,
       },
       onUpdate: () => {
