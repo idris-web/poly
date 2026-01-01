@@ -59,7 +59,7 @@ export default function Exordium() {
 
     // Animate frame index with GSAP scrub
     // Start at frame 60, end at frame 90 when scrolling through section
-    const frameObj = { frame: 59 };
+    const frameObj = { frame: 0 };
     const frameTween = gsap.to(frameObj, {
       frame: FRAME_COUNT - 1,
       ease: 'none',
