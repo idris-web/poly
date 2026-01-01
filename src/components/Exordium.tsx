@@ -65,7 +65,7 @@ export default function Exordium() {
       ease: 'none',
       scrollTrigger: {
         trigger: section,
-        start: 'top 60%',
+        start: 'top 10%',
         end: 'bottom 5%',
         scrub: 0.5,
       },
