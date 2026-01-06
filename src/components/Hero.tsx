@@ -56,7 +56,7 @@ export default function Hero() {
             src="/hero-bg.webp"
             alt="Warm amber atmosphere capturing the POLIGAMIA fragrance moment"
             decoding="async"
-            fetchpriority="high"
+            fetchPriority="high"
             className={styles.heroBgImage}
             onError={(e) => {
               e.currentTarget.style.display = 'none';

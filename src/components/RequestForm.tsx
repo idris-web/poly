@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import emailjs from '@emailjs/browser';
 import { useLanguage } from '../i18n/LanguageContext';
 import styles from './RequestForm.module.css';
 
@@ -9,6 +8,57 @@ import styles from './RequestForm.module.css';
 const EMAILJS_SERVICE_ID = 'service_h8e3zgf';
 const EMAILJS_TEMPLATE_ID = 'template_9ger65j';
 const EMAILJS_PUBLIC_KEY = 'U38CXB8gbjNn3IeGU';
+
+declare global {
+  interface Window {
+    emailjs?: typeof import('@emailjs/browser');
+    __poligamiaEmailJsReady?: Promise<typeof import('@emailjs/browser')>;
+    __poligamiaEmailJsReadyResolver?: (lib: typeof import('@emailjs/browser')) => void;
+  }
+}
+
+const readConsent = () => {
+  if (typeof window === 'undefined') return null;
+  try {
+    const stored = localStorage.getItem('poligamia_osano_consent');
+    return stored ? JSON.parse(stored) : null;
+  } catch {
+    return null;
+  }
+};
+
+const hasMarketingConsent = () => {
+  const stored = readConsent();
+  return stored?.marketing ?? false;
+};
+
+const ensureEmailJsLoaded = (): Promise<typeof import('@emailjs/browser')> => {
+  if (typeof window === 'undefined') {
+    return Promise.reject(new Error('Browser environment required'));
+  }
+
+  if (window.emailjs) {
+    return Promise.resolve(window.emailjs);
+  }
+
+  if (window.__poligamiaEmailJsReady) {
+    return window.__poligamiaEmailJsReady;
+  }
+
+  return new Promise((resolve, reject) => {
+    const interval = window.setInterval(() => {
+      if (window.emailjs) {
+        window.clearInterval(interval);
+        resolve(window.emailjs);
+      }
+    }, 200);
+
+    window.setTimeout(() => {
+      window.clearInterval(interval);
+      reject(new Error('EmailJS konnte nicht geladen werden.'));
+    }, 5000);
+  });
+};
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -169,10 +219,23 @@ export default function RequestForm() {
       return;
     }
 
+    if (!hasMarketingConsent()) {
+      alert(
+        language === 'de'
+          ? 'Bitte akzeptieren Sie die Marketing-Cookies, damit wir Ihre Anfrage über das Formular versenden können.'
+          : 'Please accept the marketing cookies so we can submit your request.'
+      );
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      await emailjs.send(
+      const emailjsLib = await ensureEmailJsLoaded();
+      if (emailjsLib && typeof emailjsLib.init === 'function') {
+        emailjsLib.init(EMAILJS_PUBLIC_KEY);
+      }
+      await emailjsLib.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {

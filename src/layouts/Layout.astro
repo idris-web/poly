@@ -7,7 +7,7 @@ const { title } = Astro.props;
 const description =
   'POLIGAMIA - Ein Parfümhaus für Kenner. Für Ästheten. Für jene, die nicht fragen, sondern verstehen. Not for Everybody.';
 const canonical = 'https://poligamia.eu';
-const featuredImage = '/hero-featured.webp';
+const featuredImage = '/hero-bg.webp';
 ---
 
 <!DOCTYPE html>
@@ -38,20 +38,509 @@ const featuredImage = '/hero-featured.webp';
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={featuredImage} />
     <meta name="twitter:image:alt" content="POLIGAMIA hero fragrance experience" />
+
+    <script>
+      window.OsanoConfig = {
+        language: 'de',
+        countryDetection: false,
+        policyUrl: '/datenschutz',
+        // The actual Osano site ID is required for a production setup.
+        // Replace "your-osano-site-id" with your account ID once available.
+        osanoSiteId: 'your-osano-site-id',
+        disableBanner: true,
+      };
+    </script>
     <script
-      id="Cookiebot"
-      src="https://consent.cookiebot.com/uc.js"
-      data-cbid="29410cb4-eaf1-455a-b4a3-4aec16faefe1"
-      data-blockingmode="auto"
-      type="text/javascript"
+      src="https://cdn.cookieconsent.osano.com/consent/6.6.1/osano.js"
+      async
     ></script>
   </head>
   <body>
     <div class="noise-overlay"></div>
     <slot />
+
+    <div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+      <div class="cookie-card">
+        <h2 id="cookie-title">Cookie-Einstellungen</h2>
+        <p>
+          Für den Betrieb dieser Website verwenden wir notwendige Cookies. Weitere Kategorien werden erst nach Ihrer Zustimmung aktiviert.
+        </p>
+        <div class="cookie-actions">
+          <button type="button" class="cookie-btn primary" data-action="accept-all">Alle akzeptieren</button>
+          <button type="button" class="cookie-btn ghost" data-action="reject-all">Alle ablehnen</button>
+          <button type="button" class="cookie-btn secondary" data-action="open-settings">Einstellungen</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cookie-settings" class="cookie-settings" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title" aria-hidden="true">
+      <div class="cookie-card">
+        <h2 id="cookie-settings-title">Cookie-Einstellungen anpassen</h2>
+        <p>Wählen Sie hier, welche Kategorien optionaler Cookies Sie erlauben möchten.</p>
+        <div class="cookie-options">
+          <label class="cookie-option">
+            <input type="checkbox" checked disabled />
+            <span class="cookie-label">Notwendig</span>
+            <span class="cookie-desc">Erforderlich für die grundlegende Funktionalität der Seite.</span>
+          </label>
+          <label class="cookie-option">
+            <input type="checkbox" id="cookie-analytics" />
+            <span class="cookie-label">Statistik</span>
+            <span class="cookie-desc">Hilft uns, die Nutzung besser zu verstehen und Inhalte zu verbessern.</span>
+          </label>
+          <label class="cookie-option">
+            <input type="checkbox" id="cookie-marketing" />
+            <span class="cookie-label">Marketing</span>
+            <span class="cookie-desc">Erlaubt personalisierte Inhalte und externe Dienste wie EmailJS.</span>
+          </label>
+        </div>
+        <div class="cookie-actions">
+          <button type="button" class="cookie-btn primary" data-action="save-settings">Auswahl speichern</button>
+          <button type="button" class="cookie-btn ghost" data-action="close-settings">Abbrechen</button>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="cookie-settings-button" class="cookie-settings-button" aria-haspopup="dialog">
+      Cookie-Einstellungen
+    </button>
+
+    <script type="text/javascript">
+      (() => {
+        const CONSENT_KEY = 'poligamia_osano_consent';
+        const EMAILJS_PUBLIC_KEY = 'U38CXB8gbjNn3IeGU';
+        const optionalScripts = [
+          {
+            category: 'marketing',
+            src: 'https://cdn.emailjs.com/dist/email.min.js',
+            loaded: false,
+          },
+        ];
+        const banner = document.getElementById('cookie-banner');
+        const settingsPanel = document.getElementById('cookie-settings');
+        const settingsButton = document.getElementById('cookie-settings-button');
+        const analyticsToggle = document.getElementById('cookie-analytics');
+        const marketingToggle = document.getElementById('cookie-marketing');
+
+        const setCookie = (name, value, days) => {
+          const maxAge = days ? `; max-age=${days * 86400}` : '';
+          const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+          document.cookie = `${name}=${value}; path=/; SameSite=Lax${secure}${maxAge}`;
+        };
+
+        const readConsentFromCookie = () => {
+          const nameEq = `${CONSENT_KEY}=`;
+          const cookies = document.cookie.split('; ');
+          const match = cookies.find((cookie) => cookie.startsWith(nameEq));
+          if (!match) return null;
+          const [, value] = match.split('=');
+          if (!value) return null;
+          try {
+            return JSON.parse(decodeURIComponent(value));
+          } catch {
+            return null;
+          }
+        };
+
+        const interpretConsent = (value) => {
+          if (typeof value === 'boolean') return value;
+          if (typeof value === 'string') {
+            const normalized = value.toLowerCase();
+            return ['accepted', 'allow', 'granted', 'true', '1'].includes(normalized);
+          }
+          if (value && typeof value === 'object') {
+            if ('status' in value) return interpretConsent(value.status);
+            if ('value' in value) return interpretConsent(value.value);
+            if ('state' in value) return interpretConsent(value.state);
+          }
+          if (Array.isArray(value)) {
+            return value.some((entry) => interpretConsent(entry));
+          }
+          return false;
+        };
+
+        const saveConsent = (consent) => {
+          try {
+            localStorage.setItem(CONSENT_KEY, JSON.stringify(consent));
+          } catch {
+            // ignore storage failures
+          }
+          setCookie(CONSENT_KEY, JSON.stringify(consent), 180);
+        };
+
+        const loadConsent = () => {
+          try {
+            const stored = localStorage.getItem(CONSENT_KEY);
+            if (stored) {
+              return JSON.parse(stored);
+            }
+          } catch {
+            // ignore
+          }
+          return readConsentFromCookie();
+        };
+
+        const getOsanoCategory = (category) => {
+          const osano = window.Osano || window.osano;
+          if (!osano) return undefined;
+          if (typeof osano.getConsent === 'function') {
+            return osano.getConsent(category);
+          }
+          if (osano.consent && typeof osano.consent.getConsent === 'function') {
+            return osano.consent.getConsent(category);
+          }
+          return undefined;
+        };
+
+        const updateOsanoConsent = (state) => {
+          const osano = window.Osano || window.osano;
+          if (!osano) return;
+          const setter =
+            typeof osano.setConsent === 'function'
+              ? osano.setConsent
+              : osano.consent && typeof osano.consent.setConsent === 'function'
+                ? osano.consent.setConsent
+                : undefined;
+          if (!setter) return;
+
+          const payload = {
+            necessary: true,
+            analytics: state.analytics,
+            statistics: state.analytics,
+            marketing: state.marketing,
+          };
+
+          try {
+            if (setter.length >= 2) {
+              setter('statistics', payload.statistics);
+              setter('marketing', payload.marketing);
+            } else {
+              setter(payload);
+            }
+          } catch (error) {
+            console.error('Osano consent update failed', error);
+          }
+        };
+
+        const loadOptionalScript = (category) => {
+          const entry = optionalScripts.find((item) => item.category === category);
+          if (!entry || entry.loaded) return;
+          const script = document.createElement('script');
+          script.src = entry.src;
+          script.async = true;
+          script.onload = () => {
+            entry.loaded = true;
+            if (window.emailjs && typeof window.emailjs.init === 'function') {
+              window.emailjs.init(EMAILJS_PUBLIC_KEY);
+              if (window.__poligamiaEmailJsReadyResolver) {
+                window.__poligamiaEmailJsReadyResolver(window.emailjs);
+              }
+            }
+          };
+          document.head.appendChild(script);
+        };
+
+        window.__poligamiaEmailJsReady = new Promise((resolve) => {
+          window.__poligamiaEmailJsReadyResolver = resolve;
+        });
+
+        let currentConsent = {
+          analytics: false,
+          marketing: false,
+        };
+
+        const applyConsent = (consent, { persist = true, hide = true } = {}) => {
+          currentConsent = {
+            analytics: consent.analytics,
+            marketing: consent.marketing,
+          };
+
+          if (consent.marketing) {
+            loadOptionalScript('marketing');
+          }
+
+          if (persist) {
+            saveConsent(currentConsent);
+            updateOsanoConsent(currentConsent);
+          }
+
+          if (hide) {
+            banner?.classList.add('is-hidden');
+          }
+        };
+
+        const parseDetail = (detail) => {
+          if (!detail) return {};
+          const consentSource = detail.consent || detail.choices || detail;
+          return {
+            marketing: interpretConsent(consentSource.marketing),
+            analytics: interpretConsent(consentSource.statistics ?? consentSource.analytics),
+          };
+        };
+
+        const synchronizeConsent = () => {
+          const osanoAnalytics = interpretConsent(getOsanoCategory('statistics') ?? getOsanoCategory('analytics'));
+          const osanoMarketing = interpretConsent(getOsanoCategory('marketing'));
+          if (osanoAnalytics || osanoMarketing) {
+            applyConsent({ analytics: osanoAnalytics, marketing: osanoMarketing }, { persist: true, hide: true });
+          }
+        };
+
+        const handleConsentEvent = (event) => {
+          const parsed = parseDetail(event?.detail);
+          const newConsent = {
+            analytics: parsed.analytics ?? currentConsent.analytics,
+            marketing: parsed.marketing ?? currentConsent.marketing,
+          };
+          applyConsent(newConsent, { persist: true, hide: true });
+        };
+
+        const showBanner = () => {
+          banner?.classList.remove('is-hidden');
+        };
+
+        const showSettings = () => {
+          settingsPanel?.setAttribute('aria-hidden', 'false');
+          settingsPanel?.classList.add('is-visible');
+        };
+
+        const closeSettings = () => {
+          settingsPanel?.setAttribute('aria-hidden', 'true');
+          settingsPanel?.classList.remove('is-visible');
+        };
+
+        const loadStored = loadConsent();
+        if (loadStored) {
+          applyConsent(
+            {
+              analytics: loadStored.analytics ?? false,
+              marketing: loadStored.marketing ?? false,
+            },
+            { persist: false, hide: true }
+          );
+        } else {
+          showBanner();
+        }
+
+        window.addEventListener('OsanoOnConsentReady', handleConsentEvent);
+        window.addEventListener('OsanoOnConsentChanged', handleConsentEvent);
+
+        banner?.addEventListener('click', (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLElement)) return;
+          const action = target.getAttribute('data-action');
+          if (!action) return;
+          if (action === 'accept-all') {
+            applyConsent({ analytics: true, marketing: true });
+          }
+          if (action === 'reject-all') {
+            applyConsent({ analytics: false, marketing: false });
+          }
+          if (action === 'open-settings') {
+            settingsPanel?.classList.add('is-visible');
+            settingsPanel?.setAttribute('aria-hidden', 'false');
+          }
+        });
+
+        settingsPanel?.addEventListener('click', (event) => {
+          const target = event.target;
+          if (!(target instanceof HTMLElement)) return;
+          const action = target.getAttribute('data-action');
+          if (action === 'save-settings') {
+            const preference = {
+              analytics: analyticsToggle?.checked ?? false,
+              marketing: marketingToggle?.checked ?? false,
+            };
+            applyConsent(preference);
+          }
+          if (action === 'close-settings') {
+            closeSettings();
+          }
+        });
+
+        settingsButton?.addEventListener('click', () => {
+          closeSettings();
+          showBanner();
+          const stored = loadConsent();
+          if (stored) {
+            analyticsToggle?.setAttribute('checked', stored.analytics ? 'true' : 'false');
+            marketingToggle?.setAttribute('checked', stored.marketing ? 'true' : 'false');
+            analyticsToggle.checked = stored.analytics;
+            marketingToggle.checked = stored.marketing;
+          }
+        });
+
+        synchronizeConsent();
+      })();
+    </script>
   </body>
 </html>
 
 <style is:global>
   @import '../styles/global.css';
+
+  .cookie-banner,
+  .cookie-settings {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .cookie-banner.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .cookie-settings {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .cookie-settings.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .cookie-card {
+    max-width: 640px;
+    width: 100%;
+    background: #0f0f0f;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .cookie-card h2 {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .cookie-card p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .cookie-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .cookie-btn {
+    border-radius: 999px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+
+  .cookie-btn.primary {
+    background: #f1c88b;
+    color: #111;
+  }
+
+  .cookie-btn.secondary {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
+
+  .cookie-btn.ghost {
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .cookie-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .cookie-options {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cookie-option {
+    display: grid;
+    gap: 0.3rem;
+    font-family: var(--font-body);
+  }
+
+  .cookie-option input {
+    transform: scale(1.1);
+    margin-right: 0.5rem;
+  }
+
+  .cookie-label {
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .cookie-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .cookie-settings-button {
+    position: fixed;
+    left: 1.5rem;
+    bottom: 1.5rem;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.6rem 1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    z-index: 1500;
+  }
+
+  @media (max-width: 768px) {
+    .cookie-banner,
+    .cookie-settings {
+      padding: 1.25rem;
+    }
+
+    .cookie-card {
+      padding: 1.5rem;
+      border-radius: 16px;
+    }
+
+    .cookie-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .cookie-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    .cookie-settings-button {
+      left: 1rem;
+      bottom: 1rem;
+    }
+  }
 </style>
