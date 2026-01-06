@@ -102,12 +102,12 @@ export default function Access() {
   // Localized header and quote text
   const headerText = {
     de: {
-      title: 'EXORDIUM ist bewusst entzogen –',
+      title: 'EXORDIUM ist bewusst entzogen:',
       titleHighlight: 'Dem Mainstream. Der Masse. Dem Erwartbaren.',
       subtitle: 'Es findet dich.',
     },
     en: {
-      title: 'EXORDIUM is deliberately withheld –',
+      title: 'EXORDIUM is deliberately withheld:',
       titleHighlight: 'From the mainstream. The masses. The expected.',
       subtitle: 'It finds you.',
     },

@@ -137,18 +137,12 @@
 }
 
 .inputLine {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--crown-gold);
-  transition: width 0.5s var(--ease-luxury);
+  display: none;
 }
 
 .input:focus ~ .inputLine,
 .textarea:focus ~ .inputLine {
-  width: 100%;
+  width: 0;
 }
 
 /* Validation States */

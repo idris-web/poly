@@ -66,11 +66,13 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   border-radius: 20px;
+  text-shadow: none;
 }
 
 /* Headline - Bold Statement */
 .heroHeadline {
   margin-bottom: 2rem;
+  text-shadow: none;
 }
 
 .logoWrapper {
@@ -159,12 +161,24 @@
   color: #fff;
   margin-bottom: 2.5rem;
   max-width: 580px;
+  text-shadow: none;
 }
 
 /* Buttons */
 .heroButtons {
   display: flex;
   gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.heroButtons button {
+  min-width: 220px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  letter-spacing: 0.15em;
 }
 
 .btnPrimary {
@@ -180,8 +194,8 @@
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.4s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
+  box-shadow: none;
 
 .btnPrimary:hover {
   background: transparent;
@@ -345,6 +359,7 @@
 @media (max-width: 768px) {
   .hero {
     min-height: 100svh;
+    align-items: flex-start;
   }
 
   .heroBgImage {
@@ -352,13 +367,13 @@
   }
 
   .heroContent {
-    padding: 0 1.5rem;
-    justify-content: flex-end;
-    padding-bottom: 2.5rem;
+    padding: 4.5rem 1.5rem 2.5rem;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   .heroText {
-    padding: 1.5rem !important;
+    padding: 1.25rem !important;
     margin: 0 !important;
     margin-bottom: 2rem !important;
     text-align: center;
@@ -366,33 +381,38 @@
     background: transparent;
     backdrop-filter: none;
     border-radius: 0;
+    color: #000;
   }
 
   .heroHeadline {
     text-align: center;
+    color: #000;
+    margin-bottom: 1.1rem;
   }
 
   .heroLogo {
     max-width: 280px;
-    filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    filter: brightness(0);
   }
 
   .trademark {
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    color: #000;
+    text-shadow: none;
   }
 
   .heroSubtitle {
     font-size: 0.9rem;
     max-width: 100%;
-    color: #fff;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
-    margin-bottom: 1.5rem;
+    color: #000;
+    text-shadow: none;
+    line-height: 1.5;
+    margin-bottom: 1.1rem;
   }
 
   .heroButtons {
     flex-direction: column;
     width: 100%;
-    gap: 0.75rem;
+    gap: 0.6rem;
   }
 
   .btnPrimary {
@@ -400,7 +420,10 @@
     text-align: center;
     padding: 0.875rem 1.5rem;
     font-size: 0.7rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    background: #000;
+    border-color: #000;
+    box-shadow: none;
   }
 
   .btnSecondary {
@@ -408,8 +431,27 @@
     text-align: center;
     padding: 0.875rem 1.5rem;
     font-size: 0.7rem;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
+    color: #fff;
+    background: #8B7355;
+    border-color: #8B7355;
+    backdrop-filter: none;
+  }
+
+  .btnPrimary:hover,
+  .btnSecondary:hover {
+    transform: translateY(-1px);
+  }
+
+  .btnPrimary:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+  }
+
+  .btnSecondary:hover {
+    background: #8B7355;
+    color: #fff;
+    border-color: #8B7355;
   }
 
   .productCard {

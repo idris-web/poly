@@ -119,8 +119,8 @@ export default function Footer() {
             {footerText[language].copyright}
           </p>
           <div className={styles.legalLinks}>
-            <a href="#" className={styles.legalLink}>{footerText[language].imprint}</a>
-            <a href="#" className={styles.legalLink}>{footerText[language].privacy}</a>
+            <a href="/impressum" className={styles.legalLink}>{footerText[language].imprint}</a>
+            <a href="/datenschutz" className={styles.legalLink}>{footerText[language].privacy}</a>
           </div>
         </div>
       </div>

@@ -75,14 +75,14 @@ export default function RequestForm() {
   const headerText = {
     de: {
       overline: 'Zugang anfragen',
-      title: 'Bist du bereit,',
-      titleHighlight: 'Teil dieser Welt zu werden?',
+      title: 'Bist du bereit für einen Duft,',
+      titleHighlight: 'der Luxus, Charakter und Exklusivität vereint?',
       subtitle: 'Jede Einladung ist eine Entscheidung.',
     },
     en: {
       overline: 'Request Access',
-      title: 'Are you ready to',
-      titleHighlight: 'become part of this world?',
+      title: 'Are you ready for a fragrance that combines',
+      titleHighlight: 'luxury, character, and exclusivity?',
       subtitle: 'Every invitation is a decision.',
     },
   };

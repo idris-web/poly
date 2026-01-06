@@ -97,23 +97,24 @@ export default function Navigation() {
             </a>
           </div>
 
-          {/* Language Switcher */}
-          <button
-            className={styles.langSwitch}
-            onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
-            aria-label="Switch language"
-          >
-            {language === 'de' ? 'EN' : 'DE'}
-          </button>
+          <div className={styles.actions}>
+            <button
+              className={styles.langSwitch}
+              onClick={() => setLanguage(language === 'de' ? 'en' : 'de')}
+              aria-label="Switch language"
+            >
+              {language === 'de' ? 'EN' : 'DE'}
+            </button>
 
-          {/* CTA (Desktop) */}
-          <a
-            href="#request"
-            onClick={(e) => scrollToSection(e, 'request')}
-            className={styles.cta}
-          >
-            <span>{t.nav.request}</span>
-          </a>
+            {/* CTA (Desktop) */}
+            <a
+              href="#request"
+              onClick={(e) => scrollToSection(e, 'request')}
+              className={styles.cta}
+            >
+              <span>{t.nav.request}</span>
+            </a>
+          </div>
 
           {/* Hamburger Menu (Mobile) */}
           <button

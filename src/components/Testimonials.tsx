@@ -15,7 +15,7 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    quote: 'Ein Duft der die Herzen der Frauen erobert! Dieser Duft vermittelt Sicherheit, Seriösität und maskuline Stärke! Er ist Herb gleichzeitig umgibt er die Umgebung von einer wohlen süßen Aura. Not for everyone!',
+    quote: 'Dieser Duft vermittelt Sicherheit, Seriösität und maskuline Stärke! Er ist Herb gleichzeitig umgibt er die Umgebung von einer wohlen süßen Aura. Not for everyone!',
     author: 'Elvis Z.',
     title: 'Physiotherapeut aus Nürnberg',
     rating: 5,

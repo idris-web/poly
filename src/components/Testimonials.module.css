@@ -2,7 +2,7 @@
   background: #E8E0D5; /* Beige - reviews section */
   padding: 6rem 0;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Header */
@@ -45,19 +45,13 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  mask-image: linear-gradient(
-    90deg,
-    transparent,
-    white 5%,
-    white 95%,
-    transparent
-  );
+  padding: 0.5rem 0;
 }
 
 /* Single Row */
 .row {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* Row Track - contains all cards */

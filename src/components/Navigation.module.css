@@ -116,6 +116,12 @@
   gap: 2.5rem;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .link {
   font-family: var(--font-display);
   font-size: 0.7rem;
