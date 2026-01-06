@@ -4,9 +4,98 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="POLIGAMIA | Datenschutz">
   <main class="page-content">
-    <section class="placeholder">
-      <h1>Datenschutz</h1>
-      <p>Dieser Bereich steht bereit. Bitte ergänzen Sie hier die Datenschutzinformationen, sobald Sie sie vorbereitet haben.</p>
+    <section class="legal">
+      <h1>Datenschutzerklärung</h1>
+
+      <p>
+        Wir bei POLIGAMIA nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Diese Erklärung informiert Sie über
+        die Erhebung, Verarbeitung und Nutzung personenbezogener Daten im Zusammenhang mit dem Besuch dieser Website
+        sowie der Kontaktaufnahme zur Anfrage von Zugang oder weiteren Informationen.
+      </p>
+
+      <h2>Verantwortlicher</h2>
+      <p>
+        Ensar Kuč<br />
+        POLIGAMIA<br />
+        Im Sonnentau 11<br />
+        91161 Hilpoltstein<br />
+        Deutschland<br />
+        Telefon: <a href="tel:+4917634325157">+49 176 34325157</a><br />
+        E-Mail: <a href="mailto:info@poligamia.eu">info@poligamia.eu</a>
+      </p>
+
+      <h2>Rechtsgrundlagen</h2>
+      <p>
+        Die Verarbeitung erfolgt zur Erfüllung gesetzlicher Pflichten (§ 6 Abs. 1 lit. c DSGVO) oder zur Wahrung
+        berechtigter Interessen (§ 6 Abs. 1 lit. f DSGVO), etwa zur Kommunikation mit Interessenten oder zur Pflege
+        unserer Online-Präsenz. Soweit Sie in die Verarbeitung einwilligen (z. B. Kontaktformular), basiert diese auf
+        Art. 6 Abs. 1 lit. a DSGVO.
+      </p>
+
+      <h2>Erhebung &amp; Nutzung personenbezogener Daten</h2>
+      <p>
+        Beim Besuch unserer Website speichern wir automatisch technische Daten (z. B. IP-Adresse, Browsertyp, Zeitpunkt
+        des Zugriffs) in sogenannten Server-Logs zur Gewährleistung eines sicheren und stabilen Betriebs. Dieser
+        Zugriff ist für die Darstellung der Seite erforderlich und erfolgt aufgrund unseres berechtigten Interesses an
+        einem störungsfreien Betrieb.
+      </p>
+
+      <h2>Kontaktformular &amp; Anfrage</h2>
+      <p>
+        Wenn Sie über das Formular Zugang anfragen, werden Name, E-Mail-Adresse und Ihre Nachricht erhoben. Diese Daten
+        verwenden wir ausschließlich zur Bearbeitung Ihrer Anfrage. Die Verarbeitung erfolgt auf Grundlage Ihrer
+        Einwilligung oder zur Wahrung berechtigter Interessen an einer professionellen Kommunikation.
+      </p>
+
+      <h2>Cookies &amp; Tracking</h2>
+      <p>
+        Diese Website nutzt den Consent-Manager von Cookiebot, um Cookie-Präferenzen DSGVO-konform zu verwalten.
+        Notwendige Cookies erlauben den Betrieb der Website, während nicht essentielle Cookies nur mit Ihrer aktiven
+        Zustimmung gesetzt werden. Sie können Ihre Einwilligung jederzeit über das Cookiebot-Tool widerrufen.
+        Auf unserer Seite werden darüber hinaus keine Tracking-Services ohne Einwilligung geladen.
+      </p>
+
+      <h2>Drittanbieter &amp; Einbettungen</h2>
+      <p>
+        Aus Gründen der Performance nutzen wir Google Fonts (googleapis.com). Die Anfrage wird über https verschlüsselt
+        übertragen; für Daten, die dabei an Google übermittelt werden, beachten Sie bitte die Datenschutzerklärung von
+        Google. Soweit weitere Dienste eingebunden sind (z. B. Payment-, Hosting- oder Analysepartner), erfolgt dies
+        stets nach Abwägung Ihrer Interessen und nur mit geeigneten Auftragsverarbeitungsverträgen.
+      </p>
+
+      <h2>Hosting</h2>
+      <p>
+        Gehostet wird diese Website von einem europäischen Anbieter, der sichere Serverstandorte sowie zertifizierte
+        Rechenzentren zur Verfügung stellt. Die Verarbeitung der Daten erfolgt auf Basis unseres berechtigten
+        Interessen an einem stabilen Hosting.
+      </p>
+
+      <h2>Speicherdauer und Löschung</h2>
+      <p>
+        Personenbezogene Daten werden nur so lange gespeichert, wie es für die genannten Zwecke notwendig ist oder
+        gesetzliche Aufbewahrungsfristen bestehen. Danach löschen wir oder anonymisieren die Daten.
+      </p>
+
+      <h2>Ihre Rechte</h2>
+      <p>
+        Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit
+        sowie Widerruf erteilter Einwilligungen. Wenden Sie sich zur Ausübung Ihrer Rechte an die oben genannte
+        Kontaktadresse. Zudem steht Ihnen das Beschwerderecht bei einer Aufsichtsbehörde zu.
+      </p>
+
+      <h2>Datensicherheit</h2>
+      <p>
+        Wir treffen technische und organisatorische Maßnahmen (z. B. Verschlüsselung per HTTPS), um Ihre Daten vor
+        unberechtigtem Zugriff zu schützen.
+      </p>
+
+      <h2>Änderungen der Datenschutzerklärung</h2>
+      <p>
+        Diese Erklärung kann bei rechtlichen oder technischen Änderungen angepasst werden. Das Datum der letzten
+        Aktualisierung sehen Sie unten.
+      </p>
+
+      <p class="update">Stand: {new Date().toLocaleDateString('de-DE')}</p>
     </section>
   </main>
 </Layout>
@@ -18,19 +107,48 @@ import Layout from '../layouts/Layout.astro';
     align-items: center;
     justify-content: center;
     padding: 4rem 2rem;
-    text-align: center;
+    text-align: left;
   }
 
-  .placeholder h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 4vw, 3rem);
-    margin-bottom: 1rem;
+  .legal {
+    max-width: 860px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 3rem;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 24px;
     color: #fff;
   }
 
-  .placeholder p {
-    font-family: var(--font-body);
+  .legal h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .legal h2 {
+    font-family: var(--font-display);
     font-size: 1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .legal p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.8;
     color: rgba(255, 255, 255, 0.85);
+  }
+
+  .legal a {
+    color: #f1c88b;
+  }
+
+  .update {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.7);
   }
 </style>

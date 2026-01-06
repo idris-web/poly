@@ -454,7 +454,7 @@ export const translations = {
       },
       contact: {
         title: 'Contact',
-        email: 'contact@poligamia.com',
+        email: 'contact@poligamia.eu',
       },
       copyright: '© 2024 POLIGAMIA. All rights reserved.',
     },

@@ -4,9 +4,49 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="POLIGAMIA | Impressum">
   <main class="page-content">
-    <section class="placeholder">
+    <section class="legal">
       <h1>Impressum</h1>
-      <p>Dieser Bereich ist vorbereitet. Die Inhalte werden hier eingepflegt, sobald Sie den Text bereitstellen.</p>
+      <p>Angaben gemäß § 5 TMG:</p>
+      <ul>
+        <li>Ensar Kuč</li>
+        <li>POLIGAMIA</li>
+        <li>Im Sonnentau 11</li>
+        <li>91161 Hilpoltstein, Deutschland</li>
+      </ul>
+
+      <h2>Kontakt</h2>
+      <p>
+        Telefon: <a href="tel:+4917634325157">+49 176 34325157</a><br />
+        E-Mail: <a href="mailto:info@poligamia.eu">info@poligamia.eu</a>
+      </p>
+
+      <h2>Vertretungsberechtigte Person</h2>
+      <p>Ensar Kuč</p>
+
+      <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+      <p>Ensar Kuč, Im Sonnentau 11, 91161 Hilpoltstein</p>
+
+      <h2>Haftung für Inhalte</h2>
+      <p>
+        Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Dennoch übernehmen wir keine Gewähr für
+        die Aktualität, Richtigkeit oder Vollständigkeit der Inhalte. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG
+        für eigene Inhalte auf dieser Website nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir
+        als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen
+        oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+      </p>
+
+      <h2>Haftung für Links</h2>
+      <p>
+        Unsere Website enthält Links zu externen Websites Dritter. Für deren Inhalte sind ausschließlich die jeweiligen Anbieter verantwortlich.
+        Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.
+      </p>
+
+      <h2>Urheberrecht</h2>
+      <p>
+        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+        Beiträge Dritter sind als solche gekennzeichnet. Die Vervielfältigung, Bearbeitung oder Verbreitung ist ohne
+        schriftliche Zustimmung nicht gestattet.
+      </p>
     </section>
   </main>
 </Layout>
@@ -18,19 +58,47 @@ import Layout from '../layouts/Layout.astro';
     align-items: center;
     justify-content: center;
     padding: 4rem 2rem;
-    text-align: center;
+    text-align: left;
   }
 
-  .placeholder h1 {
-    font-family: var(--font-display);
-    font-size: clamp(2.5rem, 4vw, 3rem);
-    margin-bottom: 1rem;
+  .legal {
+    max-width: 860px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 3rem;
+    background: rgba(0, 0, 0, 0.65);
+    border-radius: 24px;
     color: #fff;
   }
 
-  .placeholder p {
-    font-family: var(--font-body);
+  .legal h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .legal h2 {
+    font-family: var(--font-display);
     font-size: 1rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .legal p,
+  .legal li {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.8;
     color: rgba(255, 255, 255, 0.85);
+  }
+
+  .legal ul {
+    padding-left: 1.25rem;
+    margin: 0.25rem 0 0;
+  }
+
+  .legal a {
+    color: #f1c88b;
   }
 </style>
