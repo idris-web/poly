@@ -101,4 +101,28 @@ import Layout from '../layouts/Layout.astro';
   .legal a {
     color: #f1c88b;
   }
+
+  @media (max-width: 768px) {
+    .page-content {
+      padding: 3rem 1.25rem;
+    }
+
+    .legal {
+      padding: 2rem;
+      border-radius: 16px;
+    }
+
+    .legal h1 {
+      font-size: 2rem;
+    }
+
+    .legal h2 {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+    }
+
+    .legal ul {
+      padding-left: 1rem;
+    }
+  }
 </style>
