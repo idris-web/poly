@@ -85,10 +85,10 @@ export default function Footer() {
             <div className={styles.socialColumn}>
               <h4 className={styles.columnTitle}>{footerText[language].socialTitle}</h4>
               <div className={styles.socialLinks}>
-                <a href="https://instagram.com/poligamia" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                <a href="#" className={styles.socialLink} aria-disabled="true">
                   Instagram
                 </a>
-                <a href="https://tiktok.com/@poligamia" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
+                <a href="#" className={styles.socialLink} aria-disabled="true">
                   TikTok
                 </a>
               </div>

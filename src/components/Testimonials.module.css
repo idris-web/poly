@@ -45,13 +45,15 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 3rem 0;
+  overflow: visible;
 }
 
 /* Single Row */
 .row {
   width: 100%;
   overflow: visible;
+  padding: 2rem 0;
 }
 
 /* Row Track - contains all cards */
@@ -59,6 +61,8 @@
   display: flex;
   gap: 1.5rem;
   width: max-content;
+  overflow: visible;
+  padding: 2rem 0;
 }
 
 /* Animation for left direction */
@@ -104,6 +108,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
   transition: all 0.3s ease;
   flex-shrink: 0;
+  will-change: transform;
 }
 
 .card:hover {
@@ -174,10 +179,12 @@
 
   .rowsWrapper {
     gap: 1rem;
+    padding: 2rem 0;
   }
 
   .rowTrack {
     gap: 1rem;
+    animation: none;
   }
 
   .card {
@@ -190,11 +197,25 @@
     font-size: 0.9rem;
   }
 
-  .rowTrack[data-direction="left"] {
-    animation-duration: 70s;
+  .row {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding: 2rem 0 2rem;
+    scrollbar-width: none;
   }
 
-  .rowTrack[data-direction="right"] {
-    animation-duration: 85s;
+  .row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rowTrack {
+    scroll-snap-type: none;
+    padding: 1.5rem 0;
+  }
+
+  .card {
+    scroll-snap-align: start;
   }
 }
