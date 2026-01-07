@@ -74,6 +74,7 @@ export default function Hero() {
           <div className={`${styles.heroHeadline} hero-headline`}>
             <div className={styles.logoWrapper}>
               <img src="/logo-full.svg" alt="POLIGAMIA - Not for everybody" className={styles.heroLogo} />
+              <span className={styles.trademark}>™</span>
             </div>
           </div>
 

@@ -256,6 +256,20 @@
   max-width: 450px;
 }
 
+.description p {
+  margin: 0 0 0.8rem 0;
+}
+
+.description p:last-child {
+  margin-bottom: 0;
+}
+
+.descriptionHighlight {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  font-style: italic;
+}
+
 /* Product Details */
 .details {
   display: flex;

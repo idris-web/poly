@@ -58,21 +58,30 @@ export default function Exordium() {
     ctx.drawImage(firstImage, 0, 0);
 
     // Animate frame index with GSAP scrub
-    // Start at frame 60, end at frame 90 when scrolling through section
+    // Frame 10 should appear when section is centered in viewport
+    // Frame 10 is ~10% through animation, center is ~50% scroll
+    // So we need to start earlier (before section is visible)
     const frameObj = { frame: 0 };
     const frameTween = gsap.to(frameObj, {
       frame: FRAME_COUNT - 1,
       ease: 'none',
       scrollTrigger: {
         trigger: section,
-        start: 'top bottom',
-        end: 'bottom 5%',
+        start: 'top 180%',  // Start animation before section is visible
+        end: 'bottom top',
         scrub: 0.5,
       },
       onUpdate: () => {
         const frameIndex = Math.round(frameObj.frame);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(images[frameIndex], 0, 0);
+
+        // Debug: Show frame number
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(10, 10, 120, 40);
+        ctx.fillStyle = '#B29982';
+        ctx.font = 'bold 24px Arial';
+        ctx.fillText(`Frame: ${frameIndex + 1}`, 20, 40);
       }
     });
 
@@ -132,9 +141,11 @@ export default function Exordium() {
             <span className={styles.titleSub}>{t.exordium.titleSub}</span>
           </h2>
 
-          <p className={`${styles.description} exordium-text`}>
-            {t.exordium.description}
-          </p>
+          <div className={`${styles.description} exordium-text`}>
+            <p>{t.exordium.description}</p>
+            <p className={styles.descriptionHighlight}>{t.exordium.descriptionHighlight}</p>
+            <p>{t.exordium.descriptionEnd}</p>
+          </div>
 
           <div className={`${styles.details} exordium-text`}>
             <div className={styles.detailItem}>

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(git pull:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd trademark symbols, text updates, and teaser section\n\n- Add ™ trademark symbol to all logo instances \\(Nav, Hero, Footer\\)\n- Replace request form with \"Coming Soon\" teaser banner\n- Update manifest: POLIGAMIA on separate line\n- Fix text punctuation \\(commas to periods\\)\n- Remove TikTok from footer socials\n- Remove \"Es findet dich\" and related text\n- Remove asterisks from stats\n- Move philosophy text above quote\n- Update Exordium description formatting\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}

@@ -57,6 +57,13 @@
   letter-spacing: -0.01em;
 }
 
+.brandName {
+  display: block;
+  color: #8B7355;
+  font-style: normal;
+  margin-bottom: 0.5rem;
+}
+
 .statementFirst {
   display: block;
   white-space: nowrap;

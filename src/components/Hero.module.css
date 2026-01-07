@@ -87,6 +87,17 @@
   filter: brightness(0) invert(1);
 }
 
+.trademark {
+  position: absolute;
+  top: 0;
+  right: -12px;
+  font-size: 1rem;
+  color: #fff;
+  opacity: 0.8;
+  font-weight: 300;
+  line-height: 1;
+}
+
 .heroHeadlineFirst {
   display: block;
 }

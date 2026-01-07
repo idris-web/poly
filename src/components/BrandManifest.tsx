@@ -94,7 +94,8 @@ export default function BrandManifest() {
             ref={(el) => { textRefs.current[0] = el; }}
             className={styles.statement}
           >
-            <span className={styles.statementFirst}><span className={styles.highlight}>POLIGAMIA</span> {t.manifest.title}</span>
+            <span className={styles.brandName}>POLIGAMIA</span>
+            <span className={styles.statementFirst}>{t.manifest.title}</span>
             <span className={styles.statementSecond}>{t.manifest.subtitle.split(' ').slice(0, -1).join(' ')} <span ref={manifestWordRef} className={styles.manifestWord}>{t.manifest.subtitle.split(' ').slice(-1)[0]}</span></span>
           </h2>
 

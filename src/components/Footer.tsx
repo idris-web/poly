@@ -64,7 +64,10 @@ export default function Footer() {
           <div className={styles.grid}>
             {/* Brand Column */}
             <div className={styles.brandColumn}>
-              <img src="/logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
+              <div className={styles.logoWrapper}>
+                <img src="/logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
+                <span className={styles.trademark}>™</span>
+              </div>
               <p className={styles.tagline}>{t.footer.tagline}</p>
               <p className={styles.brandDescription}>
                 {footerText[language].brandDescription}
@@ -88,9 +91,6 @@ export default function Footer() {
                 <a href="#" className={styles.socialLink} aria-disabled="true">
                   Instagram
                 </a>
-                <a href="#" className={styles.socialLink} aria-disabled="true">
-                  TikTok
-                </a>
               </div>
             </div>
           </div>
@@ -110,6 +110,7 @@ export default function Footer() {
             <img src="/poligamia-logo.svg" alt="" className={styles.logoSpotlight} aria-hidden="true" />
             {/* Glow layer */}
             <img src="/poligamia-logo.svg" alt="" className={styles.logoGlow} aria-hidden="true" />
+            <span className={styles.bigTrademark}>™</span>
           </div>
         </div>
 

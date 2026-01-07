@@ -22,7 +22,7 @@ export const translations = {
       title: 'Wir kreieren nicht für die Masse.',
       subtitle: 'Sondern für jene, die wissen, wer sie sind.',
       description:
-        'POLIGAMIA ist kein Parfüm für jeden. Es ist ein Statement. Ein olfaktorisches Bekenntnis für Menschen, die sich nicht anpassen – sondern auffallen. Die nicht folgen – sondern führen.',
+        'POLIGAMIA ist kein Parfüm für jeden. Es ist ein Statement. Ein olfaktorisches Bekenntnis für Menschen, die sich nicht anpassen, sondern auffallen. Die nicht folgen, sondern führen.',
       values: [
         { title: 'Exklusivität', desc: 'Limitierte Editionen für Kenner' },
         { title: 'Authentizität', desc: 'Kompromisslos in jeder Note' },
@@ -35,8 +35,9 @@ export const translations = {
       badge: 'First Edition',
       title: 'EXORDIUM',
       titleSub: 'The Beginning of the Chosen Ones',
-      description:
-        'Ein Duft, der nicht nur verführt, sondern erwacht. Kraftvoll. Rätselhaft. Unberechenbar. Jede Note erzählt eine Geschichte von Rebellion und Raffinesse.',
+      description: 'Ein Duft, der nicht nur verführt, sondern erwacht.',
+      descriptionHighlight: 'Kraftvoll. Rätselhaft. Unberechenbar.',
+      descriptionEnd: 'Jede Note erzählt eine Geschichte von Rebellion und Raffinesse.',
       concentration: 'Konzentration',
       concentrationValue: 'Extrait de Parfum',
       content: 'Inhalt',
@@ -45,7 +46,7 @@ export const translations = {
       editionValue: 'Limitiert',
       quote:
         'Ein Duft, erschaffen für Persönlichkeiten, deren Identität nicht verhandelbar ist.',
-      quoteHighlight: 'angekündigt',
+      quoteHighlight: 'angekündigt werden.',
       quoteSuffix: 'Für jene, die nicht erwartet, sondern',
     },
 
@@ -96,12 +97,12 @@ export const translations = {
         {
           name: 'Der Duft',
           description:
-            'Luxuriöse Tiefe mit warmen Noten, ein Erlebnis, das in Erinnerung bleibt.',
+            'Luxuriöse Tiefe mit warmen Noten. Ein Erlebnis, das in Erinnerung bleibt.',
         },
         {
           name: 'Das Erlebnis',
           description:
-            'Mehr als ein Parfüm, ein Statement für die, die herausstechen wollen.',
+            'Mehr als ein Parfüm. Ein Statement für die, die herausstechen wollen.',
         },
       ],
     },
@@ -252,7 +253,7 @@ export const translations = {
       title: "We don't create for the masses.",
       subtitle: 'But for those who know who they are.',
       description:
-        "POLIGAMIA is not a perfume for everyone. It's a statement. An olfactory confession for people who don't adapt – but stand out. Who don't follow – but lead.",
+        "POLIGAMIA is not a perfume for everyone. It's a statement. An olfactory confession for people who don't adapt, but stand out. Who don't follow, but lead.",
       values: [
         { title: 'Exclusivity', desc: 'Limited editions for connoisseurs' },
         { title: 'Authenticity', desc: 'Uncompromising in every note' },
@@ -265,8 +266,9 @@ export const translations = {
       badge: 'First Edition',
       title: 'EXORDIUM',
       titleSub: 'The Beginning of the Chosen Ones',
-      description:
-        "A fragrance that doesn't just seduce, but awakens. Powerful. Enigmatic. Unpredictable. Every note tells a story of rebellion and refinement.",
+      description: "A fragrance that doesn't just seduce, but awakens.",
+      descriptionHighlight: 'Powerful. Enigmatic. Unpredictable.',
+      descriptionEnd: 'Every note tells a story of rebellion and refinement.',
       concentration: 'Concentration',
       concentrationValue: 'Extrait de Parfum',
       content: 'Content',

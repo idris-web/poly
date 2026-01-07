@@ -77,7 +77,7 @@ export default function Access() {
       {
         number: '03',
         title: 'Auf Einladung',
-        description: 'Zugang ausschließlich auf Einladung. Begrenzte Stückzahl. Denn wahre Exklusivität lässt sich nicht anklicken. Sie findet dich.',
+        description: 'Zugang ausschließlich auf Einladung. Begrenzte Stückzahl.',
       },
     ],
     en: [
@@ -94,7 +94,7 @@ export default function Access() {
       {
         number: '03',
         title: 'By Invitation',
-        description: 'Access exclusively by invitation. Limited quantity. Because true exclusivity cannot be clicked. It finds you.',
+        description: 'Access exclusively by invitation. Limited quantity.',
       },
     ],
   };
@@ -104,12 +104,12 @@ export default function Access() {
     de: {
       title: 'EXORDIUM ist bewusst entzogen:',
       titleHighlight: 'Dem Mainstream. Der Masse. Dem Erwartbaren.',
-      subtitle: 'Es findet dich.',
+      subtitle: '',
     },
     en: {
       title: 'EXORDIUM is deliberately withheld:',
       titleHighlight: 'From the mainstream. The masses. The expected.',
-      subtitle: 'It finds you.',
+      subtitle: '',
     },
   };
 

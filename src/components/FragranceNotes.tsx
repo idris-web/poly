@@ -136,7 +136,6 @@ export default function FragranceNotes() {
         {/* Bottom Info */}
         <div className={styles.bottomInfo}>
           <span className={styles.concentration}>{t.fragrance.concentration}</span>
-          <span className={styles.concentrationValue}>{t.fragrance.concentrationValue}</span>
         </div>
       </div>
     </section>

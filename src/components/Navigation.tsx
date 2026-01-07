@@ -70,6 +70,7 @@ export default function Navigation() {
           {/* Logo */}
           <a href="#" className={styles.logo}>
             <img src="/logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
+            <span className={styles.trademark}>™</span>
           </a>
 
           {/* Nav Links (Desktop) */}

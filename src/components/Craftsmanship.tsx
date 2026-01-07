@@ -5,7 +5,7 @@ const stats = [
   { number: '5000+', labelKey: 'devHours' },
   { number: '47', labelKey: 'ingredients' },
   { number: '18', labelKey: 'monthsMaturing' },
-  { number: '1000*', labelKey: 'limitedBottles' },
+  { number: '1000', labelKey: 'limitedBottles' },
 ];
 
 // Static stat labels - these are numerical facts, not translatable
@@ -13,7 +13,7 @@ const statLabels: Record<string, { de: string; en: string }> = {
   devHours: { de: 'Stunden Entwicklung*', en: 'Hours of Development*' },
   ingredients: { de: 'Rohstoffe', en: 'Raw Materials' },
   monthsMaturing: { de: 'Monate Reifung', en: 'Months Maturing' },
-  limitedBottles: { de: 'Limitierte Flakons*', en: 'Limited Bottles*' },
+  limitedBottles: { de: 'Limitierte Flakons', en: 'Limited Bottles' },
 };
 
 export default function Craftsmanship() {
@@ -59,10 +59,10 @@ export default function Craftsmanship() {
         </div>
 
         <div className={styles.quoteSection}>
+          <span className={styles.author}>{quoteText[language].author}</span>
           <p className={styles.quote}>
             {quoteText[language].main} <span className={styles.quoteHighlight}>{quoteText[language].highlight}</span>
           </p>
-          <span className={styles.author}>{quoteText[language].author}</span>
         </div>
       </div>
     </section>

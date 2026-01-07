@@ -32,11 +32,27 @@
   gap: 1rem;
 }
 
+.logoWrapper {
+  position: relative;
+  display: inline-block;
+}
+
 .logoIcon {
   width: 40px;
   height: auto;
   opacity: 0.9;
   filter: brightness(1.2);
+}
+
+.trademark {
+  position: absolute;
+  top: -2px;
+  right: -8px;
+  font-size: 0.55rem;
+  color: var(--crown-gold);
+  opacity: 0.7;
+  font-weight: 300;
+  line-height: 1;
 }
 
 .tagline {
@@ -291,6 +307,22 @@
   opacity: 1;
 }
 
+.bigTrademark {
+  position: absolute;
+  top: 0;
+  left: calc(50% + 440px);
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 300;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.bigBrandText.isHovering .bigTrademark {
+  color: var(--crown-gold);
+  opacity: 0.8;
+}
+
 /* Bottom Bar */
 .bottom {
   padding-top: 2rem;
@@ -375,6 +407,12 @@
 
   .bigBrand {
     padding: 3rem 0;
+  }
+
+  .bigTrademark {
+    left: auto;
+    right: 1rem;
+    font-size: 1rem;
   }
 
   .bottom {
