@@ -17,8 +17,7 @@ export default function Exordium() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const imagesRef = useRef<HTMLImageElement[]>([]);
-  const frameValueRef = useRef(0); // float frame position for smoother momentum
-  const momentumRafRef = useRef<number | null>(null);
+  const frameValueRef = useRef(0); // float frame position for smooth drag
 
   // Preload all frames
   useEffect(() => {
@@ -54,12 +53,6 @@ export default function Exordium() {
     // Set canvas size to match image
     canvas.width = firstImage.naturalWidth;
     canvas.height = firstImage.naturalHeight;
-
-    const cleanupTimersAndRafs = () => {
-      if (momentumRafRef.current !== null) cancelAnimationFrame(momentumRafRef.current);
-      momentumRafRef.current = null;
-    };
-
     const clampOrWrap = (value: number) => {
       // Toggle to false if you ever want to stop after a full 360° instead of looping
       const LOOP_ROTATION = true;
@@ -85,22 +78,6 @@ export default function Exordium() {
     // Initial frame render
     frameValueRef.current = 0;
     drawFrame(frameValueRef.current);
-
-    const startMomentum = (velocity: number) => {
-      if (momentumRafRef.current !== null) cancelAnimationFrame(momentumRafRef.current);
-      const FRICTION = 0.94;
-      const step = () => {
-        if (Math.abs(velocity) < 0.01) {
-          momentumRafRef.current = null;
-          return;
-        }
-        applyFrameDelta(velocity);
-        velocity *= FRICTION;
-        momentumRafRef.current = requestAnimationFrame(step);
-      };
-      momentumRafRef.current = requestAnimationFrame(step);
-    };
-
     const pointerState = {
       isDragging: false,
       lastX: 0,
@@ -109,7 +86,6 @@ export default function Exordium() {
     };
 
     const handlePointerDown = (e: PointerEvent) => {
-      if (momentumRafRef.current !== null) cancelAnimationFrame(momentumRafRef.current);
       pointerState.isDragging = true;
       pointerState.lastX = e.clientX;
       pointerState.lastTime = performance.now();
@@ -136,13 +112,6 @@ export default function Exordium() {
       if (!pointerState.isDragging) return;
       pointerState.isDragging = false;
       canvas.releasePointerCapture?.(e.pointerId);
-
-      // Momentum based on last velocity for a physical feel
-      const MOMENTUM_MULTIPLIER = 8;
-      const momentumVelocity = -pointerState.velocity * MOMENTUM_MULTIPLIER;
-      if (Math.abs(momentumVelocity) > 0.05) {
-        startMomentum(momentumVelocity);
-      }
     };
 
     canvas.addEventListener('pointerdown', handlePointerDown);
@@ -155,7 +124,6 @@ export default function Exordium() {
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
       window.removeEventListener('pointercancel', handlePointerUp);
-      cleanupTimersAndRafs();
     };
   }, [imagesLoaded]);
 
