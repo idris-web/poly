@@ -14,6 +14,8 @@ export const translations = {
     hero: {
       tagline: 'Not for Everybody',
       cta: 'Kollektion entdecken',
+      description:
+        'POLIGAMIA ist mehr als eine Parfümmarke. Es ist ein Manifest. Eine Einladung, Grenzen zu überschreiten und Identität neu zu definieren. Für jene, die nicht dazugehören wollen, sondern herausstechen.',
     },
 
     // Brand Manifest
@@ -46,7 +48,7 @@ export const translations = {
       editionValue: 'Limitiert',
       quote:
         'Ein Duft, erschaffen für Persönlichkeiten, deren Identität nicht verhandelbar ist.',
-      quoteHighlight: 'angekündigt werden.',
+      quoteHighlight: 'angekündigt werden',
       quoteSuffix: 'Für jene, die nicht erwartet, sondern',
     },
 
@@ -245,6 +247,8 @@ export const translations = {
     hero: {
       tagline: 'Not for Everybody',
       cta: 'Discover Collection',
+      description:
+        "POLIGAMIA is more than a perfume brand. It's a manifesto. An invitation to cross boundaries and redefine identity. For those who don't want to belong, but stand out.",
     },
 
     // Brand Manifest

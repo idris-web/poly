@@ -77,7 +77,7 @@ export default function Access() {
       {
         number: '03',
         title: 'Auf Einladung',
-        description: 'Zugang ausschließlich auf Einladung. Begrenzte Stückzahl.',
+        description: 'Zugang ausschließlich auf Einladung. Denn wahre Exklusivität drängt sich nicht auf. Sie findet dich.',
       },
     ],
     en: [

@@ -52,10 +52,6 @@
   border-bottom: 1px solid rgba(178, 153, 130, 0.08);
 }
 
-.nav.hidden {
-  transform: translateY(-100%);
-}
-
 /* Hide navigation completely when in hero section */
 .nav.inHero {
   opacity: 0;

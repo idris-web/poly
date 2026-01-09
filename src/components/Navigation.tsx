@@ -5,9 +5,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 export default function Navigation() {
   const { language, setLanguage, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [inHero, setInHero] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -18,23 +16,13 @@ export default function Navigation() {
       // Check if we're in the hero section
       setInHero(currentScrollY < heroHeight);
 
-      // Show/hide based on scroll direction (but not when menu is open or in hero)
-      if (!menuOpen && currentScrollY >= heroHeight) {
-        if (currentScrollY > lastScrollY && currentScrollY > heroHeight + 100) {
-          setHidden(true);
-        } else {
-          setHidden(false);
-        }
-      }
-
       // Background change
       setScrolled(currentScrollY > 50);
-      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, menuOpen]);
+  }, []);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -63,8 +51,8 @@ export default function Navigation() {
     <>
       <nav
         className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${
-          hidden ? styles.hidden : ''
-        } ${menuOpen ? styles.menuOpen : ''} ${inHero ? styles.inHero : ''}`}
+          menuOpen ? styles.menuOpen : ''
+        } ${inHero ? styles.inHero : ''}`}
       >
         <div className={styles.container}>
           {/* Logo */}
