@@ -60,6 +60,7 @@ export default function Collections() {
                   src={collectionImages[index]}
                   alt={item.name}
                   className={styles.cardImage}
+                  loading="lazy"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
                   }}

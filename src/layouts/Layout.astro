@@ -8,6 +8,33 @@ const description =
   'Exklusive Düfte für diejenigen, die es wagen, anders zu sein.';
 const canonical = 'https://poligamia.eu';
 const featuredImage = '/poligamia-hero-featured.webp';
+const siteName = 'POLIGAMIA';
+const productName = 'Poligamia Exordium';
+const productDescription =
+  'Poligamia Exordium – ein charakterstarker Duft mit würzigen, harzigen und holzigen Noten. Entwickelt für Persönlichkeiten, die Grenzen überschreiten.';
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteName,
+  url: canonical,
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${canonical}/?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const productStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: productName,
+  description: productDescription,
+  image: `${canonical}${featuredImage}`,
+  brand: {
+    '@type': 'Brand',
+    name: siteName,
+  },
+};
 ---
 
 <!DOCTYPE html>
@@ -21,8 +48,11 @@ const featuredImage = '/poligamia-hero-featured.webp';
     <meta name="theme-color" content="#000000" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/poligamia-favicon.svg" sizes="any" type="image/svg+xml" />
+    <link rel="icon" href="/poligamia-favicon.png" sizes="32x32" type="image/png" />
+    <link rel="icon" href="/poligamia-favicon.png" sizes="16x16" type="image/png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/poligamia-apple-touch-icon.png" />
     <link rel="shortcut icon" href="/poligamia-favicon.svg" />
-    <link rel="mask-icon" href="/poligamia-logo-icon.svg" color="#000000" />
+    <link rel="mask-icon" href="/poligamia-logo-icon.svg" color="#0c0a09" />
     <title>{title}</title>
 
     <!-- Preload Fonts -->
@@ -33,13 +63,17 @@ const featuredImage = '/poligamia-hero-featured.webp';
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={featuredImage} />
+    <meta property="og:image" content={`${canonical}${featuredImage}`} />
     <meta property="og:image:alt" content="POLIGAMIA hero fragrance experience" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={featuredImage} />
+    <meta name="twitter:image" content={`${canonical}${featuredImage}`} />
     <meta name="twitter:image:alt" content="POLIGAMIA hero fragrance experience" />
+    <meta property="og:site_name" content={siteName} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(productStructuredData)}></script>
 
     <script>
       window.OsanoConfig = {

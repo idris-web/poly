@@ -90,8 +90,9 @@ export default function FragranceNotes() {
         <div className={styles.heroImage}>
           <img
             src="/poligamia-product-mockup-03.webp"
-            alt="EXORDIUM"
+            alt="Poligamia Exordium fragrance bottle"
             className={styles.heroImg}
+            loading="lazy"
           />
         </div>
 
