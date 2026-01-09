@@ -169,6 +169,12 @@ export const translations = {
           author: 'David R.',
           role: 'Kreativdirektor',
         },
+        {
+          quote:
+            'Die Verarbeitung der Verpackung, der Flasche sowie der goldenen Karte ist einzigartig und absolut überragend. Man merkt sofort, dass hier viel Wert auf Details und Qualität gelegt wurde. Der Duft selbst ist genau das Richtige für jeden erfolgreichen Mann, perfekt aufeinander abgestimmt, kraftvoll, aber keinesfalls aufdringlich. Er strahlt Stärke, Eleganz und Selbstbewusstsein aus, ohne zu dominieren. Wie der Slogan bereits sagt – dieses Parfüm ist wirklich Not for Everybody.',
+          author: 'Adrian D.',
+          role: 'Management in Logistik',
+        },
       ],
     },
 
@@ -401,6 +407,12 @@ export const translations = {
             'Finally a fragrance as uncompromising as I am. POLIGAMIA understands its audience.',
           author: 'David R.',
           role: 'Creative Director',
+        },
+        {
+          quote:
+            'The craftsmanship of the packaging, the bottle, and the golden card is outstanding. You immediately notice the attention to detail and quality. The fragrance itself is perfect for a successful man: well-balanced, powerful but never overpowering. It radiates strength, elegance, and confidence without dominating. As the slogan says – this perfume is truly not for Everybody.',
+          author: 'Adrian D.',
+          role: 'Logistics Management',
         },
       ],
     },

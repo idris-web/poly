@@ -18,6 +18,8 @@ export default function Exordium() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const frameValueRef = useRef(0); // float frame position for smooth drag
+  const [rotationHintVisible, setRotationHintVisible] = useState(true);
+  const [rotationHintFading, setRotationHintFading] = useState(false);
 
   // Preload all frames
   useEffect(() => {
@@ -86,6 +88,8 @@ export default function Exordium() {
     };
 
     const handlePointerDown = (e: PointerEvent) => {
+      setRotationHintFading(true);
+      setTimeout(() => setRotationHintVisible(false), 400);
       pointerState.isDragging = true;
       pointerState.lastX = e.clientX;
       pointerState.lastTime = performance.now();
@@ -127,6 +131,15 @@ export default function Exordium() {
     };
   }, [imagesLoaded]);
 
+  // Auto-hide rotation hint after a short time
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setRotationHintFading(true);
+      setTimeout(() => setRotationHintVisible(false), 400);
+    }, 5500);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Other animations
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -159,6 +172,14 @@ export default function Exordium() {
           <div ref={productRef} className={styles.productWrapper}>
             {/* Scroll-controlled frame animation */}
             <div className={styles.productImage}>
+              {rotationHintVisible && (
+                <div
+                  className={`${styles.rotateHint} ${rotationHintFading ? styles.rotateHintFading : ''}`}
+                  aria-hidden="true"
+                >
+                  <img src="/360.svg" alt="" className={styles.rotateIcon} />
+                </div>
+              )}
               <canvas
                 ref={canvasRef}
                 className={styles.bottleCanvas}
