@@ -10,7 +10,7 @@ const stats = [
 
 // Static stat labels - these are numerical facts, not translatable
 const statLabels: Record<string, { de: string; en: string }> = {
-  devHours: { de: 'Stunden Entwicklung*', en: 'Hours of Development*' },
+  devHours: { de: 'Stunden Entwicklung', en: 'Hours of Development*' },
   ingredients: { de: 'Rohstoffe', en: 'Raw Materials' },
   monthsMaturing: { de: 'Monate Reifung', en: 'Months Maturing' },
   limitedBottles: { de: 'Limitierte Flakons', en: 'Limited Bottles' },
