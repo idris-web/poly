@@ -62,6 +62,7 @@
 
 .productWrapper {
   position: relative;
+  width: 100%;
 }
 
 .productGlow {
@@ -171,7 +172,7 @@
 .productImage {
   position: relative;
   width: 100%;
-  max-width: 550px;
+  max-width: 100%;
   cursor: grab;
 }
 
@@ -181,7 +182,7 @@
 
 .rotateHint {
   position: absolute;
-  bottom: -32px;
+  top: -36px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -194,6 +195,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(8px);
   pointer-events: none;
+  z-index: 2;
   transition: opacity 0.4s ease;
 }
 
@@ -431,11 +433,15 @@
   }
 
   .productImage {
-    max-width: 300px;
+    max-width: 100%;
   }
 
   .bottleImage {
     max-height: 400px;
+  }
+
+  .bottleCanvas {
+    filter: none;
   }
 
   .productGlow {
@@ -444,7 +450,7 @@
   }
 
   .rotateHint {
-    bottom: -20px;
+    top: -28px;
     left: 50%;
     transform: translateX(-50%);
   }

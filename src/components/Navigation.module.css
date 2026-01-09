@@ -6,6 +6,7 @@
   z-index: 1000;
   padding: 1.5rem 2rem;
   transition: all 0.5s var(--ease-luxury);
+  border-bottom: 1px solid transparent;
 }
 
 /* Initial state - light background (hero) */
@@ -155,13 +156,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 0.75rem;
+  padding: 0.625rem 1.25rem;
   border: 1px solid rgba(178, 153, 130, 0.3);
-  border-radius: 6px;
+  border-radius: 50px;
   font-family: var(--font-display);
   font-size: 0.65rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: rgba(178, 153, 130, 0.9);
   background: transparent;
   cursor: pointer;
@@ -311,11 +313,12 @@
 
 .drawerLangSwitch {
   font-family: var(--font-display);
-  font-size: 0.9rem;
-  font-weight: 400;
+  font-size: 1.2rem;
+  font-weight: 300;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: rgba(178, 153, 130, 0.7);
-  padding: 1rem 0;
+  padding: 1.25rem 0;
   border: none;
   border-bottom: 1px solid rgba(178, 153, 130, 0.1);
   background: transparent;
@@ -367,6 +370,14 @@
 @media (max-width: 768px) {
   .nav {
     padding: 1rem 1.5rem;
+    box-sizing: border-box;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .nav.scrolled {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(178, 153, 130, 0.08);
   }
 
   .links {
@@ -386,11 +397,16 @@
   }
 
   .logo {
-    width: 38px;
-    height: 38px;
+    width: 44px;
+    height: 44px;
   }
 
   .logoText {
     font-size: 1.2rem;
+  }
+
+  .logoIcon {
+    width: 22px;
+    height: 22px;
   }
 }

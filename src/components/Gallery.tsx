@@ -122,7 +122,6 @@ export default function Gallery() {
                 src={image.src}
                 alt={image.title}
                 className={styles.image}
-                loading="lazy"
               />
               <div className={styles.imageOverlay} />
 

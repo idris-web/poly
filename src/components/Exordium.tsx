@@ -20,6 +20,7 @@ export default function Exordium() {
   const frameValueRef = useRef(0); // float frame position for smooth drag
   const [rotationHintVisible, setRotationHintVisible] = useState(true);
   const [rotationHintFading, setRotationHintFading] = useState(false);
+  const rotationHintTimerRef = useRef<number | null>(null);
 
   // Preload all frames
   useEffect(() => {
@@ -51,10 +52,38 @@ export default function Exordium() {
 
     const images = imagesRef.current;
     const firstImage = images[0];
+    let renderWidth = 0;
+    let renderHeight = 0;
+    const container = canvas.parentElement;
+    let lastWidth = 0;
+    let lastHeight = 0;
+    let lastDpr = 0;
 
-    // Set canvas size to match image
-    canvas.width = firstImage.naturalWidth;
-    canvas.height = firstImage.naturalHeight;
+    const resizeCanvas = () => {
+      const containerWidth = container?.clientWidth || firstImage.naturalWidth;
+      if (!containerWidth) return;
+      const aspectRatio = firstImage.naturalHeight / firstImage.naturalWidth;
+      renderWidth = containerWidth;
+      renderHeight = Math.round(containerWidth * aspectRatio);
+
+      const dpr = window.devicePixelRatio || 1;
+      if (
+        renderWidth === lastWidth &&
+        renderHeight === lastHeight &&
+        dpr === lastDpr
+      ) {
+        return;
+      }
+      canvas.style.width = `${renderWidth}px`;
+      canvas.style.height = `${renderHeight}px`;
+      canvas.width = Math.round(renderWidth * dpr);
+      canvas.height = Math.round(renderHeight * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      lastWidth = renderWidth;
+      lastHeight = renderHeight;
+      lastDpr = dpr;
+    };
+
     const clampOrWrap = (value: number) => {
       // Toggle to false if you ever want to stop after a full 360° instead of looping
       const LOOP_ROTATION = true;
@@ -68,9 +97,17 @@ export default function Exordium() {
     const drawFrame = (frameValue: number) => {
       const frameIndex = Math.round(frameValue) % FRAME_COUNT;
       const normalizedIndex = frameIndex < 0 ? frameIndex + FRAME_COUNT : frameIndex;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(images[normalizedIndex], 0, 0);
+      ctx.clearRect(0, 0, renderWidth, renderHeight);
+      ctx.drawImage(images[normalizedIndex], 0, 0, renderWidth, renderHeight);
     };
+
+    const handleResize = () => {
+      resizeCanvas();
+      drawFrame(frameValueRef.current);
+    };
+
+    // Set canvas size to match container with DPR scaling
+    handleResize();
 
     const applyFrameDelta = (delta: number) => {
       frameValueRef.current = clampOrWrap(frameValueRef.current + delta);
@@ -88,8 +125,13 @@ export default function Exordium() {
     };
 
     const handlePointerDown = (e: PointerEvent) => {
-      setRotationHintFading(true);
-      setTimeout(() => setRotationHintVisible(false), 400);
+      if (rotationHintTimerRef.current) {
+        window.clearTimeout(rotationHintTimerRef.current);
+      }
+      rotationHintTimerRef.current = window.setTimeout(() => {
+        setRotationHintFading(true);
+        window.setTimeout(() => setRotationHintVisible(false), 400);
+      }, 5000);
       pointerState.isDragging = true;
       pointerState.lastX = e.clientX;
       pointerState.lastTime = performance.now();
@@ -122,12 +164,21 @@ export default function Exordium() {
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
     window.addEventListener('pointerup', handlePointerUp);
     window.addEventListener('pointercancel', handlePointerUp);
+    window.addEventListener('resize', handleResize);
+    const resizeObserver = container && 'ResizeObserver' in window
+      ? new ResizeObserver(() => {
+          handleResize();
+        })
+      : null;
+    resizeObserver?.observe(container);
 
     return () => {
       canvas.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
       window.removeEventListener('pointercancel', handlePointerUp);
+      window.removeEventListener('resize', handleResize);
+      resizeObserver?.disconnect();
     };
   }, [imagesLoaded]);
 

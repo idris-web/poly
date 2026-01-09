@@ -146,7 +146,6 @@ export default function Access() {
                 src="/poligamia-icon.svg"
                 alt="Poligamia icon"
                 className={styles.cardIcon}
-                loading="lazy"
               />
               <div className={styles.cardDivider} />
               <h3 className={styles.cardTitle}>{item.title}</h3>

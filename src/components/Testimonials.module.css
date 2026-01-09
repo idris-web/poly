@@ -45,7 +45,7 @@
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
-  padding: 3rem 0;
+  padding: 0;
   overflow: visible;
 }
 
@@ -53,7 +53,7 @@
 .row {
   width: 100%;
   overflow: visible;
-  padding: 2rem 0;
+  padding: 2rem 1.5rem;
 }
 
 /* Row Track - contains all cards */
@@ -179,7 +179,7 @@
 
   .rowsWrapper {
     gap: 1rem;
-    padding: 2rem 0;
+    padding: 0;
   }
 
   .rowTrack {
@@ -187,9 +187,14 @@
     animation: none;
   }
 
+  .rowTrack[data-direction="left"],
+  .rowTrack[data-direction="right"] {
+    animation: none;
+  }
+
   .card {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 80vw;
+    max-width: 80vw;
     padding: 1.5rem;
   }
 
@@ -202,7 +207,8 @@
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding: 2rem 0 2rem;
+    padding: 2rem 0 2rem 1rem;
+    scroll-padding-left: 1rem;
     scrollbar-width: none;
   }
 
@@ -212,7 +218,7 @@
 
   .rowTrack {
     scroll-snap-type: none;
-    padding: 1.5rem 0;
+    padding: 1.5rem 1rem;
   }
 
   .card {

@@ -50,11 +50,34 @@ const testimonials: Testimonial[] = [
     title: 'IT Security aus Deutschland, Frankfurt a.M.',
     rating: 5,
   },
+  {
+    quote: 'EXORDIUM ist nicht einfach ein Parfüm – es ist eine Erklärung. Wer es trägt, wird nicht übersehen.',
+    author: 'Marcus V.',
+    title: 'Unternehmer',
+    rating: 5,
+  },
+  {
+    quote: 'Die Komplexität dieses Duftes ist beeindruckend. Er entwickelt sich über Stunden und bleibt einzigartig.',
+    author: 'Elena K.',
+    title: 'Kunstsammlerin',
+    rating: 5,
+  },
+  {
+    quote: 'Endlich ein Duft, der so kompromisslos ist wie ich. POLIGAMIA versteht seine Zielgruppe.',
+    author: 'David R.',
+    title: 'Kreativdirektor',
+    rating: 5,
+  },
+  {
+    quote: 'Die Verarbeitung der Verpackung, der Flasche sowie der goldenen Karte ist einzigartig und absolut überragend… dieses Parfüm ist wirklich Not for Everybody.',
+    author: 'Adrian D.',
+    title: 'Management in Logistik',
+    rating: 5,
+  },
 ];
 
-// Split into rows for the floating effect (10 per row for 20 total)
-const row1 = testimonials.slice(0, 10);
-const row2 = testimonials.slice(10, 20);
+// Single row for the floating effect
+const row1 = testimonials;
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -135,25 +158,6 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Row 2 - moves right */}
-        <div className={styles.row}>
-          <div className={styles.rowTrack} data-direction="right">
-            {[...row2, ...row2].map((testimonial, index) => (
-              <div key={index} className={styles.card}>
-                <StarRating rating={testimonial.rating} />
-                <blockquote className={styles.quote}>
-                  "{testimonial.quote}"
-                </blockquote>
-                <div className={styles.author}>
-                  <div className={styles.authorInfo}>
-                    <span className={styles.authorName}>{testimonial.author}</span>
-                    <span className={styles.authorTitle}>{testimonial.title}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
