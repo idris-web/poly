@@ -46,7 +46,7 @@
 }
 
 .titleHighlight {
-  color: #8B7355;
+  color: #b29982;
   font-weight: 300;
   font-style: italic;
 }
@@ -74,14 +74,14 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #8B7355;
+  color: #b29982;
   margin-bottom: 2.5rem;
 }
 
 .pulsingDot {
   width: 8px;
   height: 8px;
-  background: #8B7355;
+  background: #b29982;
   border-radius: 50%;
   animation: pulse 2s ease-in-out infinite;
 }

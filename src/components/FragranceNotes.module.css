@@ -24,7 +24,7 @@
   font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #8B7355;
+  color: #b29982;
   margin-bottom: 1.5rem;
 }
 
@@ -38,7 +38,7 @@
 }
 
 .titleHighlight {
-  color: #8B7355;
+  color: #b29982;
   font-weight: 400;
 }
 
@@ -93,7 +93,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #8B7355, #B29982);
+  background: linear-gradient(90deg, #b29982, #B29982);
   transform-origin: left center;
 }
 
@@ -118,7 +118,7 @@
   height: 48px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #8B7355;
+  border: 2px solid #b29982;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -127,7 +127,7 @@
 }
 
 .nodeCircle:hover {
-  background: #8B7355;
+  background: #b29982;
   transform: scale(1.1);
 }
 
@@ -139,7 +139,7 @@
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 500;
-  color: #8B7355;
+  color: #b29982;
   transition: color 0.3s ease;
 }
 
@@ -183,7 +183,7 @@
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 400;
-  color: #8B7355;
+  color: #b29982;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
@@ -201,7 +201,7 @@
 .phaseDivider {
   width: 40px;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #8B7355, transparent);
+  background: linear-gradient(90deg, transparent, #b29982, transparent);
   margin: 0 auto 1.5rem;
 }
 
@@ -227,7 +227,7 @@
 }
 
 .noteItem:hover {
-  color: #8B7355;
+  color: #b29982;
 }
 
 /* Bottom Info */
@@ -253,7 +253,7 @@
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 300;
-  color: #8B7355;
+  color: #b29982;
   padding: 0.5rem 1rem;
   border: 1px solid rgba(139, 115, 85, 0.3);
   border-radius: 50px;

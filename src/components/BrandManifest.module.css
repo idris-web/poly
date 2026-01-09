@@ -59,7 +59,7 @@
 
 .brandName {
   display: block;
-  color: #8B7355;
+  color: #b29982;
   font-style: normal;
   margin-bottom: 0.5rem;
 }
@@ -77,12 +77,12 @@
 }
 
 .highlight {
-  color: #8B7355;
+  color: #b29982;
   font-style: normal;
 }
 
 .manifestWord {
-  color: #8B7355;
+  color: #b29982;
   font-style: normal;
   font-weight: 500;
   display: inline-block;
@@ -141,7 +141,7 @@
 
 .emphasis {
   font-weight: 600;
-  color: #8B7355;
+  color: #b29982;
 }
 
 /* Side Accents */

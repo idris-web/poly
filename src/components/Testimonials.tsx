@@ -69,7 +69,7 @@ const testimonials: Testimonial[] = [
     rating: 5,
   },
   {
-    quote: 'Die Verarbeitung der Verpackung, der Flasche sowie der goldenen Karte ist einzigartig und absolut überragend… dieses Parfüm ist wirklich Not for Everybody.',
+    quote: 'Die Verarbeitung der Verpackung, der Flasche sowie der goldenen Karte ist einzigartig und absolut überragend. Man merkt sofort, dass hier viel Wert auf Details und Qualität gelegt wurde. Der Duft ist kraftvoll, aber keinesfalls aufdringlich und strahlt Stärke, Eleganz und Selbstbewusstsein aus. Wie der Slogan bereits sagt dieses Parfüm ist wirklich not for Everybody',
     author: 'Adrian D.',
     title: 'Management in Logistik',
     rating: 5,

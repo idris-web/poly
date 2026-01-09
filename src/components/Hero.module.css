@@ -427,8 +427,8 @@
     padding: 0.875rem 1.5rem;
     font-size: 0.7rem;
     color: #fff;
-    background: #8B7355;
-    border-color: #8B7355;
+    background: #b29982;
+    border-color: #b29982;
     backdrop-filter: none;
   }
 
@@ -444,9 +444,9 @@
   }
 
   .btnSecondary:hover {
-    background: #8B7355;
+    background: #b29982;
     color: #fff;
-    border-color: #8B7355;
+    border-color: #b29982;
   }
 
   .productCard {
