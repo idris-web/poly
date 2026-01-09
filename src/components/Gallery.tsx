@@ -7,13 +7,13 @@ import styles from './Gallery.module.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const galleryImageSources = [
-  '/mockup-02.webp',
-  '/mockup-06.webp',
-  '/shot-01.webp',
-  '/shot-02.webp',
-  '/shot-03.webp',
-  '/shot-04.webp',
-  '/shot-05.webp',
+  '/poligamia-product-mockup-02.webp',
+  '/poligamia-product-mockup-06.webp',
+  '/poligamia-product-shot-01.webp',
+  '/poligamia-product-detail-02.webp',
+  '/poligamia-product-shot-03.webp',
+  '/poligamia-product-detail-03.webp',
+  '/poligamia-product-shot-05.webp',
 ];
 
 interface GalleryImage {

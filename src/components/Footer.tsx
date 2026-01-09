@@ -65,8 +65,7 @@ export default function Footer() {
             {/* Brand Column */}
             <div className={styles.brandColumn}>
               <div className={styles.logoWrapper}>
-                <img src="/logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
-                <span className={styles.trademark}>™</span>
+                <img src="/poligamia-logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
               </div>
               <p className={styles.tagline}>{t.footer.tagline}</p>
               <p className={styles.brandDescription}>
@@ -105,12 +104,11 @@ export default function Footer() {
         >
           <div ref={brandTextRef} className={styles.bigBrandText}>
             {/* Base layer - subtle */}
-            <img src="/poligamia-logo.svg" alt="POLIGAMIA" className={styles.logoBase} />
+            <img src="/poligamia-logo-wordmark.svg" alt="POLIGAMIA" className={styles.logoBase} />
             {/* Spotlight layer */}
-            <img src="/poligamia-logo.svg" alt="" className={styles.logoSpotlight} aria-hidden="true" />
+            <img src="/poligamia-logo-wordmark.svg" alt="" className={styles.logoSpotlight} aria-hidden="true" />
             {/* Glow layer */}
-            <img src="/poligamia-logo.svg" alt="" className={styles.logoGlow} aria-hidden="true" />
-            <span className={styles.bigTrademark}>™</span>
+            <img src="/poligamia-logo-wordmark.svg" alt="" className={styles.logoGlow} aria-hidden="true" />
           </div>
         </div>
 

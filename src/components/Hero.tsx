@@ -51,9 +51,9 @@ export default function Hero() {
       {/* Background Image */}
       <div className={styles.heroBg}>
         <picture>
-          <source media="(max-width: 768px)" srcSet="/hero-mobile.webp" />
+          <source media="(max-width: 768px)" srcSet="/poligamia-hero-mobile.webp" />
           <img
-            src="/hero-bg.webp"
+            src="/poligamia-hero-background.webp"
             alt="Warm amber atmosphere capturing the POLIGAMIA fragrance moment"
             decoding="async"
             fetchPriority="high"
@@ -73,8 +73,11 @@ export default function Hero() {
           <h1 className="sr-only">POLIGAMIA – Not for Everybody</h1>
           <div className={`${styles.heroHeadline} hero-headline`}>
             <div className={styles.logoWrapper}>
-              <img src="/logo-full.svg" alt="POLIGAMIA - Not for everybody" className={styles.heroLogo} />
-              <span className={styles.trademark}>™</span>
+              <img
+                src="/poligamia-logo-full.svg"
+                alt="POLIGAMIA - Not for everybody"
+                className={styles.heroLogo}
+              />
             </div>
           </div>
 

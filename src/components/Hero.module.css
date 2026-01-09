@@ -64,9 +64,16 @@
   margin-top: 0.625rem;
   align-self: center;
   background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   text-shadow: none;
+}
+
+@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .heroText {
+    background: rgba(0, 0, 0, 0.72);
+  }
 }
 
 /* Headline - Bold Statement */
@@ -85,17 +92,6 @@
   width: 100%;
   height: auto;
   filter: brightness(0) invert(1);
-}
-
-.trademark {
-  position: absolute;
-  top: 0;
-  right: -12px;
-  font-size: 1rem;
-  color: #fff;
-  opacity: 0.8;
-  font-weight: 300;
-  line-height: 1;
 }
 
 .heroHeadlineFirst {

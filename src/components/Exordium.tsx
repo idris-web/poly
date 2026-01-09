@@ -7,7 +7,7 @@ import styles from './Exordium.module.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const FRAME_COUNT = 102;
-const getFramePath = (index: number) => `/frames/frame-${String(index).padStart(3, '0')}.webp`;
+const getFramePath = (index: number) => `/product-frames/frame_${index}.webp`;
 
 export default function Exordium() {
   const { t } = useLanguage();
@@ -17,6 +17,8 @@ export default function Exordium() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const imagesRef = useRef<HTMLImageElement[]>([]);
+  const frameValueRef = useRef(0); // float frame position for smoother momentum
+  const momentumRafRef = useRef<number | null>(null);
 
   // Preload all frames
   useEffect(() => {
@@ -37,12 +39,11 @@ export default function Exordium() {
     }
   }, []);
 
-  // Setup scroll animation once images are loaded
+  // Setup interactive rotation once images are loaded
   useEffect(() => {
     if (!imagesLoaded) return;
     const canvas = canvasRef.current;
-    const section = sectionRef.current;
-    if (!canvas || !section) return;
+    if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -54,39 +55,107 @@ export default function Exordium() {
     canvas.width = firstImage.naturalWidth;
     canvas.height = firstImage.naturalHeight;
 
-    // Draw first frame
-    ctx.drawImage(firstImage, 0, 0);
+    const cleanupTimersAndRafs = () => {
+      if (momentumRafRef.current !== null) cancelAnimationFrame(momentumRafRef.current);
+      momentumRafRef.current = null;
+    };
 
-    // Animate frame index with GSAP scrub
-    // Frame 10 should appear when section is centered in viewport
-    // Frame 10 is ~10% through animation, center is ~50% scroll
-    // So we need to start earlier (before section is visible)
-    const frameObj = { frame: 0 };
-    const frameTween = gsap.to(frameObj, {
-      frame: FRAME_COUNT - 1,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 180%',  // Start animation before section is visible
-        end: 'bottom top',
-        scrub: 0.5,
-      },
-      onUpdate: () => {
-        const frameIndex = Math.round(frameObj.frame);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(images[frameIndex], 0, 0);
-
-        // Debug: Show frame number
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-        ctx.fillRect(10, 10, 120, 40);
-        ctx.fillStyle = '#B29982';
-        ctx.font = 'bold 24px Arial';
-        ctx.fillText(`Frame: ${frameIndex + 1}`, 20, 40);
+    const clampOrWrap = (value: number) => {
+      // Toggle to false if you ever want to stop after a full 360° instead of looping
+      const LOOP_ROTATION = true;
+      if (LOOP_ROTATION) {
+        const mod = value % FRAME_COUNT;
+        return mod < 0 ? mod + FRAME_COUNT : mod;
       }
-    });
+      return Math.min(FRAME_COUNT - 1, Math.max(0, value));
+    };
+
+    const drawFrame = (frameValue: number) => {
+      const frameIndex = Math.round(frameValue) % FRAME_COUNT;
+      const normalizedIndex = frameIndex < 0 ? frameIndex + FRAME_COUNT : frameIndex;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(images[normalizedIndex], 0, 0);
+    };
+
+    const applyFrameDelta = (delta: number) => {
+      frameValueRef.current = clampOrWrap(frameValueRef.current + delta);
+      drawFrame(frameValueRef.current);
+    };
+
+    // Initial frame render
+    frameValueRef.current = 0;
+    drawFrame(frameValueRef.current);
+
+    const startMomentum = (velocity: number) => {
+      if (momentumRafRef.current !== null) cancelAnimationFrame(momentumRafRef.current);
+      const FRICTION = 0.94;
+      const step = () => {
+        if (Math.abs(velocity) < 0.01) {
+          momentumRafRef.current = null;
+          return;
+        }
+        applyFrameDelta(velocity);
+        velocity *= FRICTION;
+        momentumRafRef.current = requestAnimationFrame(step);
+      };
+      momentumRafRef.current = requestAnimationFrame(step);
+    };
+
+    const pointerState = {
+      isDragging: false,
+      lastX: 0,
+      lastTime: 0,
+      velocity: 0,
+    };
+
+    const handlePointerDown = (e: PointerEvent) => {
+      if (momentumRafRef.current !== null) cancelAnimationFrame(momentumRafRef.current);
+      pointerState.isDragging = true;
+      pointerState.lastX = e.clientX;
+      pointerState.lastTime = performance.now();
+      pointerState.velocity = 0;
+      canvas.setPointerCapture?.(e.pointerId);
+    };
+
+    const handlePointerMove = (e: PointerEvent) => {
+      if (!pointerState.isDragging) return;
+      const now = performance.now();
+      const dx = e.clientX - pointerState.lastX;
+      const dt = now - pointerState.lastTime || 16;
+
+      pointerState.lastX = e.clientX;
+      pointerState.lastTime = now;
+      pointerState.velocity = dx / dt;
+
+      // Negative dx (drag left) -> next frame; positive dx -> previous frame
+      const DRAG_SENSITIVITY = 0.25;
+      applyFrameDelta(-dx * DRAG_SENSITIVITY);
+    };
+
+    const handlePointerUp = (e: PointerEvent) => {
+      if (!pointerState.isDragging) return;
+      pointerState.isDragging = false;
+      canvas.releasePointerCapture?.(e.pointerId);
+
+      // Momentum based on last velocity for a physical feel
+      const MOMENTUM_MULTIPLIER = 8;
+      const momentumVelocity = -pointerState.velocity * MOMENTUM_MULTIPLIER;
+      if (Math.abs(momentumVelocity) > 0.05) {
+        startMomentum(momentumVelocity);
+      }
+    };
+
+    canvas.addEventListener('pointerdown', handlePointerDown);
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerup', handlePointerUp);
+    window.addEventListener('pointercancel', handlePointerUp);
 
     return () => {
-      frameTween.kill();
+      canvas.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
+      cleanupTimersAndRafs();
     };
   }, [imagesLoaded]);
 

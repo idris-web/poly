@@ -110,17 +110,6 @@
   opacity: 0.85;
 }
 
-.trademark {
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  font-size: 0.45rem;
-  color: var(--crown-gold);
-  opacity: 0.7;
-  font-weight: 300;
-  line-height: 1;
-}
-
 /* Links */
 .links {
   display: flex;

@@ -7,9 +7,9 @@ import styles from './Collections.module.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const collectionImages = [
-  '/shot-02.webp',
-  '/mockup-04.webp',
-  '/shot-04.webp',
+  '/poligamia-product-detail-02.webp',
+  '/poligamia-product-mockup-04.webp',
+  '/poligamia-product-detail-01.webp',
 ];
 
 export default function Collections() {

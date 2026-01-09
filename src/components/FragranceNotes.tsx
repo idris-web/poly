@@ -89,7 +89,7 @@ export default function FragranceNotes() {
         {/* Hero Image */}
         <div className={styles.heroImage}>
           <img
-            src="/mockup-03.webp"
+            src="/poligamia-product-mockup-03.webp"
             alt="EXORDIUM"
             className={styles.heroImg}
           />

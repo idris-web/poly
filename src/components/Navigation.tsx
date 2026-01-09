@@ -69,8 +69,7 @@ export default function Navigation() {
         <div className={styles.container}>
           {/* Logo */}
           <a href="#" className={styles.logo}>
-            <img src="/logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
-            <span className={styles.trademark}>™</span>
+            <img src="/poligamia-logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
           </a>
 
           {/* Nav Links (Desktop) */}
