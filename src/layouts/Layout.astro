@@ -9,9 +9,6 @@ const description =
 const canonical = 'https://poligamia.eu';
 const featuredImage = '/poligamia-hero-featured.webp';
 const siteName = 'POLIGAMIA';
-const productName = 'Poligamia Exordium';
-const productDescription =
-  'Poligamia Exordium – ein charakterstarker Duft mit würzigen, harzigen und holzigen Noten. Entwickelt für Persönlichkeiten, die Grenzen überschreiten.';
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -24,17 +21,6 @@ const structuredData = {
   },
 };
 
-const productStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: productName,
-  description: productDescription,
-  image: `${canonical}${featuredImage}`,
-  brand: {
-    '@type': 'Brand',
-    name: siteName,
-  },
-};
 ---
 
 <!DOCTYPE html>
@@ -73,7 +59,6 @@ const productStructuredData = {
     <meta property="og:site_name" content={siteName} />
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
-    <script type="application/ld+json" set:html={JSON.stringify(productStructuredData)}></script>
 
     <script>
       window.OsanoConfig = {

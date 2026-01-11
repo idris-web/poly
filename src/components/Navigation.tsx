@@ -2,13 +2,25 @@ import { useEffect, useState } from 'react';
 import styles from './Navigation.module.css';
 import { useLanguage } from '../i18n/LanguageContext';
 
-export default function Navigation() {
+type NavigationMode = 'landing' | 'legal';
+
+interface NavigationProps {
+  mode?: NavigationMode;
+}
+
+export default function Navigation({ mode = 'landing' }: NavigationProps) {
   const { language, setLanguage, t } = useLanguage();
-  const [scrolled, setScrolled] = useState(false);
-  const [inHero, setInHero] = useState(true);
+  const isLegal = mode === 'legal';
+  const [scrolled, setScrolled] = useState(isLegal);
+  const [inHero, setInHero] = useState(!isLegal);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
+    if (isLegal) {
+      setScrolled(true);
+      setInHero(false);
+      return;
+    }
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       const heroHeight = window.innerHeight * 0.8; // 80% of viewport height
@@ -22,7 +34,7 @@ export default function Navigation() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isLegal]);
 
   // Lock body scroll when menu is open
   useEffect(() => {
@@ -47,6 +59,16 @@ export default function Navigation() {
     }
   };
 
+  const linkPrefix = isLegal ? '/' : '';
+  const logoHref = isLegal ? '/' : '#';
+  const onSectionLinkClick = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isLegal) {
+      setMenuOpen(false);
+      return;
+    }
+    scrollToSection(e, id);
+  };
+
   return (
     <>
       <nav
@@ -56,29 +78,29 @@ export default function Navigation() {
       >
         <div className={styles.container}>
           {/* Logo */}
-          <a href="#" className={styles.logo}>
+          <a href={logoHref} className={styles.logo}>
             <img src="/poligamia-logo-icon.svg" alt="Poligamia" className={styles.logoIcon} />
           </a>
 
           {/* Nav Links (Desktop) */}
           <div className={styles.links}>
             <a
-              href="#manifest"
-              onClick={(e) => scrollToSection(e, 'manifest')}
+              href={`${linkPrefix}#manifest`}
+              onClick={onSectionLinkClick('manifest')}
               className={styles.link}
             >
               {t.nav.manifest}
             </a>
             <a
-              href="#exordium"
-              onClick={(e) => scrollToSection(e, 'exordium')}
+              href={`${linkPrefix}#exordium`}
+              onClick={onSectionLinkClick('exordium')}
               className={styles.link}
             >
               {t.nav.exordium}
             </a>
             <a
-              href="#access"
-              onClick={(e) => scrollToSection(e, 'access')}
+              href={`${linkPrefix}#access`}
+              onClick={onSectionLinkClick('access')}
               className={styles.link}
             >
               {t.nav.access}
@@ -96,8 +118,8 @@ export default function Navigation() {
 
             {/* CTA (Desktop) */}
             <a
-              href="#request"
-              onClick={(e) => scrollToSection(e, 'request')}
+              href={`${linkPrefix}#request`}
+              onClick={onSectionLinkClick('request')}
               className={styles.cta}
             >
               <span>{t.nav.request}</span>
@@ -122,22 +144,22 @@ export default function Navigation() {
       <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
         <div className={styles.drawerContent}>
           <a
-            href="#manifest"
-            onClick={(e) => scrollToSection(e, 'manifest')}
+            href={`${linkPrefix}#manifest`}
+            onClick={onSectionLinkClick('manifest')}
             className={styles.drawerLink}
           >
             {t.nav.manifest}
           </a>
           <a
-            href="#exordium"
-            onClick={(e) => scrollToSection(e, 'exordium')}
+            href={`${linkPrefix}#exordium`}
+            onClick={onSectionLinkClick('exordium')}
             className={styles.drawerLink}
           >
             {t.nav.exordium}
           </a>
           <a
-            href="#access"
-            onClick={(e) => scrollToSection(e, 'access')}
+            href={`${linkPrefix}#access`}
+            onClick={onSectionLinkClick('access')}
             className={styles.drawerLink}
           >
             {t.nav.access}
@@ -149,8 +171,8 @@ export default function Navigation() {
             {language === 'de' ? 'English' : 'Deutsch'}
           </button>
           <a
-            href="#request"
-            onClick={(e) => scrollToSection(e, 'request')}
+            href={`${linkPrefix}#request`}
+            onClick={onSectionLinkClick('request')}
             className={styles.drawerCta}
           >
             {t.nav.request}

@@ -21,6 +21,8 @@ export default function Exordium() {
   const [rotationHintVisible, setRotationHintVisible] = useState(true);
   const [rotationHintFading, setRotationHintFading] = useState(false);
   const rotationHintTimerRef = useRef<number | null>(null);
+  const rotationHintStartedRef = useRef(false);
+  const lastFrameIndexRef = useRef(0);
 
   // Preload all frames
   useEffect(() => {
@@ -97,6 +99,11 @@ export default function Exordium() {
     const drawFrame = (frameValue: number) => {
       const frameIndex = Math.round(frameValue) % FRAME_COUNT;
       const normalizedIndex = frameIndex < 0 ? frameIndex + FRAME_COUNT : frameIndex;
+      if (rotationHintVisible && normalizedIndex !== lastFrameIndexRef.current) {
+        setRotationHintFading(true);
+        window.setTimeout(() => setRotationHintVisible(false), 400);
+      }
+      lastFrameIndexRef.current = normalizedIndex;
       ctx.clearRect(0, 0, renderWidth, renderHeight);
       ctx.drawImage(images[normalizedIndex], 0, 0, renderWidth, renderHeight);
     };
@@ -117,6 +124,7 @@ export default function Exordium() {
     // Initial frame render
     frameValueRef.current = 0;
     drawFrame(frameValueRef.current);
+    lastFrameIndexRef.current = 0;
     const pointerState = {
       isDragging: false,
       lastX: 0,
@@ -125,13 +133,7 @@ export default function Exordium() {
     };
 
     const handlePointerDown = (e: PointerEvent) => {
-      if (rotationHintTimerRef.current) {
-        window.clearTimeout(rotationHintTimerRef.current);
-      }
-      rotationHintTimerRef.current = window.setTimeout(() => {
-        setRotationHintFading(true);
-        window.setTimeout(() => setRotationHintVisible(false), 400);
-      }, 5000);
+      rotationHintStartedRef.current = false;
       pointerState.isDragging = true;
       pointerState.lastX = e.clientX;
       pointerState.lastTime = performance.now();
@@ -181,15 +183,6 @@ export default function Exordium() {
       resizeObserver?.disconnect();
     };
   }, [imagesLoaded]);
-
-  // Auto-hide rotation hint after a short time
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setRotationHintFading(true);
-      setTimeout(() => setRotationHintVisible(false), 400);
-    }, 5500);
-    return () => clearTimeout(timer);
-  }, []);
 
   // Other animations
   useEffect(() => {
